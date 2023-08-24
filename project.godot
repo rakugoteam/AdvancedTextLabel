@@ -17,9 +17,9 @@ advanced_text/default_vars="{
 
 [application]
 
-config/name="AdvancedTextLabel"
+config/name="AdvancedText"
 config/features=PackedStringArray("4.1")
-config/icon="res://icon.png"
+config/icon="res://addons/advanced-text/icons/AdvancedTextLabel.svg"
 
 [autoload]
 
