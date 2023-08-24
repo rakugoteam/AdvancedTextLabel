@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" type="Script" id=1]
-[ext_resource path="res://addons/advanced-text/font/DejaVuSans-H2.tres" type="DynamicFont" id=2]
+[ext_resource path="res://addons/advanced-text/font/DejaVuSans-H2.tres" type="FontFile" id=2]
 [ext_resource path="res://addons/advanced-text/font/theme_with_fonts.tres" type="Theme" id=3]
-[ext_resource path="res://addons/advanced-text/font/DejaVuSans-H1.tres" type="DynamicFont" id=4]
-[ext_resource path="res://addons/advanced-text/font/DejaVuSans-H3.tres" type="DynamicFont" id=5]
+[ext_resource path="res://addons/advanced-text/font/DejaVuSans-H1.tres" type="FontFile" id=4]
+[ext_resource path="res://addons/advanced-text/font/DejaVuSans-H3.tres" type="FontFile" id=5]
 
 [node name="AdvancedTextLabelTest" type="TabContainer"]
 anchor_right = 1.0
@@ -16,15 +16,15 @@ __meta__ = {
 [node name="BBCodeTest" type="RichTextLabel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 3 )
 bbcode_enabled = true
-bbcode_text = "[font=res://addons/advanced-text/font/DejaVuSans-H3.tres]Header Level 1[/font]
+text = "[font=res://addons/advanced-text/font/DejaVuSans-H3.tres]Header Level 1[/font]
 [font=res://addons/advanced-text/font/DejaVuSans-H2.tres]Header Level 2[/font]
 [font=res://addons/advanced-text/font/DejaVuSans-H1.tres]Header Level 3[/font]
 
@@ -158,15 +158,15 @@ headers_fonts = [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 5 ) ]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 3 )
 bbcode_enabled = true
-bbcode_text = "[font=res://addons/advanced-text/font/DejaVuSans-H3.tres]Header Level 1[/font]
+text = "[font=res://addons/advanced-text/font/DejaVuSans-H3.tres]Header Level 1[/font]
 [font=res://addons/advanced-text/font/DejaVuSans-H2.tres]Header Level 2[/font]
 [font=res://addons/advanced-text/font/DejaVuSans-H1.tres]Header Level 3[/font]
 
@@ -311,15 +311,15 @@ headers_fonts = [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 5 ) ]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 3 )
 bbcode_enabled = true
-bbcode_text = "[font=res://addons/advanced-text/font/DejaVuSans-H3.tres]Header Level 1[/font]
+text = "[font=res://addons/advanced-text/font/DejaVuSans-H3.tres]Header Level 1[/font]
 [font=res://addons/advanced-text/font/DejaVuSans-H2.tres]Header Level 2[/font]
 [font=res://addons/advanced-text/font/DejaVuSans-H1.tres]Header Level 3[/font]
 
@@ -503,15 +503,15 @@ headers_fonts = [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 5 ) ]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 3 )
 bbcode_enabled = true
-bbcode_text = "[b]This is normally Markdown[/b]
+text = "[b]This is normally Markdown[/b]
 [color=#c39f00]variable from settings:[/color] [color=lime]variable from project settings[/color]"
 text = "This is normally Markdown
 variable from settings: variable from project settings"

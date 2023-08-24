@@ -1,11 +1,11 @@
 extends TabContainer
 
-export(String, MULTILINE) var text := "[center][shake rate=5 level=10]**Clik to edit me**[/shake][/center]"
-export var _button: NodePath
-export var _edit: NodePath
-export var _buttons_container: NodePath
-export var _save_button: NodePath
-export var _cancel_button: NodePath
+@export var text := "[center][shake rate=5 level=10]**Clik to edit me**[/shake][/center]" # (String, MULTILINE)
+@export var _button: NodePath
+@export var _edit: NodePath
+@export var _buttons_container: NodePath
+@export var _save_button: NodePath
+@export var _cancel_button: NodePath
 
 var button: AdvancedTextButton
 var m_edit: TextEdit
@@ -23,14 +23,14 @@ func _ready():
 
 	m_edit.text = text
 	button.markup_text = text
-	button.connect("pressed", self, "_on_button_pressed")
-	save_button.connect("pressed", self, "_on_save_button_pressed")
-	cancel_button.connect("pressed", self, "_on_cancel_button_pressed")
+	button.connect("pressed", Callable(self, "_on_button_pressed"))
+	save_button.connect("pressed", Callable(self, "_on_save_button_pressed"))
+	cancel_button.connect("pressed", Callable(self, "_on_cancel_button_pressed"))
 
 
 func _on_button_pressed():
 	m_edit.text = button.markup_text
-	m_edit.rect_min_size = button.rect_size
+	m_edit.custom_minimum_size = button.size
 	current_tab = 1
 	buttons_container.show()
 

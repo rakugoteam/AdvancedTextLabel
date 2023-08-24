@@ -1,10 +1,10 @@
 [gd_resource type="Theme" load_steps=11 format=2]
 
-[ext_resource path="res://addons/advanced-text/font/DejaVuSans-Oblique.tres" type="DynamicFont" id=1]
-[ext_resource path="res://addons/advanced-text/font/DejaVuSans-BoldOblique.tres" type="DynamicFont" id=2]
-[ext_resource path="res://addons/advanced-text/font/DejaVuSans.tres" type="DynamicFont" id=3]
-[ext_resource path="res://addons/advanced-text/font/DejaVuSans-Mono.tres" type="DynamicFont" id=4]
-[ext_resource path="res://addons/advanced-text/font/DejaVuSans-Bold.tres" type="DynamicFont" id=5]
+[ext_resource path="res://addons/advanced-text/font/DejaVuSans-Oblique.tres" type="FontFile" id=1]
+[ext_resource path="res://addons/advanced-text/font/DejaVuSans-BoldOblique.tres" type="FontFile" id=2]
+[ext_resource path="res://addons/advanced-text/font/DejaVuSans.tres" type="FontFile" id=3]
+[ext_resource path="res://addons/advanced-text/font/DejaVuSans-Mono.tres" type="FontFile" id=4]
+[ext_resource path="res://addons/advanced-text/font/DejaVuSans-Bold.tres" type="FontFile" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 6.0

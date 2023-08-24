@@ -1,4 +1,4 @@
-tool
+@tool
 extends TextEdit
 class_name CodeEdit, "res://addons/advanced-text/icons/CodeEdit.svg"
 
@@ -11,9 +11,9 @@ var icons_gd
 
 signal update
 
-export(String, FILE) var text_file := "" setget _set_text_file
-export var highlight_colors := true
-export(Array, String, FILE, "*.json") var configs
+@export var text_file := "": set = _set_text_file
+@export var highlight_colors := true
+@export var configs # (Array, String, FILE, "*.json")
 
 func _ready() -> void:
 	EmojisImport = preload("../emojis_import.gd")
@@ -22,11 +22,11 @@ func _ready() -> void:
 	IconsImport = preload("../material_icons_import.gd")
 	IconsImport = IconsImport.new()
 
-	syntax_highlighting = true
+	syntax_highlighter = true
 
 	clear_colors()
 	_add_keywords_highlighting()
-	connect("update", self, "_on_update")
+	connect("update", Callable(self, "_on_update"))
 	emit_signal("update")
 
 func _set_text_file(value:String) -> void:
@@ -58,21 +58,21 @@ func _add_keywords_highlighting() -> void:
 
 func _highlight_colors():
 	var colors := { 
-		"aqua": Color.aqua, 
-		"black": Color.black,
-		"blue": Color.blue,
-		"fuchsia": Color.fuchsia,
-		"gray": Color.gray,
-		"green": Color.green,
-		"lime": Color.lime,
-		"maroon": Color.maroon,
+		"aqua": Color.AQUA, 
+		"black": Color.BLACK,
+		"blue": Color.BLUE,
+		"fuchsia": Color.FUCHSIA,
+		"gray": Color.GRAY,
+		"green": Color.GREEN,
+		"lime": Color.LIME,
+		"maroon": Color.MAROON,
 		"navy": Color("#7faeff"),
-		"purple": Color.purple,
-		"red": Color.red,
-		"silver": Color.silver,
-		"teal": Color.teal,
-		"white": Color.white,
-		"yellow":	Color.yellow
+		"purple": Color.PURPLE,
+		"red": Color.RED,
+		"silver": Color.SILVER,
+		"teal": Color.TEAL,
+		"white": Color.WHITE,
+		"yellow":	Color.YELLOW
 	}
 
 	for c in colors.keys():
@@ -80,7 +80,9 @@ func _highlight_colors():
 
 func load_json_config(json: String) -> void:
 	var content := get_file_content(json)
-	var config : Dictionary = parse_json(content)
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(content)
+	var config : Dictionary = test_json_conv.get_data()
 
 	for conf in config:
 		read_conf_element(config, conf)

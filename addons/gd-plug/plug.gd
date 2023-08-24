@@ -1,4 +1,4 @@
-tool
+@tool
 extends SceneTree
 
 signal updated(plugin)
@@ -18,7 +18,7 @@ const ENV_KEEP_IMPORT_RESOURCE_FILE = "keep_import_resource_file"
 
 const MSG_PLUG_START_ASSERTION = "_plug_start() must be called first"
 
-var project_dir = Directory.new()
+var project_dir = DirAccess.new()
 var installation_config = ConfigFile.new()
 var logger = _Logger.new()
 
@@ -32,7 +32,7 @@ var threadpool = _ThreadPool.new(logger)
 
 
 func _init():
-	threadpool.connect("all_thread_finished", self, "request_quit")
+	threadpool.connect("all_thread_finished", Callable(self, "request_quit"))
 
 func _initialize():
 	var args = OS.get_cmdline_args()
@@ -167,11 +167,11 @@ func _plug_install():
 		if removed:
 			removed_plugins.append(plugin)
 	if removed_plugins:
-		threadpool.disconnect("all_thread_finished", self, "request_quit")
+		threadpool.disconnect("all_thread_finished", Callable(self, "request_quit"))
 		if not threadpool.is_all_thread_finished():
-			yield(threadpool, "all_thread_finished")
+			await threadpool.all_thread_finished
 			logger.debug("All installation finished! Ready to uninstall removed plugins...")
-		threadpool.connect("all_thread_finished", self, "request_quit")
+		threadpool.connect("all_thread_finished", Callable(self, "request_quit"))
 		for plugin in removed_plugins:
 			threadpool.enqueue_task(self, "uninstall_plugin", plugin, Thread.PRIORITY_LOW)
 
@@ -185,11 +185,11 @@ func _plug_uninstall():
 func _plug_clean():
 	assert(_installed_plugins != null, MSG_PLUG_START_ASSERTION)
 	logger.info("Cleaning...")
-	var plugged_dir = Directory.new()
+	var plugged_dir = DirAccess.new()
 	plugged_dir.open(DEFAULT_PLUG_DIR)
-	plugged_dir.list_dir_begin(true, true)
+	plugged_dir.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 	var file = plugged_dir.get_next()
-	while not file.empty():
+	while not file.is_empty():
 		if plugged_dir.current_is_dir():
 			if not (file in _installed_plugins):
 				logger.info("Remove %s" % file)
@@ -204,11 +204,11 @@ func _plug_upgrade():
 	var gd_plug = _plugged_plugins["gd-plug"]
 	OS.set_environment(ENV_FORCE, "true") # Required to overwrite res://addons/gd-plug/plug.gd
 	threadpool.enqueue_task(self, "install_plugin", gd_plug)
-	threadpool.disconnect("all_thread_finished", self, "request_quit")
+	threadpool.disconnect("all_thread_finished", Callable(self, "request_quit"))
 	if not threadpool.is_all_thread_finished():
-		yield(threadpool, "all_thread_finished")
+		await threadpool.all_thread_finished
 		logger.debug("All installation finished! Ready to uninstall removed plugins...")
-	threadpool.connect("all_thread_finished", self, "request_quit")
+	threadpool.connect("all_thread_finished", Callable(self, "request_quit"))
 	threadpool.enqueue_task(self, "directory_delete_recursively", gd_plug.plug_dir)
 
 func _plug_status():
@@ -228,9 +228,9 @@ func _plug_status():
 			has_checking_plugin = true
 	if has_checking_plugin:
 		logger.info("\n", true)
-		threadpool.disconnect("all_thread_finished", self, "request_quit")
-		yield(threadpool, "all_thread_finished")
-		threadpool.connect("all_thread_finished", self, "request_quit")
+		threadpool.disconnect("all_thread_finished", Callable(self, "request_quit"))
+		await threadpool.all_thread_finished
+		threadpool.connect("all_thread_finished", Callable(self, "request_quit"))
 		logger.debug("Finished checking plugins, ready to proceed")
 	if new_plugins:
 		logger.info("\nPlugged %d plugin%s" % [new_plugins.size(), "s" if new_plugins.size() > 1 else ""])
@@ -242,12 +242,12 @@ func _plug_status():
 		logger.info("\nUnplugged %d plugin%s" % [removed_plugins.size(), "s" if removed_plugins.size() > 1 else ""])
 		for plugin in removed_plugins:
 			logger.info("- %s removed" % plugin.name)
-	var plug_directory = Directory.new()
+	var plug_directory = DirAccess.new()
 	var orphan_dirs = []
 	if plug_directory.open(DEFAULT_PLUG_DIR) == OK:
-		plug_directory.list_dir_begin(true, true)
+		plug_directory.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var file = plug_directory.get_next()
-		while not file.empty():
+		while not file.is_empty():
 			if plug_directory.current_is_dir():
 				if not (file in _installed_plugins):
 					orphan_dirs.append(file)
@@ -291,7 +291,7 @@ func plug(repo, args={}):
 	is_valid = is_valid and validate_var_type(plugin, "tag", TYPE_STRING, "String")
 	plugin.commit = args.get("commit", "")
 	is_valid = is_valid and validate_var_type(plugin, "commit", TYPE_STRING, "String")
-	if not plugin.commit.empty():
+	if not plugin.commit.is_empty():
 		var is_valid_commit = plugin.commit.length() == 40
 		if not is_valid_commit:
 			logger.error("Expected full length 40 digits commit-hash string, given %s" % plugin.commit)
@@ -407,7 +407,7 @@ func downlaod(plugin):
 
 func install(plugin):
 	var include = plugin.get("include", [])
-	if include.empty(): # Auto include "addons/" folder if not explicitly specified
+	if include.is_empty(): # Auto include "addons/" folder if not explicitly specified
 		include = ["addons/"]
 	if not OS.get_environment(ENV_FORCE) and not OS.get_environment(ENV_TEST):
 		var is_exists = false
@@ -480,12 +480,12 @@ func directory_copy_recursively(from, to, args={}):
 	var exclude = args.get("exclude", [])
 	var test = args.get("test", false)
 	var silent_test = args.get("silent_test", false)
-	var dir = Directory.new()
+	var dir = DirAccess.new()
 	var dest_files = []
 	if dir.open(from) == OK:
-		dir.list_dir_begin(true, true)
+		dir.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var file_name = dir.get_next()
-		while not file_name.empty():
+		while not file_name.is_empty():
 			var source = dir.get_current_dir() + ("/" if dir.get_current_dir() != "res://" else "") + file_name
 			var dest = to + ("/" if to != "res://" else "") + file_name
 			
@@ -520,11 +520,11 @@ func directory_delete_recursively(dir_path, args={}):
 	var exclude = args.get("exclude", [])
 	var test = args.get("test", false)
 	var silent_test = args.get("silent_test", false)
-	var dir = Directory.new()
+	var dir = DirAccess.new()
 	if dir.open(dir_path) == OK:
-		dir.list_dir_begin(true, false)
+		dir.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var file_name = dir.get_next()
-		while not file_name.empty():
+		while not file_name.is_empty():
 			var source = dir.get_current_dir() + ("/" if dir.get_current_dir() != "res://" else "") + file_name
 			
 			if dir.current_is_dir():
@@ -576,7 +576,7 @@ func directory_remove_batch(files, args={}):
 		var dir = dirs.get(file_dir)
 		
 		if not dir:
-			dir = Directory.new()
+			dir = DirAccess.new()
 			dir.open(file_dir)
 			dirs[file_dir] = dir
 
@@ -604,7 +604,7 @@ func directory_remove_batch(files, args={}):
 		var current_dir = dir.get_current_dir()
 		for i in slash_count:
 			current_dir = current_dir.get_base_dir()
-			var d = Directory.new()
+			var d = DirAccess.new()
 			if d.open(current_dir) == OK:
 				if test:
 					if not silent_test: logger.warn("[TEST] Remove empty ancestor directory: %s" % d.get_current_dir())
@@ -687,7 +687,7 @@ func _plugging():
 	pass
 """
 
-class _GitExecutable extends Reference:
+class _GitExecutable extends RefCounted:
 	var cwd = ""
 	var logger
 
@@ -829,7 +829,7 @@ class _GitExecutable extends Reference:
 			return FAILED if is_commit_behind else OK
 		return FAILED
 
-class _ThreadPool extends Reference:
+class _ThreadPool extends RefCounted:
 	signal all_thread_finished()
 
 	var _threads = []
@@ -847,7 +847,7 @@ class _ThreadPool extends Reference:
 		var can_execute = thread
 		if can_execute:
 			task.thread = weakref(thread)
-			thread.start(self, "_execute", task, task.priority)
+			thread.start(Callable(self, "_execute").bind(task), task.priority)
 			logger.debug("Execute task %s.%s() " % [task.instance, task.method])
 		return can_execute
 
@@ -922,7 +922,7 @@ class _ThreadPool extends Reference:
 				return false
 		return true
 
-class _Logger extends Reference:
+class _Logger extends RefCounted:
 	enum LogLevel {
 		ALL, DEBUG, INFO, WARN, ERROR, NONE
 	}
@@ -960,7 +960,7 @@ class _Logger extends Reference:
 		})
 
 	func get_formatted_datatime():
-		var datetime = OS.get_datetime()
+		var datetime = Time.get_datetime_dict_from_system()
 		datetime.year = "%04d" % datetime.year
 		datetime.month = "%02d" % datetime.month
 		datetime.day = "%02d" % datetime.day

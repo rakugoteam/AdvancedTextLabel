@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 # now is added as autoload singleton : "EBBCodeParser"
 
@@ -33,11 +33,11 @@ func parse(text:String, headers_fonts:Array, variables:Dictionary) -> String:
 	var output = "" + text
 
 	# prints("bbcode_parser run with variables:", variables)
-	if !variables.empty():
+	if !variables.is_empty():
 		output = replace_variables(output, variables)
 
 	# Parse headers
-	if !headers_fonts.empty():
+	if !headers_fonts.is_empty():
 		output = parse_headers(output, headers_fonts)
 
 	# prints("emojis_gd:", emojis_gd)

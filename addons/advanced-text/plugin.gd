@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorPlugin
 
 func _enter_tree():
@@ -21,7 +21,7 @@ func _enter_tree():
 	if !ProjectSettings.has_setting("addons/advanced_text/default_vars"):
 		ProjectSettings.set_setting(
 			"addons/advanced_text/default_vars",
-			JSON.print({
+			JSON.stringify({
 			"test_setting": "variable from project settings" 
 			}, "\t"
 		))

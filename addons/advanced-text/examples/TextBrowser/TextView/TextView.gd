@@ -1,13 +1,13 @@
-tool
+@tool
 extends AdvancedTextLabel
 
 func _ready():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		return
 
-	connect("meta_clicked", self, "_on_meta_clicked")
-	connect("meta_hover_started", self, "_on_meta_hover_started")
-	connect("meta_hover_ended", self, "_on_meta_hover_ended")
+	connect("meta_clicked", Callable(self, "_on_meta_clicked"))
+	connect("meta_hover_started", Callable(self, "_on_meta_hover_started"))
+	connect("meta_hover_ended", Callable(self, "_on_meta_hover_ended"))
 
 func _on_meta_hover_started(meta:String):
 	Input.set_default_cursor_shape(CURSOR_POINTING_HAND)

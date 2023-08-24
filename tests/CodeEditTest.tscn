@@ -19,24 +19,24 @@ __meta__ = {
 [node name="GDScriptEdit" type="TextEdit" parent="HBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "# tool
 extends Button
 class_name AdvancedTextButton
 
-onready var adv_label := get_node(\"AdvancedTextLabel\")
+@onready var adv_label := get_node(\"AdvancedTextLabel\")
 
 func _ready():
-	adv_label.connect(\"resized\", self, \"_on_button_resized\")
-	connect(\"mouse_entered\", self, \"_on_mouse_entered\")
-	connect(\"mouse_exited\", self, \"_on_mouse_exited\")
-	connect(\"pressed\", self, \"_on_pressed\")
-	connect(\"toggled\", self, \"_on_toggled\")
+	adv_label.connect(\"resized\", Callable(self, \"_on_button_resized\"))
+	connect(\"mouse_entered\", Callable(self, \"_on_mouse_entered\"))
+	connect(\"mouse_exited\", Callable(self, \"_on_mouse_exited\"))
+	connect(\"pressed\", Callable(self, \"_on_pressed\"))
+	connect(\"toggled\", Callable(self, \"_on_toggled\"))
 
 func _set_label_color(color_name:String):
 	var color_path := \"Button/colors/\" + color_name
@@ -58,7 +58,7 @@ func _set(property:String, value)->bool:
 	return true
 
 func _on_button_resized():
-	adv_label.rect_size = rect_size
+	adv_label.size = size
 
 func is_toggled():
 	return pressed and toggle_mode
@@ -84,7 +84,7 @@ func _on_toggled(value:bool):
 
 
 "
-syntax_highlighting = true
+syntax_highlighter = true
 script = ExtResource( 1 )
 text_file = "res://addons/advanced-text/examples/AdvancedTextButton/AdvancedTextButton.gd"
 configs = [ "res://addons/advanced-text/highlights/gdscript.json" ]
@@ -93,10 +93,10 @@ configs = [ "res://addons/advanced-text/highlights/gdscript.json" ]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "{
@@ -108,7 +108,7 @@ text = "{
     ]
   }
 }"
-syntax_highlighting = true
+syntax_highlighter = true
 script = ExtResource( 1 )
 text_file = "res://addons/advanced-text/highlights/json.json"
 configs = [ "res://addons/advanced-text/highlights/json.json" ]
@@ -117,10 +117,10 @@ configs = [ "res://addons/advanced-text/highlights/json.json" ]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "# Header Level 1
@@ -182,7 +182,7 @@ test_dict.key1 = <test_dict.key1>
 
 
 "
-syntax_highlighting = true
+syntax_highlighter = true
 script = ExtResource( 1 )
 text_file = "res://addons/advanced-text/help/markdown.md"
 configs = [ "res://addons/advanced-text/highlights/markdown.json" ]
@@ -191,10 +191,10 @@ configs = [ "res://addons/advanced-text/highlights/markdown.json" ]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "[h1]Header Level 1[/h1]
@@ -240,7 +240,7 @@ test_dict.key1 = <test_dict.key1>
 [fade start=4 length=14]fade[/fade]
 [rainbow freq=0.2 sat=10 val=20]rainbow[/rainbow]
 "
-syntax_highlighting = true
+syntax_highlighter = true
 script = ExtResource( 1 )
 text_file = "res://addons/advanced-text/help/bbcode.txt"
 configs = [ "res://addons/advanced-text/highlights/bbcode.json" ]
@@ -249,10 +249,10 @@ configs = [ "res://addons/advanced-text/highlights/bbcode.json" ]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "\"\"\"
@@ -302,7 +302,7 @@ test_dict.key1 = <test_dict.key1>
 {fade start=4 length=14}fade{/fade}
 {rainbow freq=0.2 sat=10 val=20}rainbow{/rainbow}
 \"\"\""
-syntax_highlighting = true
+syntax_highlighter = true
 script = ExtResource( 1 )
 text_file = "res://addons/advanced-text/help/renpy.rpy"
 configs = [ "res://addons/advanced-text/highlights/renpy.json" ]

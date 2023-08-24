@@ -1,4 +1,4 @@
-tool
+@tool
 extends "EBBCodeParser.gd"
 # now is added as autoload singleton : "MarkdownParser"
 
@@ -10,7 +10,7 @@ func parse(text:String, headers_fonts:Array, variables:Dictionary) -> String:
 	var output = "" + text
 
 	# prints("markdown_parser run with variables:", variables)
-	if !variables.empty():
+	if !variables.is_empty():
 		output = replace_variables(output, variables)
 	
 	# prints("emojis_gd:", emojis_gd)
@@ -21,7 +21,7 @@ func parse(text:String, headers_fonts:Array, variables:Dictionary) -> String:
 		output = parse_icons(output)
 
 	# Parse headers
-	if !headers_fonts.empty():
+	if !headers_fonts.is_empty():
 		output = parse_headers(output, headers_fonts)
 
 	output = convert_markdown(output)
@@ -55,9 +55,9 @@ func convert_markdown(text:String) -> String:
 	re.compile("([=\\[\\]\\(]?)(\\w+:\\/\\/[A-Za-z0-9\\.\\-\\_\\@\\/]+)([\\]\\[\\)]?)")
 	for result in re.search_all(text):
 		if result.get_string():
-			if !result.get_string(1).empty():
+			if !result.get_string(1).is_empty():
 				continue
-			if !result.get_string(3).empty():
+			if !result.get_string(3).is_empty():
 				continue
 
 			replacement = "[url]%s[/url]" % result.get_string(2)
@@ -68,7 +68,7 @@ func convert_markdown(text:String) -> String:
 	re.compile("(\\]?)\\[(.+)\\]\\(([A-Za-z0-9\\.-_@\\/]+)\\)")
 	for result in re.search_all(text):
 		if result.get_string():
-			if !result.get_string(1).empty():
+			if !result.get_string(1).is_empty():
 				continue
 			var _text = result.get_string(2)
 			var url = result.get_string(3)

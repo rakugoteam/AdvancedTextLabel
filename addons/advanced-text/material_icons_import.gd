@@ -1,4 +1,4 @@
-tool
+@tool
 extends Object
 
 # MI stands from Material Icons
@@ -47,9 +47,9 @@ func get_icons_panel() -> Node:
     return null
 
   var panel = load(mi_panel)
-  return panel.instance()
+  return panel.instantiate()
 
-func get_icon() -> Texture:
+func get_icon() -> Texture2D:
   if !is_plugin_enabled():
     return null
 

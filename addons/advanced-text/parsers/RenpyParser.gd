@@ -1,4 +1,4 @@
-tool
+@tool
 extends "EBBCodeParser.gd"
 # now is added as autoload singleton : "RenpyParser"
 
@@ -14,10 +14,10 @@ func parse(text:String, headers_fonts:Array, variables:Dictionary) -> String:
 		lines.pop_at(0)
 		if lines.back() == '"""':
 			lines.pop_back()
-		output = PoolStringArray(lines).join('\n')
+		output = '\n'.join(PackedStringArray(lines))
 
 	# prints("renpy_parser run with variables:", variables)
-	if !variables.empty():
+	if !variables.is_empty():
 		# like in renpy - don't work with arrays indexing :(
 		# output = replace_variables(output, variables, "[_]")
 		output = replace_variables(output, variables, "<_>")
@@ -25,7 +25,7 @@ func parse(text:String, headers_fonts:Array, variables:Dictionary) -> String:
 	output = convert_renpy_markup(output)
 
 	# Parse headers
-	if !headers_fonts.empty():
+	if !headers_fonts.is_empty():
 		output = parse_headers(output, headers_fonts)
 		
 	# prints("emojis_gd:", emojis_gd)

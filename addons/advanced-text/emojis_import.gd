@@ -1,4 +1,4 @@
-tool
+@tool
 extends Object
 
 const emoji_path := "res://addons/emojis-for-godot/emojis/emojis.gd"
@@ -44,9 +44,9 @@ func get_emoji_panel() -> Node:
 		return null
 	
 	var panel = load(emoji_panel)
-	return panel.instance()
+	return panel.instantiate()
 
-func get_icon() -> Texture:
+func get_icon() -> Texture2D:
 	if not is_plugin_enabled():
 		return null
 	
