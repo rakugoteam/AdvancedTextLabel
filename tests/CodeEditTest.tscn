@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://addons/advanced-text/nodes/CodeEdit.gd" type="Script" id=1]
+[ext_resource path="res://addons/advanced-text/nodes/CodeEditAlt.gd" type="Script" id=1]
 
-[node name="CodeEditTest" type="Control"]
+[node name="CodeEditAltTest" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -187,7 +187,7 @@ script = ExtResource( 1 )
 text_file = "res://addons/advanced-text/help/markdown.md"
 configs = [ "res://addons/advanced-text/highlights/markdown.json" ]
 
-[node name="BBCodeEdit" type="TextEdit" parent="HBoxContainer"]
+[node name="BBCodeEditAlt" type="TextEdit" parent="HBoxContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
