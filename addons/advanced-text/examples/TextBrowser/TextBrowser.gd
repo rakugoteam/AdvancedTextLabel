@@ -1,11 +1,11 @@
 extends Panel
 
-@export var home_text_file := "" # (String, FILE, "*.md, *.rpy, *.txt")
+@export_file("*.md", "*.rpy", "*.txt") var home_text_file := ""
 @export var tab_button_scene : PackedScene
 @export var text_view_scene : PackedScene
 
-@export (NodePath) onready var tabs = get_node(tabs) as TabContainer
-@export (NodePath) onready var tabs_box = get_node(tabs_box) as VBoxContainer
+@export var tabs : TabContainer
+@export var tabs_box : VBoxContainer
 
 var current_text_view : AdvancedTextLabel
 var tabs_group := ButtonGroup.new()

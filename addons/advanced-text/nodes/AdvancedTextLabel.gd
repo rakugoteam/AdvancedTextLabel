@@ -1,8 +1,8 @@
+@icon("res://addons/advanced-text/icons/AdvancedTextLabel.svg")
 @tool
 extends RichTextLabel
-class_name AdvancedTextLabel, "res://addons/advanced-text/icons/AdvancedTextLabel.svg"
+class_name AdvancedTextLabel
 
-var f : File
 signal update
 
 @export var markup_text_file := "": set = _set_markup_text_file
@@ -69,8 +69,7 @@ func _set_markup_text_file(value:String) -> void:
 	emit_signal("update")
 
 func _load_file(file_path:String) -> void:
-	f = File.new()
-	f.open(file_path, File.READ)
+	var f = FileAccess.open(file_path, FileAccess.READ)
 	var file_ext = file_path.get_extension()
 
 	bbcode_enabled = true

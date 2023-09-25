@@ -6,7 +6,6 @@ const emoji_plugin_path := "res://addons/emojis-for-godot/plugin.cfg"
 const emoji_panel := "res://addons/emojis-for-godot/EmojiPanel/EmojiPanel.tscn"
 const emoji_icon_path :="res://addons/emojis-for-godot/icon.png"
 
-var f := File.new()
 var _emojis
 var _plugin_enabled := false
 var _warning_shown := false
@@ -30,7 +29,7 @@ func get_emojis():
 	if !is_plugin_enabled():
 		return null
 
-	if f.file_exists(emoji_path):
+	if FileAccess.file_exists(emoji_path):
 		_emojis = load(emoji_path)
 		_emojis = _emojis.new()
 		return _emojis

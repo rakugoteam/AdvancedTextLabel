@@ -9,7 +9,6 @@ const mi_panel := "res://addons/material-design-icons/icon_finder/IconFinder.tsc
 const mi_icon_path := "res://addons/material-design-icons/nodes/MaterialIcon.svg"
 const mi_font_path := "res://addons/material-design-icons/fonts/%s.tres"
 
-var f := File.new()
 var _icons
 var _plugin_enabled := false
 var _warning_shown := false
@@ -33,7 +32,7 @@ func get_icons():
 	if !is_plugin_enabled():
 		return null
 
-	if f.file_exists(mi_path):
+	if FileAccess.file_exists(mi_path):
 		_icons = load(mi_path)
 		_icons = _icons.new()
 		return _icons
@@ -43,16 +42,16 @@ func get_icons():
 		return null
 
 func get_icons_panel() -> Node:
-  if !is_plugin_enabled():
-    return null
+	if !is_plugin_enabled():
+		return null
 
-  var panel = load(mi_panel)
-  return panel.instantiate()
+	var panel = load(mi_panel)
+	return panel.instantiate()
 
 func get_icon() -> Texture2D:
-  if !is_plugin_enabled():
-    return null
+	if !is_plugin_enabled():
+		return null
 
-  var icon = load(mi_icon_path)
-  return icon
+	var icon = load(mi_icon_path)
+	return icon
 

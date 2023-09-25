@@ -1,17 +1,15 @@
 @tool
 extends Control
 
-@export var text := "[center][shake rate=5 level=10]**Clik to edit me**[/shake][/center]" # (String, MULTILINE)
-@export(NodePath) onready var m_edit = get_node(m_edit)
-@export(NodePath) onready var button = get_node(button)
-
+@export_multiline var text := "[center][shake rate=5 level=10]**Clik to edit me**[/shake][/center]"
+@export var m_edit : TextEdit
+@export var button : Button
 
 func _ready():
 	button.markup_text = text
 	m_edit.text = text
-	button.connect("toggled", Callable(self, "_on_button_toggled"))
-	m_edit.connect("text_changed", Callable(self, "_on_text_changed"))
-
+	button.toggled.connect(_on_button_toggled)
+	m_edit.text_changed.connect(_on_text_changed)
 
 func _on_button_toggled(toggled: bool):
 	if toggled:
@@ -24,10 +22,8 @@ func _on_button_toggled(toggled: bool):
 	else:
 		$Popup.hide()
 
-
 func _on_text_changed():
 	button.markup_text = m_edit.text
-
 
 func _process(delta):
 	if $Popup.visible:

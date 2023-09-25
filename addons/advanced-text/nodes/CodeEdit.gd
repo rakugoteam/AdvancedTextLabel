@@ -1,30 +1,31 @@
+@icon("res://addons/advanced-text/icons/CodeEdit.svg")
 @tool
 extends TextEdit
-class_name CodeEditAlt, "res://addons/advanced-text/icons/CodeEdit.svg"
+class_name CodeEditAlt
 
-var f : File
 var EmojisImport
 var emojis_gd
 
 var IconsImport
 var icons_gd
+var code_highlighter := CodeHighlighter.new()
 
 signal update
 
 @export var text_file := "": set = _set_text_file
 @export var highlight_colors := true
-@export var configs # (Array, String, FILE, "*.json")
+@export var configs : Array[FileHelper]
 
 func _ready() -> void:
-	EmojisImport = preload("../emojis_import.gd")
-	EmojisImport = EmojisImport.new()
+	# EmojisImport = preload("../emojis_import.gd")
+	# EmojisImport = EmojisImport.new()
 
-	IconsImport = preload("../material_icons_import.gd")
-	IconsImport = IconsImport.new()
+	# IconsImport = preload("../material_icons_import.gd")
+	# IconsImport = IconsImport.new()
 
-	syntax_highlighter = true
+	syntax_highlighter = code_highlighter
 
-	clear_colors()
+	code_highlighter.clear_colors()
 	_add_keywords_highlighting()
 	connect("update", Callable(self, "_on_update"))
 	emit_signal("update")
@@ -38,20 +39,14 @@ func _on_update() -> void:
 		_load_file(text_file)
 
 func _load_file(file_path:String) -> void:
-	f = File.new()
-	f.open(file_path, File.READ)
+	var f = FileAccess.open(file_path, FileAccess.READ)
 	text = f.get_as_text()
 	f.close()
-
-func switch_config(json_file:String, id:=0) -> void:
-	clear_colors()
-	configs[id] = json_file
-	_add_keywords_highlighting()
 
 func _add_keywords_highlighting() -> void:
 	if configs.size() > 0:
 		for json in configs:
-			load_json_config(json)
+			load_json_config(json.file)
 	
 	if highlight_colors:
 		_highlight_colors()
@@ -76,7 +71,7 @@ func _highlight_colors():
 	}
 
 	for c in colors.keys():
-		add_keyword_color(c, colors[c])
+		code_highlighter.add_keyword_color(c, colors[c])
 
 func load_json_config(json: String) -> void:
 	var content := get_file_content(json)
@@ -122,7 +117,7 @@ func load_emojis_if_exists(color: Color) -> void:
 
 	if emojis_gd:
 		for e in emojis_gd.emojis.keys():
-			add_keyword_color(e, color)
+			code_highlighter.add_keyword_color(e, color)
 
 func load_icons_if_exists(color: Color) -> void:
 	if icons_gd == null:
@@ -130,39 +125,38 @@ func load_icons_if_exists(color: Color) -> void:
 
 	if icons_gd:
 		for e in icons_gd.icons.keys():
-			add_keyword_color(e, color)
+			code_highlighter.add_keyword_color(e, color)
 
 func read_region_if_exist(c, color:Color): 
 	if c.has("region"):
 		var r = c["region"]
-		add_color_region(r[0], r[1], color)
+		code_highlighter.add_color_region(r[0], r[1], color)
 	
 func read_keywords_if_exist(c, color:Color):
 	if c.has("keywords"):
 		var keywords = c["keywords"]
 		for k in keywords:
-			add_keyword_color(k, color)
+			code_highlighter.add_keyword_color(k, color)
 
 func read_class_conf_if_exist(c):
 	var class_color := read_color(c, "class_color")
 	var variables_color := read_color(c, "variables_color")
 	if c.has("load") and c["load"]:
-		for c in ClassDB.get_class_list():
-			add_keyword_color(c, class_color)
-			for m in ClassDB.class_get_property_list(c):
+		for _class in ClassDB.get_class_list():
+			code_highlighter.add_keyword_color(_class, class_color)
+			for m in ClassDB.class_get_property_list(_class):
 				for key in m:
-					add_keyword_color(key, variables_color)
+					code_highlighter.add_keyword_color(key, variables_color)
 
 	if c.has("custom_classes"):
 		for _class in c["custom_classes"]:
-			add_keyword_color(_class, class_color)
+			code_highlighter.add_keyword_color(_class, class_color)
 
 func get_file_content(path:String) -> String:
-	var file = File.new()
-	var error : int = file.open(path, file.READ)
+	var file = FileAccess.open(path, FileAccess.READ)
 	var content : = ""
 	
-	if error == OK:
+	if file.get_error() == OK:
 		content = file.get_as_text()
 		file.close()
 

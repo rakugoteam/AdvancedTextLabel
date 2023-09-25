@@ -26,6 +26,8 @@ config/icon="res://addons/advanced-text/icons/AdvancedTextLabel.svg"
 EBBCodeParser="*res://addons/advanced-text/parsers/EBBCodeParser.gd"
 MarkdownParser="*res://addons/advanced-text/parsers/MarkdownParser.gd"
 RenpyParser="*res://addons/advanced-text/parsers/RenpyParser.gd"
+EmojisDB="*res://addons/emojis-for-godot/emojis/emojis.gd"
+MaterialIconsDB="*res://addons/material-design-icons/icons/icons.gd"
 
 [debug]
 
@@ -38,7 +40,7 @@ gdscript/warnings/unused_argument=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/advanced-text/plugin.cfg")
+enabled=PackedStringArray("res://addons/advanced-text/plugin.cfg", "res://addons/emojis-for-godot/plugin.cfg", "res://addons/material-design-icons/plugin.cfg")
 
 [global]
 

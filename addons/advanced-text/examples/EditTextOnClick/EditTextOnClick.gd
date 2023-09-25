@@ -54,7 +54,7 @@ func _process(delta):
 			return
 
 		if Input.is_key_pressed(KEY_ENTER):
-			if Input.is_key_pressed(KEY_MASK_SHIFT):
+			if Input.is_key_pressed(KEY_SHIFT):
 				m_edit.text += "\n"
 				return
 
