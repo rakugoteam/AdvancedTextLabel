@@ -23,9 +23,6 @@ config/icon="res://addons/advanced-text/icons/AdvancedTextLabel.svg"
 
 [autoload]
 
-EBBCodeParser="*res://addons/advanced-text/parsers/EBBCodeParser.gd"
-MarkdownParser="*res://addons/advanced-text/parsers/MarkdownParser.gd"
-RenpyParser="*res://addons/advanced-text/parsers/RenpyParser.gd"
 EmojisDB="*res://addons/emojis-for-godot/emojis/emojis.gd"
 MaterialIconsDB="*res://addons/material-design-icons/icons/icons.gd"
 
