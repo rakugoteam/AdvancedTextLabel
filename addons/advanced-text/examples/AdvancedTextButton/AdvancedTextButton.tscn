@@ -1,25 +1,25 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://kfvmx8cuta3o"]
 
-[ext_resource path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" type="Script" id=1]
-[ext_resource path="res://addons/advanced-text/examples/AdvancedTextButton/button_theme.tres" type="Theme" id=2]
-[ext_resource path="res://addons/advanced-text/examples/AdvancedTextButton/AdvancedTextButton.gd" type="Script" id=3]
+[ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="1"]
+[ext_resource type="Theme" uid="uid://3dtle1rh85vc" path="res://addons/advanced-text/examples/AdvancedTextButton/button_theme.tres" id="2"]
+[ext_resource type="Script" path="res://addons/advanced-text/examples/AdvancedTextButton/AdvancedTextButton.gd" id="3"]
 
 [node name="AdvancedTextButton" type="Button"]
+custom_minimum_size = Vector2(224, 24)
 offset_right = 373.0
 offset_bottom = 24.0
-custom_minimum_size = Vector2( 224, 24 )
 size_flags_horizontal = 3
-theme = ExtResource( 2 )
-script = ExtResource( 3 )
+theme = ExtResource("2")
+script = ExtResource("3")
 
 [node name="AdvancedTextLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+layout_mode = 0
 offset_right = 373.0
 offset_bottom = 20.0
-clip_contents = false
 mouse_filter = 1
 bbcode_enabled = true
-text = "[center][shake rate=5 level=10][b]Advanced Teeeeeeeeeeeext Button[/b][/shake][/center]"
-text = "Advanced Teeeeeeeeeeeext Button"
+text = "[center][shake rate=5 level=10][b]Advanced Teeeeeeeeeeeext Button[/b]te=5 level=10][i][/i]eeeeeext Button[/b]te=5 level=10]**Advanced Teeeeeeeeeeeext Button[i][/i]te=5 level=10][b]Advanced Teeeeeeeeeeeext Button[/b]te=5 level=10][i][/i]eeeeeext Button[/b]te=5 level=10]**Advanced Teeeeeeeeeeeext Button**[/shake][/center]"
 scroll_active = false
-script = ExtResource( 1 )
+script = ExtResource("1")
 markup_text = "[center][shake rate=5 level=10]**Advanced Teeeeeeeeeeeext Button**[/shake][/center]"

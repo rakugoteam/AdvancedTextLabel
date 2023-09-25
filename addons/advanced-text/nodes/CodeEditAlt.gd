@@ -12,7 +12,7 @@ var code_highlighter := CodeHighlighter.new()
 
 signal update
 
-@export var text_file := "": set = _set_text_file
+@export_file var text_file := "": set = _set_text_file
 @export var highlight_colors := true
 @export var configs : Array[FileHelper]
 
