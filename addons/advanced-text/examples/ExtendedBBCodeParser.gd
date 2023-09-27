@@ -4,13 +4,24 @@ extends TextParser
 class_name ExtendedBBCodeParser
 
 var headers : Array[int] = [22, 20, 18, 16]
+
+# ! Remember To release Icons and Emojis with need fixes for Advanced Text,
+# ! before release this addon !
+
 var emojis_db : Node :
 	get:
+		if !is_node_ready():
+			return null
+		
 		return get_node("/root/EmojisDB")
 
 var icons_db : Node :
 	get:
+		if !is_node_ready():
+			return null
+		
 		return get_node("/root/MaterialIconsDB")
+
 
 func parse(text:String) -> String:
 	text = parse_headers(text)

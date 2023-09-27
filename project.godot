@@ -21,6 +21,7 @@ MaterialIconsDB="*res://addons/material-design-icons/icons/icons.gd"
 
 [debug]
 
+gdscript/warnings/exclude_addons=false
 gdscript/warnings/unassigned_variable=false
 gdscript/warnings/unassigned_variable_op_assign=false
 gdscript/warnings/unused_variable=false
