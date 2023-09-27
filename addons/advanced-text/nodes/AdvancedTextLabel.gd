@@ -20,6 +20,9 @@ class_name AdvancedTextLabel
 		if value != null:
 			update_text()
 
+func _ready():
+	update_text()
+
 func update_text():
 	bbcode_enabled = false
 	if parser == null:

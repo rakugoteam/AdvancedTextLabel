@@ -31,9 +31,8 @@ theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
 bbcode_enabled = true
 script = ExtResource("1_uinld")
-_text = "[h1]H1[/h1]
-[h2]H2[/h2]
-[h3]H3[/h3]"
+_text = "[h1]H1[/h1][h2]H2[/h2][h3]H3[/h3]
+Label with :e::m::o::j::i: :grin:"
 parser = NodePath("ExtendedBBCodeParser")
 
 [node name="TextParser" type="Node" parent="AdvancedTextLabel"]

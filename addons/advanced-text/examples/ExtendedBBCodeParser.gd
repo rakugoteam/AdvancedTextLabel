@@ -4,13 +4,17 @@ extends TextParser
 class_name ExtendedBBCodeParser
 
 var headers : Array[int] = [22, 20, 18, 16]
+var emojis_db : Node :
+	get:
+		return get_node("/root/EmojisDB")
+
 
 func parse(text:String) -> String:
 	text = parse_headers(text)
 	
-	# if emojis_gd:
-	# 	output = emojis_gd.parse_emojis(output)
-			
+	if emojis_db != null:
+		text = emojis_db.parse_emojis(text)
+	
 	# if icons_gd:
 	# 	output = parse_icons(output)
 	
@@ -25,14 +29,12 @@ func parse_headers(text:String) -> String:
 	var re = RegEx.new()
 	re.compile("\\[h(?P<size>[1-4])\\](?P<text>.+?)\\[/h(?P=size)\\]")
 
-	var founds := re.search_all(text)
-	if founds.is_empty():
-		return text
-	
-	for found in founds:
-		var h_size := found.get_string("size").to_int()
+	var x := re.search(text)
+	while x != null:
+		var h_size := x.get_string("size").to_int()
 		var font_size := headers[h_size - 1]
 		text = text.replace("[h" + str(h_size) + "]", "[font_size=" + str(font_size) + "]")
 		text = text.replace("[/h" + str(h_size) + "]", "[/font_size]")
+		x = re.search(text, x.get_end())
 	
 	return text
