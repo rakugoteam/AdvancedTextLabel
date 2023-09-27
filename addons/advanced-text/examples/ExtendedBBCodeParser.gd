@@ -25,12 +25,14 @@ func parse_headers(text:String) -> String:
 	var re = RegEx.new()
 	re.compile("\\[h(?P<size>[1-4])\\](?P<text>.+?)\\[/h(?P=size)\\]")
 
-	var found := re.search(text)
-	if not found:
+	var founds := re.search_all(text)
+	if founds.is_empty():
 		return text
-
-	var h_size := found.get_string("size").to_int()
-	var font_size := headers[h_size - 1]
-	text = text.replace("[h" + str(h_size) + "]", "[font_size=" + str(font_size) + "]")
-	text = text.replace("[/h" + str(h_size) + "]", "[/font_size]")
+	
+	for found in founds:
+		var h_size := found.get_string("size").to_int()
+		var font_size := headers[h_size - 1]
+		text = text.replace("[h" + str(h_size) + "]", "[font_size=" + str(font_size) + "]")
+		text = text.replace("[/h" + str(h_size) + "]", "[/font_size]")
+	
 	return text
