@@ -6,24 +6,19 @@
 [ext_resource type="FontFile" uid="uid://dv5f7ykw422ft" path="res://addons/advanced-text/font/DejaVuSans-Oblique.ttf" id="3_7l8y2"]
 [ext_resource type="FontFile" uid="uid://3spkwr34s2bq" path="res://addons/advanced-text/font/DejaVuSans-BoldOblique.ttf" id="4_rc1wt"]
 [ext_resource type="FontFile" uid="uid://buj02o26lgfif" path="res://addons/advanced-text/font/DejaVuSansMono.ttf" id="5_fmnql"]
-[ext_resource type="Script" path="res://addons/advanced-text/examples/TextParser.gd" id="8_2g1qs"]
+[ext_resource type="Script" path="res://addons/advanced-text/examples/RenPyStringParser.gd" id="8_1kv26"]
 [ext_resource type="Script" path="res://addons/advanced-text/examples/ExtendedBBCodeParser.gd" id="8_jj1jg"]
 
-[node name="AdvancedTextLabels" type="Control"]
-layout_mode = 3
+[node name="AdvancedTextLabels" type="TabContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AdvancedTextLabel" type="RichTextLabel" parent="." node_paths=PackedStringArray("parser")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ExBBCodeLabel" type="RichTextLabel" parent="." node_paths=PackedStringArray("parser")]
+visible = false
+layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
 theme_override_fonts/italics_font = ExtResource("3_7l8y2")
@@ -36,8 +31,22 @@ Label with :e::m::o::j::i: :grin:
 Text with Icons: [icon:format-textbox] Second icon: [icon:alpha]"
 parser = NodePath("ExtendedBBCodeParser")
 
-[node name="TextParser" type="Node" parent="AdvancedTextLabel"]
-script = ExtResource("8_2g1qs")
-
-[node name="ExtendedBBCodeParser" type="Node" parent="AdvancedTextLabel"]
+[node name="ExtendedBBCodeParser" type="Node" parent="ExBBCodeLabel"]
 script = ExtResource("8_jj1jg")
+
+[node name="RenPyStringLabel" type="RichTextLabel" parent="." node_paths=PackedStringArray("parser")]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_nhc5f")
+theme_override_fonts/bold_font = ExtResource("2_aml2b")
+theme_override_fonts/italics_font = ExtResource("3_7l8y2")
+theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
+theme_override_fonts/mono_font = ExtResource("5_fmnql")
+bbcode_enabled = true
+script = ExtResource("1_uinld")
+_text = "{h1}H1{/h1}{h2}H2{/h2}{h3}H3{/h3}
+Label with :e::m::o::j::i: :grin:
+Text with Icons: {icon:format-textbox} Second icon: {icon:alpha}"
+parser = NodePath("RenPyStringParser")
+
+[node name="RenPyStringParser" type="Node" parent="RenPyStringLabel"]
+script = ExtResource("8_1kv26")
