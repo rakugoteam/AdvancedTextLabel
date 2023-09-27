@@ -8,6 +8,9 @@ var emojis_db : Node :
 	get:
 		return get_node("/root/EmojisDB")
 
+var icons_db : Node :
+	get:
+		return get_node("/root/MaterialIconsDB")
 
 func parse(text:String) -> String:
 	text = parse_headers(text)
@@ -15,8 +18,8 @@ func parse(text:String) -> String:
 	if emojis_db != null:
 		text = emojis_db.parse_emojis(text)
 	
-	# if icons_gd:
-	# 	output = parse_icons(output)
+	if icons_db != null:
+		text = icons_db.parse_icons(text)
 	
 	return text
 
