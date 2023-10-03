@@ -3,6 +3,16 @@
 extends RichTextLabel
 class_name AdvancedTextLabel
 
+@export_file var text_file := "" :
+	get:
+		return text_file
+	
+	set(value):
+		text_file = value
+		if text_file:
+			var f := FileAccess.open(text_file, FileAccess.READ)
+			_text = f.get_as_text()
+
 @export_multiline var _text := "" :
 	get:
 		return _text
@@ -33,7 +43,5 @@ func update_text():
 
 	bbcode_enabled = true
 	text = parser.parse(_text)
-
-	
 
 

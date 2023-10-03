@@ -63,11 +63,17 @@ func parse(text: String) -> String:
 
 	return super.parse(text)
 
-func base_parse(text:String, open_md:String, close_md:String, open_bbc:String, close_bbc:String):
-	re.compile(open_md + "(?P<text>.+?)" + open_bbc)
+func parse_headers(text:String) -> String:
+
+	re.compile("(#+)\\s+(.+)\n")
 	for result in re.search_all(text):
 		if result.get_string():
-			replacement = open_bbc + result.get_string("text") + close_bbc
+			var header_level = headers.size() - result.get_string(1).length()
+			header_level = clamp(header_level, 0, headers.size())
+			var header_text = result.get_string(2)
+			var header_size = headers[header_level]
+			var replacement = "[font_size=%s]%s[/[font_size]\n" % [
+				header_size, header_text]
 			text = text.replace(result.get_string(), replacement)
 	
 	return text
@@ -127,29 +133,38 @@ func parse_links(text:String) -> String:
 	return text
 
 func parse_italics(text: String) -> String:
-	# turn _text_ into [i]text[/i], but only if there are no spaces between the _ and the text
-	
-	var _italics := ""
+	var search := ""
 	match italics:
 		"*":
-			_italics = "\\*"
+			search = "\\*(.*?)\\*"
 		"_":
-			_italics = "\\_"
+			search = "\\_(.*?)\\_"
 	
-	return base_parse(text, _italics, _italics, "[i]", "[/i]")
+	# *italic*
+	re.compile(search)
+	for result in re.search_all(text):
+		if result.get_string():
+			replacement = "[i]%s[/i]" % result.get_string(1)
+			text = text.replace(result.get_string(), replacement)
+
+	return text
 
 func parse_bold(text: String) -> String:
-	# turn **text** into [b]text[/b],
-	# but only if there are no spaces between the ** and the text
-
-	var _bold := ""
+	var search := ""
 	match bold:
 		"**":
-			_bold = "\\*\\*"
+			search = "\\*\\*(.*?)\\*\\*"
 		"__":
-			_bold = "\\_\\_"
+			search = "\\_\\_(.*?)\\_\\_"
 
-	return base_parse(text, _bold, _bold, "[b]", "[/b]")
+	# **bold**
+	re.compile(search)
+	for result in re.search_all(text):
+		if result.get_string():
+			replacement = "[b]%s[/b]" % result.get_string(1)
+			text = text.replace(result.get_string(), replacement)
+	
+	return text
 
 func parse_strike_through(text:String) -> String:
 	# ~~strike through~~
