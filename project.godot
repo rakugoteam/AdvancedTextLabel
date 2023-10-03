@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="AdvancedText"
+run/main_scene="res://addons/advanced-text/examples/advanced_text_labels.tscn"
 config/features=PackedStringArray("4.1")
 config/icon="res://addons/advanced-text/icons/AdvancedTextLabel.svg"
 

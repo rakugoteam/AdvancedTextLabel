@@ -72,7 +72,7 @@ func parse_headers(text:String) -> String:
 			header_level = clamp(header_level, 0, headers.size())
 			var header_text = result.get_string(2)
 			var header_size = headers[header_level]
-			var replacement = "[font_size=%s]%s[/[font_size]\n" % [
+			var replacement = "[font_size=%s]%s[/font_size]\n" % [
 				header_size, header_text]
 			text = text.replace(result.get_string(), replacement)
 	
@@ -119,14 +119,11 @@ func parse_urls(text:String) -> String:
 
 func parse_links(text:String) -> String:
 	# [link](path/to/file.md)
-	re.compile("(\\]?)\\[(.+)\\]\\(([A-Za-z0-9\\.-_@\\/]+)\\)")
+	re.compile("\\[(.+)\\]\\((.+)\\)")
 	for result in re.search_all(text):
 		if result.get_string():
-			if !result.get_string(1).is_empty():
-				continue
-
-			var link = result.get_string(2)
-			var url = result.get_string(3)
+			var link = result.get_string(1)
+			var url = result.get_string(2)
 			replacement = "[url=%s]%s[/url]" % [url, link]
 			text = text.replace(result.get_string(), replacement)
 	

@@ -18,6 +18,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ExBBCodeLabel" type="RichTextLabel" parent="." node_paths=PackedStringArray("parser")]
+visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
@@ -45,8 +46,8 @@ test_dict.key1 = <test_dict.key1>
 [color=<test_color>]text in custom color from variable[/color]
 
 [img]res://addons/emojis-for-godot/emojis/16x16/1f600.tres[/img]
-[icon=folder-open]
-[icon=folder-open, 32]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf][/font]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -92,8 +93,8 @@ test_dict.key1 = <test_dict.key1>
 [color=<test_color>]text in custom color from variable[/color]
 
 :grinning:
-[icon=folder-open]
-[icon=folder-open, 32]
+[icon:folder-open]
+[icon:folder-open, 32]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -151,8 +152,8 @@ test_dict.key1 = <test_dict.key1>
 [color=<test_color>]text in custom color from variable[/color]
 
 [img]res://addons/emojis-for-godot/emojis/16x16/1f600.tres[/img]
-[icon=folder-open]
-[icon=folder-open, 32]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf][/font]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -176,8 +177,7 @@ test_dict.key1 = <test_dict.key1>
 [tornado radius=5 freq=2]tornado[/tornado]
 [shake rate=5 level=10]shake[/shake]
 [fade start=4 length=14]fade[/fade]
-[rainbow freq=0.2 sat=10 val=20]rainbow[/rainbow]
-\"\"\""
+[rainbow freq=0.2 sat=10 val=20]rainbow[/rainbow]"
 script = ExtResource("1_uinld")
 text_file = "res://addons/advanced-text/help/renpy.rpy"
 _text = "{h1}Header Level 1{/h1}
@@ -200,8 +200,8 @@ test_dict.key1 = <test_dict.key1>
 {color=<test_color>}text in custom color from variable{/color}
 
 :grinning:
-{icon=folder-open}
-{icon=folder-open, 32}
+{icon:folder-open}
+{icon:folder-open, 32}
 {img=res://icon.png}
 {img=res://icon.png size=24x24}
 
@@ -225,15 +225,13 @@ test_dict.key1 = <test_dict.key1>
 {tornado radius=5 freq=2}tornado{/tornado}
 {shake rate=5 level=10}shake{/shake}
 {fade start=4 length=14}fade{/fade}
-{rainbow freq=0.2 sat=10 val=20}rainbow{/rainbow}
-\"\"\""
+{rainbow freq=0.2 sat=10 val=20}rainbow{/rainbow}"
 parser = NodePath("RenPyStringParser")
 
 [node name="RenPyStringParser" type="Node" parent="RenPyStringLabel"]
 script = ExtResource("8_33vn8")
 
 [node name="MarkdownLabel" type="RichTextLabel" parent="." node_paths=PackedStringArray("parser")]
-visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
@@ -241,28 +239,28 @@ theme_override_fonts/italics_font = ExtResource("3_7l8y2")
 theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
 bbcode_enabled = true
-text = "[font_size=16]Header Level 1[/[font_size]
-[font_size=18]Header Level 2[/[font_size]
-[font_size=20]Header Level 3[/[font_size]
+text = "[font_size=16]Header Level 1[/font_size]
+[font_size=18]Header Level 2[/font_size]
+[font_size=20]Header Level 3[/font_size]
 
-**bold**
-*italic*
+[b]bold[/b]
+[i]italic[/i]
 [s]strike through[/s]
 [code]mono-spaced text[/code]
 
 [url=[url]https://some_domain.com[/url]]link[/url]
 [url]https://some_domain.com[/url]
 
-test[i]string = <test[/i]string>
-test[i]int = <test[/i]int>
-test[i]bool = <test[/i]bool>
-test[i]list[0] = <test[/i]list[0]>
-test[i]dict.key1 = <test[/i]dict.key1>
+test_string = <test_string>
+test_int = <test_int>
+test_bool = <test_bool>
+test_list[0] = <test_list[0]>
+test_dict.key1 = <test_dict.key1>
 @color=<test_color> {text in custom color from variable}
 
 [img]res://addons/emojis-for-godot/emojis/16x16/1f600.tres[/img]
-[icon=folder-open]
-[icon=folder-open, 32]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf][/font]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -276,10 +274,10 @@ test[i]dict.key1 = <test[/i]dict.key1>
 [right]right aligned text[/right]
 
 [fill]fill aligned text[/fill]
-[fill]justified text *(alt to @fill)* [/fill]
+[fill]justified text [i](alt to @fill)[/i] [/fill]
 
 [indent]indent text[/indent]
-[indent]indent text *(alt to @indent)*[/indent]
+[indent]indent text [i](alt to @indent)[/i][/indent]
 
 [color=red]red text[/color]
 [color=#c39f00]custom colored text[/color]
@@ -310,7 +308,7 @@ _text = "# Header Level 1
 **bold**
 *italic*
 ~~strike through~~
-```mono-spaced text```
+`mono-spaced text`
 
 [link](https://some_domain.com)
 https://some_domain.com
@@ -323,8 +321,8 @@ test_dict.key1 = <test_dict.key1>
 @color=<test_color> {text in custom color from variable}
 
 :grinning:
-[icon=folder-open]
-[icon=folder-open, 32]
+[icon:folder-open]
+[icon:folder-open, 32]
 ![](res://icon.png)
 ![24x24](res://icon.png)
 
@@ -368,5 +366,4 @@ parser = NodePath("MarkdownParser")
 
 [node name="MarkdownParser" type="Node" parent="MarkdownLabel"]
 script = ExtResource("9_3e11a")
-italics = "_"
-bold = "__"
+points = "*"
