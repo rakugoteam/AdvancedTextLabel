@@ -47,7 +47,7 @@ test_dict.key1 = <test_dict.key1>
 
 [img]res://addons/emojis-for-godot/emojis/16x16/1f600.tres[/img]
 [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf][/font]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -153,7 +153,7 @@ test_dict.key1 = <test_dict.key1>
 
 [img]res://addons/emojis-for-godot/emojis/16x16/1f600.tres[/img]
 [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf][/font]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -248,8 +248,8 @@ text = "[font_size=16]Header Level 1[/font_size]
 [s]strike through[/s]
 [code]mono-spaced text[/code]
 
-[url=[url]https://some_domain.com[/url]]link[/url]
-[url]https://some_domain.com[/url]
+[url=[url][url]https://some_domain.com[/url][/url]]link[/url]
+[url][url]https://some_domain.com[/url][/url]
 
 test_string = <test_string>
 test_int = <test_int>
@@ -260,9 +260,9 @@ test_dict.key1 = <test_dict.key1>
 
 [img]res://addons/emojis-for-godot/emojis/16x16/1f600.tres[/img]
 [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf][/font]
-[img]res://icon.png[/img]
-[img=24x24]res://icon.png[/img]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[img][url][url]res://icon.png[/url][/url][/img]
+[img=24x24][url][url]res://icon.png[/url][/url][/img]
 
 [table=3][cell]1[/cell][cell]2[/cell][cell]3[/cell]
 [cell]4[/cell][cell]5[/cell][cell]6[/cell]

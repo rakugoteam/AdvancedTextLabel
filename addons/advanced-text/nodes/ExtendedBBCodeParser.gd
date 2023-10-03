@@ -5,6 +5,7 @@ class_name ExtendedBBCodeParser
 
 var headers : Array[int] = [22, 20, 18, 16]
 
+
 # TODO make possible for icons and emojis to change
 # TODO their tags so they can be more in sync with the text parser
 # ! Remember To release Icons and Emojis
@@ -50,19 +51,15 @@ func parse_icons(text:String) -> String:
 
 func parse_headers(text:String) -> String:
 	# replace [h1]text[/h1] with [font_size=22]text[/font_size]
-	# replace [h2]text[/h2] with [font_size=20]text[/font_size]
-	# replace [h3]text[/h3] with [font_size=18]text[/font_size]
-	# replace [h4]text[/h4] with [font_size=16]text[/font_size]
-
-	var re = RegEx.new()
 	re.compile("\\[h(?P<size>[1-4])\\](?P<text>.+?)\\[/h(?P=size)\\]")
 
-	var x := re.search(text)
-	while x != null:
-		var h_size := x.get_string("size").to_int()
+	result = re.search(text)
+	while result != null:
+		var h_size := result.get_string("size").to_int()
+		var h_text := result.get_string("text")
 		var font_size := headers[h_size - 1]
-		text = text.replace("[h" + str(h_size) + "]", "[font_size=" + str(font_size) + "]")
-		text = text.replace("[/h" + str(h_size) + "]", "[/font_size]")
-		x = re.search(text, x.get_end())
+		replacement = "[font_size=%s]%s[/font_size]" % [str(font_size), h_text]
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text, result.get_end())
 	
 	return text

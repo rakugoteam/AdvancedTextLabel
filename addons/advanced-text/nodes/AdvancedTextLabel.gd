@@ -9,9 +9,7 @@ class_name AdvancedTextLabel
 	
 	set(value):
 		text_file = value
-		if text_file:
-			var f := FileAccess.open(text_file, FileAccess.READ)
-			_text = f.get_as_text()
+		update_text()
 
 @export_multiline var _text := "" :
 	get:
@@ -34,10 +32,20 @@ func _ready():
 	update_text()
 
 func update_text():
+	if !is_ready():
+		return
+	
 	bbcode_enabled = false
 	if parser == null:
 		return
 
+	if text_file:
+		var f := FileAccess.open(text_file, FileAccess.READ)
+		
+		if f.get_open_error() == OK:
+			_text = f.get_as_text()
+			f.close()
+	
 	if _text.is_empty():
 		return
 
