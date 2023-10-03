@@ -5,7 +5,10 @@ class_name ExtendedBBCodeParser
 
 var headers : Array[int] = [22, 20, 18, 16]
 
-# ! Remember To release Icons and Emojis with need fixes for Advanced Text,
+# TODO make possible for icons and emojis to change
+# TODO their tags so they can be more in sync with the text parser
+# ! Remember To release Icons and Emojis
+# ! with need fixes for Advanced Text,
 # ! before release this addon !
 
 var emojis_db : Node :
@@ -27,11 +30,22 @@ func parse(text:String) -> String:
 	text = parse_headers(text)
 	
 	if emojis_db != null:
-		text = emojis_db.parse_emojis(text)
+		text = parse_emojis(text)
 	
 	if icons_db != null:
-		text = icons_db.parse_icons(text)
+		text = parse_icons(text)
 	
+	return text
+
+func parse_emojis(text:String) -> String:
+	# before we parse emojis we need to replace [::] to just ::
+	text = text.replace("[:", ":")
+	text = text.replace(":]", ":")
+	text = emojis_db.parse_emojis(text)
+	return text
+
+func parse_icons(text:String) -> String:
+	text = icons_db.parse_icons(text)
 	return text
 
 func parse_headers(text:String) -> String:

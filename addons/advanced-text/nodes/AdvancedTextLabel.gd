@@ -32,7 +32,7 @@ func update_text():
 		return
 
 	bbcode_enabled = true
-	parse_bbcode(parser.parse(_text))
+	text = parser.parse(_text)
 
 	
 

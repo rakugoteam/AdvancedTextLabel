@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dw681hislg41h"]
+[gd_scene load_steps=10 format=3 uid="uid://dw681hislg41h"]
 
 [ext_resource type="FontFile" uid="uid://dopnqhkanf1f7" path="res://addons/advanced-text/font/DejaVuSans.ttf" id="1_nhc5f"]
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="1_uinld"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://buj02o26lgfif" path="res://addons/advanced-text/font/DejaVuSansMono.ttf" id="5_fmnql"]
 [ext_resource type="Script" path="res://addons/advanced-text/examples/RenPyStringParser.gd" id="8_1kv26"]
 [ext_resource type="Script" path="res://addons/advanced-text/examples/ExtendedBBCodeParser.gd" id="8_jj1jg"]
+[ext_resource type="Script" path="res://addons/advanced-text/examples/MarkdownParser.gd" id="9_wl23x"]
 
 [node name="AdvancedTextLabels" type="TabContainer"]
 anchors_preset = 15
@@ -25,6 +26,9 @@ theme_override_fonts/italics_font = ExtResource("3_7l8y2")
 theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
 bbcode_enabled = true
+text = "[font_size=22]H1[/font_size][font_size=20]H2[/font_size][font_size=18]H3[/font_size]
+Label with [img]res://addons/emojis-for-godot/emojis/16x16/1f1ea.tres[/img][img]res://addons/emojis-for-godot/emojis/16x16/1f1f2.tres[/img][img]res://addons/emojis-for-godot/emojis/16x16/1f1f4.tres[/img][img]res://addons/emojis-for-godot/emojis/16x16/1f1ef.tres[/img][img]res://addons/emojis-for-godot/emojis/16x16/1f1ee.tres[/img] [img]res://addons/emojis-for-godot/emojis/16x16/1f601.tres[/img]
+Text with Icons: [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰴑[/font] Second icon: [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰀫[/font]"
 script = ExtResource("1_uinld")
 _text = "[h1]H1[/h1][h2]H2[/h2][h3]H3[/h3]
 Label with :e::m::o::j::i: :grin:
@@ -35,6 +39,7 @@ parser = NodePath("ExtendedBBCodeParser")
 script = ExtResource("8_jj1jg")
 
 [node name="RenPyStringLabel" type="RichTextLabel" parent="." node_paths=PackedStringArray("parser")]
+visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
@@ -42,6 +47,9 @@ theme_override_fonts/italics_font = ExtResource("3_7l8y2")
 theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
 bbcode_enabled = true
+text = "[font_size=22]H1[/font_size][font_size=20]H2[/font_size][font_size=18]H3[/font_size]
+Label with [img]res://addons/emojis-for-godot/emojis/16x16/1f1ea.tres[/img][img]res://addons/emojis-for-godot/emojis/16x16/1f1f2.tres[/img][img]res://addons/emojis-for-godot/emojis/16x16/1f1f4.tres[/img][img]res://addons/emojis-for-godot/emojis/16x16/1f1ef.tres[/img][img]res://addons/emojis-for-godot/emojis/16x16/1f1ee.tres[/img] [img]res://addons/emojis-for-godot/emojis/16x16/1f601.tres[/img]
+Text with Icons: [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰴑[/font] Second icon: [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰀫[/font]"
 script = ExtResource("1_uinld")
 _text = "{h1}H1{/h1}{h2}H2{/h2}{h3}H3{/h3}
 Label with :e::m::o::j::i: :grin:
@@ -50,3 +58,37 @@ parser = NodePath("RenPyStringParser")
 
 [node name="RenPyStringParser" type="Node" parent="RenPyStringLabel"]
 script = ExtResource("8_1kv26")
+
+[node name="MarkdownLabel" type="RichTextLabel" parent="." node_paths=PackedStringArray("parser")]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_nhc5f")
+theme_override_fonts/bold_font = ExtResource("2_aml2b")
+theme_override_fonts/italics_font = ExtResource("3_7l8y2")
+theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
+theme_override_fonts/mono_font = ExtResource("5_fmnql")
+bbcode_enabled = true
+text = "[i]ital[/i]cs_ __bool__
+[b][i][/b]ool [/i]talics___
+- point a
+- point b
+# H1
+## H2
+### H3
+Label with [img]res://addons/emojis-for-godot/emojis/16x16/1f1ea.tres[/img][img]res://addons/emojis-for-godot/emojis/16x16/1f1f2.tres[/img][img]res://addons/emojis-for-godot/emojis/16x16/1f1f4.tres[/img][img]res://addons/emojis-for-godot/emojis/16x16/1f1ef.tres[/img][img]res://addons/emojis-for-godot/emojis/16x16/1f1ee.tres[/img] [img]res://addons/emojis-for-godot/emojis/16x16/1f601.tres[/img]
+Text with Icons: @icon:format-textbox Second icon: @icon:alpha"
+script = ExtResource("1_uinld")
+_text = "_italics_ __bool__
+___bool italics___
+- point a
+- point b
+# H1
+## H2
+### H3
+Label with :e::m::o::j::i: :grin:
+Text with Icons: @icon:format-textbox Second icon: @icon:alpha"
+parser = NodePath("MarkdownParser")
+
+[node name="MarkdownParser" type="Node" parent="MarkdownLabel"]
+script = ExtResource("9_wl23x")
+italics = "_"
+bold = "__"
