@@ -1,4 +1,3 @@
-"""
 {h1}Header Level 1{/h1}
 {h2}Header Level 2{/h2}
 {h3}Header Level 3{/h3}
@@ -45,4 +44,3 @@ test_dict.key1 = <test_dict.key1>
 {shake rate=5 level=10}shake{/shake}
 {fade start=4 length=14}fade{/fade}
 {rainbow freq=0.2 sat=10 val=20}rainbow{/rainbow}
-"""
