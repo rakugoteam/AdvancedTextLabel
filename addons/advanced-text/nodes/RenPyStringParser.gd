@@ -45,24 +45,3 @@ func parse_imgs_size(text:String) -> String:
 			replacement = "[img=%s]%s[/img]" % [result.get_string(2), result.get_string(1)]
 			text = text.replace(result.get_string(), replacement)
 	return text
-
-func parse_cleanup(text:String) -> String:
-		# math "}" part of a valid tag
-		re.compile("(?:(?<!\\{)\\{[^\\{\\}]+)(\\})")
-		for result in re.search_all(text):
-			if result.get_string():
-				text = text.replace(result.get_string(), "]")
-		
-		# match unescaped "{"
-		re.compile("(?<!\\{)\\{(?!\\{)")
-		for result in re.search_all(text):
-			if result.get_string():
-				text = text.replace(result.get_string(), "[")
-		
-		# match escaped braces "{{" transform them into "{"
-		re.compile("([\\{]+)")
-		for result in re.search_all(text):
-			if result.get_string():
-				text = text.replace(result.get_string(), "{")
-
-		return text
