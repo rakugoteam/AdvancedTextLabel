@@ -15,11 +15,6 @@ run/main_scene="res://addons/advanced-text/examples/advanced_text_labels.tscn"
 config/features=PackedStringArray("4.1")
 config/icon="res://addons/advanced-text/icons/AdvancedTextLabel.svg"
 
-[autoload]
-
-EmojisDB="*res://addons/emojis-for-godot/emojis/emojis.gd"
-MaterialIconsDB="*res://addons/material-design-icons/icons/icons.gd"
-
 [debug]
 
 gdscript/warnings/unassigned_variable=false
@@ -31,7 +26,7 @@ gdscript/warnings/unused_argument=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/advanced-text/plugin.cfg", "res://addons/emojis-for-godot/plugin.cfg", "res://addons/material-design-icons/plugin.cfg")
+enabled=PackedStringArray("res://addons/advanced-text/plugin.cfg")
 
 [global]
 

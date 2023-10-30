@@ -14,17 +14,17 @@ var headers : Array[int] = [22, 20, 18, 16]
 
 var emojis_db : Node :
 	get:
-		if !is_node_ready():
-			return null
-		
-		return get_node("/root/EmojisDB")
+		if has_node("/root/EmojisDB"):
+			return get_node("/root/EmojisDB")
+
+		return null
 
 var icons_db : Node :
 	get:
-		if !is_node_ready():
-			return null
+		if has_node("/root/MaterialIconsDB"):
+			return get_node("/root/MaterialIconsDB")
 		
-		return get_node("/root/MaterialIconsDB")
+		return null
 
 
 func parse(text:String) -> String:
