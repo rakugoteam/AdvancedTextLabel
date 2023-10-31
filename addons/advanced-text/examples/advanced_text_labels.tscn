@@ -17,8 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ExBBCodeLabel" type="RichTextLabel" parent="." node_paths=PackedStringArray("parser")]
-visible = false
+[node name="ExBBCodeLabel" type="RichTextLabel" parent="."]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
@@ -26,9 +25,9 @@ theme_override_fonts/italics_font = ExtResource("3_7l8y2")
 theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
 bbcode_enabled = true
-text = "[font_size=22]Header Level 1[/font_size]
-[font_size=20]Header Level 2[/font_size]
-[font_size=18]Header Level 3[/font_size]
+text = "[h1]Header Level 1[/h1]
+[h2]Header Level 2[/h2]
+[h3]Header Level 3[/h3]
 
 [b]bold[/b]
 [i]italic[/i]
@@ -45,9 +44,9 @@ test_list[0] = <test_list[0]>
 test_dict.key1 = <test_dict.key1>
 [color=<test_color>]text in custom color from variable[/color]
 
-[img]res://addons/emojis-for-godot/emojis/16x16/1f600.tres[/img]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+:grinning:
+[icon:folder-open]
+[icon:folder-open, 32]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -118,12 +117,11 @@ test_dict.key1 = <test_dict.key1>
 [fade start=4 length=14]fade[/fade]
 [rainbow freq=0.2 sat=10 val=20]rainbow[/rainbow]
 "
-parser = NodePath("ExtendedBBCodeParser")
 
 [node name="ExtendedBBCodeParser" type="Node" parent="ExBBCodeLabel"]
 script = ExtResource("7_kauna")
 
-[node name="RenPyStringLabel" type="RichTextLabel" parent="." node_paths=PackedStringArray("parser")]
+[node name="RenPyStringLabel" type="RichTextLabel" parent="."]
 visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
@@ -132,52 +130,52 @@ theme_override_fonts/italics_font = ExtResource("3_7l8y2")
 theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
 bbcode_enabled = true
-text = "[font_size=22]Header Level 1[/font_size]
-[font_size=20]Header Level 2[/font_size]
-[font_size=18]Header Level 3[/font_size]
+text = "{h1}Header Level 1{/h1}
+{h2}Header Level 2{/h2}
+{h3}Header Level 3{/h3}
 
-[b]bold[/b]
-[i]italic[/i]
-[s]strike through[/s]
-[code]mono-spaced text[/code]
+{b}bold{/b}
+{i}italic{/i}
+{s}strike through{/s}
+{code}mono-spaced text{/code}
 
-[url=https://some_domain.com]link[/url]
-[url]https://some_domain.com[/url]
+{a=https://some_domain.com}link{/a}
+{a}https://some_domain.com{/a}
 
 test_string = <test_string>
 test_bool = <test_bool>
 test_int = <test_int>
 test_list[0] = <test_list[0]>
 test_dict.key1 = <test_dict.key1>
-[color=<test_color>]text in custom color from variable[/color]
+{color=<test_color>}text in custom color from variable{/color}
 
-[img]res://addons/emojis-for-godot/emojis/16x16/1f600.tres[/img]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[img]res://icon.png[/img]
-[img=24x24]res://icon.png[/img]
+:grinning:
+{icon:folder-open}
+{icon:folder-open, 32}
+{img=res://icon.png}
+{img=res://icon.png size=24x24}
 
-[table=3]
-[cell]1[/cell][cell]2[/cell][cell]3[/cell]
-[cell]4[/cell][cell]5[/cell][cell]6[/cell]
-[cell]7[/cell][cell]8[/cell][cell]9[/cell]
-[/table]
+{table=3}
+{cell}1{/cell}{cell}2{/cell}{cell}3{/cell}
+{cell}4{/cell}{cell}5{/cell}{cell}6{/cell}
+{cell}7{/cell}{cell}8{/cell}{cell}9{/cell}
+{/table}
 
-[u]underline[/u]
-[center]center[/center]
-[right]right[/right]
-[fill]fill[/fill]
-[indent]text[/indent]
-[color=red]red[/color]
-[color=#c39f00]colored text[/color]
-[color=<test_color>]text in custom color from variable[/color]
+{u}underline{/u}
+{center}center{/center}
+{right}right{/right}
+{fill}fill{/fill}
+{indent}text{/indent}
+{color=red}red{/color}
+{color=#c39f00}colored text{/color}
+{color=<test_color>}text in custom color from variable{/color}
 
 
-[wave amp=50 freq=2]wave[/wave]
-[tornado radius=5 freq=2]tornado[/tornado]
-[shake rate=5 level=10]shake[/shake]
-[fade start=4 length=14]fade[/fade]
-[rainbow freq=0.2 sat=10 val=20]rainbow[/rainbow]"
+{wave amp=50 freq=2}wave{/wave}
+{tornado radius=5 freq=2}tornado{/tornado}
+{shake rate=5 level=10}shake{/shake}
+{fade start=4 length=14}fade{/fade}
+{rainbow freq=0.2 sat=10 val=20}rainbow{/rainbow}"
 script = ExtResource("1_uinld")
 text_file = "res://addons/advanced-text/help/renpy.rpy"
 _text = "{h1}Header Level 1{/h1}
@@ -226,12 +224,12 @@ test_dict.key1 = <test_dict.key1>
 {shake rate=5 level=10}shake{/shake}
 {fade start=4 length=14}fade{/fade}
 {rainbow freq=0.2 sat=10 val=20}rainbow{/rainbow}"
-parser = NodePath("RenPyStringParser")
 
 [node name="RenPyStringParser" type="Node" parent="RenPyStringLabel"]
 script = ExtResource("8_33vn8")
 
-[node name="MarkdownLabel" type="RichTextLabel" parent="." node_paths=PackedStringArray("parser")]
+[node name="MarkdownLabel" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
@@ -239,17 +237,17 @@ theme_override_fonts/italics_font = ExtResource("3_7l8y2")
 theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
 bbcode_enabled = true
-text = "[font_size=16]Header Level 1[/font_size]
-[font_size=18]Header Level 2[/font_size]
-[font_size=20]Header Level 3[/font_size]
+text = "# Header Level 1
+## Header Level 2
+### Header Level 3
 
-[b]bold[/b]
-[i]italic[/i]
-[s]strike through[/s]
-[code]mono-spaced text[/code]
+**bold**
+*italic*
+~~strike through~~
+`mono-spaced text`
 
-[url=[url][url]https://some_domain.com[/url][/url]]link[/url]
-[url][url]https://some_domain.com[/url][/url]
+[link](https://some_domain.com)
+https://some_domain.com
 
 test_string = <test_string>
 test_int = <test_int>
@@ -258,44 +256,45 @@ test_list[0] = <test_list[0]>
 test_dict.key1 = <test_dict.key1>
 @color=<test_color> {text in custom color from variable}
 
-[img]res://addons/emojis-for-godot/emojis/16x16/1f600.tres[/img]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[img][url][url]res://icon.png[/url][/url][/img]
-[img=24x24][url][url]res://icon.png[/url][/url][/img]
+:grinning:
+[icon:folder-open]
+[icon:folder-open, 32]
+![](res://icon.png)
+![24x24](res://icon.png)
 
-[table=3][cell]1[/cell][cell]2[/cell][cell]3[/cell]
-[cell]4[/cell][cell]5[/cell][cell]6[/cell]
-[cell]7[/cell][cell]8[/cell][cell]9[/cell]
-[/table]
+@table=3 {
+|1|2|3|
+|4|5|6|
+|7|8|9|
+}
 
-[u]underlined text[/u]
-[center]centered text[/center]
-[right]right aligned text[/right]
+@u{underlined text}
+@center{centered text}
+@right{right aligned text}
 
-[fill]fill aligned text[/fill]
-[fill]justified text [i](alt to @fill)[/i] [/fill]
+@fill{fill aligned text}
+@justified{justified text *(alt to @fill)* }
 
-[indent]indent text[/indent]
-[indent]indent text [i](alt to @indent)[/i][/indent]
+@indent{indent text}
+@tab {indent text *(alt to @indent)*}
 
-[color=red]red text[/color]
-[color=#c39f00]custom colored text[/color]
+@color=red {red text}
+@color=#c39f00 {custom colored text}
 
-[wave  amp=50 freq=2 ]waving text[/wave]
-[wave amp=50 freq=2 ]waving text[/wave]
+@wave amp=50 freq=2 {waving text}
+@wave 50, 2 {waving text}
 
-[tornado  radius=5 freq=2 ]tornado text[/tornado]
-[tornado radius=5 freq=2 ]tornado text[/tornado]
+@tornado radius=5 freq=2 {tornado text}
+@tornado 5, 2 {tornado text}
 
-[shake  rate=5 level=10 ]shaking text [/shake]
-[shake rate=5 level=10 ]shaking text[/shake]
+@shake rate=5 level=10 {shaking text }
+@shake 5, 10 {shaking text}
 
-[fade  start=4 length=14 ]fade text[/fade]
-[fade start=4 length=14 ]fade text[/fade]
+@fade start=4 length=14 {fade text}
+@fade 4, 14 {fade text}
 
-[rainbow  freq=0.2 sat=10 val=20 ]rainbow text[/rainbow]
-[rainbow freq=0.2 sat=10 val=20 ]rainbow text[/rainbow]
+@rainbow freq=0.2 sat=10 val=20 {rainbow text}
+@rainbow 0.2,10,20 {rainbow text}
 
 
 "
@@ -362,7 +361,6 @@ test_dict.key1 = <test_dict.key1>
 
 
 "
-parser = NodePath("MarkdownParser")
 
 [node name="MarkdownParser" type="Node" parent="MarkdownLabel"]
 script = ExtResource("9_3e11a")
