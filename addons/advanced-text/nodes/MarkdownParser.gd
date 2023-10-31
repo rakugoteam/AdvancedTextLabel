@@ -111,13 +111,13 @@ func parse_links(text:String) -> String:
 		text = replace_regex_match(text, result, replacement)
 		result = re.search(text, result.get_end())
 
-	# # https://www.example.com
-	# re.compile("(\\w+:\\/\\/[A-Za-z0-9\\.\\-\\_\\@\\/]+)")
-	# result = re.search(text)
-	# while result != null:
-	# 	replacement = "[url]%s[/url]" % result.get_string(1)
-	# 	text = replace_regex_match(text, result, replacement)
-	# 	result = re.search(text, result.get_end())
+	# <https://www.example.com>
+	re.compile("<(\\w+:\\/\\/[A-Za-z0-9\\.\\-\\_\\@\\/]+)>")
+	result = re.search(text)
+	while result != null:
+		replacement = "[url]%s[/url]" % result.get_string(1)
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text, result.get_end())
 
 	return text
 
