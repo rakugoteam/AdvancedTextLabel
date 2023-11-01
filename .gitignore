@@ -6,3 +6,4 @@ mono_crash.*.json
 /addons/*
 !/addons/advanced-text/
 !/addons/gut/
+.gut_editor_config.json
