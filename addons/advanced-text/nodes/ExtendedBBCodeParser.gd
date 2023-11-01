@@ -3,11 +3,13 @@
 extends TextParser
 class_name ExtendedBBCodeParser
 
-var headers : Array[int] = [22, 20, 18, 16]
-
+## there must be 4 sizes of headers
+@export var headers : Array[int] = [22, 20, 18, 16]
+@export var custom_header_font : Font
 
 # TODO make possible for icons and emojis to change
 # TODO their tags so they can be more in sync with the text parser
+
 # ! Remember To release Icons and Emojis
 # ! with need fixes for Advanced Text,
 # ! before release this addon !
@@ -26,17 +28,30 @@ var icons_db : Node :
 		
 		return null
 
+var rakugo : Node :
+	get:
+		if has_node("/root/Rakugo"):
+			return get_node("/root/Rakugo")
+	
+		return null
 
 func parse(text:String) -> String:
 	text = parse_headers(text)
 	
-	if emojis_db != null:
+	if emojis_db:
 		text = parse_emojis(text)
 	
-	if icons_db != null:
+	if icons_db:
 		text = parse_icons(text)
 	
+	if rakugo:
+		text = rakugo.replace_variables(text)
+	
 	return text
+
+func reset_parser():
+	headers = [22, 20, 18, 16]
+	custom_header_font = null
 
 func parse_emojis(text:String) -> String:
 	# before we parse emojis we need to replace [::] to just ::
@@ -59,6 +74,11 @@ func parse_headers(text:String) -> String:
 		var h_text := result.get_string("text")
 		var font_size := headers[h_size - 1]
 		replacement = "[font_size=%s]%s[/font_size]" % [str(font_size), h_text]
+		
+		if custom_header_font:
+			var font_path := custom_header_font.resource_path
+			replacement = "[font=%s]%s[/font]" % [font_path, replacement]
+
 		text = replace_regex_match(text, result, replacement)
 		result = re.search(text, result.get_end())
 	
