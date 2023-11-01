@@ -54,15 +54,10 @@ func reset_parser():
 	custom_header_font = null
 
 func parse_emojis(text:String) -> String:
-	# before we parse emojis we need to replace [::] to just ::
-	text = text.replace("[:", ":")
-	text = text.replace(":]", ":")
-	text = emojis_db.parse_emojis(text)
-	return text
+	return emojis_db.parse_emojis(text)
 
 func parse_icons(text:String) -> String:
-	text = icons_db.parse_icons(text)
-	return text
+	return icons_db.parse_icons(text)
 
 func parse_headers(text:String) -> String:
 	# replace [h1]text[/h1] with [font_size=22]text[/font_size]

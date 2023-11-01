@@ -18,6 +18,7 @@ test_dict.key1 = <test_dict.key1>
 {color=<test_color>}text in custom color from variable{/color}
 
 :grinning:
+:grinning, 32:
 {icon:folder-open}
 {icon:folder-open, 32}
 {img=res://icon.png}
