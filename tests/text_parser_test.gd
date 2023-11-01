@@ -17,7 +17,7 @@ func assert_emojis(test_string:String, expected:String, text:=""):
 	var result : String = parser.parse_emojis(test_string)
 	assert_eq(result, expected, text)
 
-func assetr_icons(test_string:String, expected:String, text:=""):
-	var result : String = parser.parse_headers(test_string)
+func assert_icons(test_string:String, expected:String, text:=""):
+	var result : String = parser.parse_icons(test_string)
 	assert_eq(result, expected, text)
 
