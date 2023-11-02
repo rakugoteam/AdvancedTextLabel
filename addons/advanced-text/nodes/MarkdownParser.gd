@@ -17,7 +17,14 @@ class_name MarkdownParser
 ## choose to use - or * to make points in bulleted list
 @export_enum("-", "*") var points = "-"
 
-## returns given text parsed to BBCode
+## Restores default parser settings
+func reset_parser():
+	super.reset_parser()
+	italics = "*"
+	bold = "**"
+	points = "-"
+
+## returns given Markdown parsed into BBCode
 func parse(text: String) -> String:
 	text = parse_imgs(text)
 	text = parse_imgs_size(text)
