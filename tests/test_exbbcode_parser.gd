@@ -35,8 +35,8 @@ func test_emojis():
 	setup_parser()
 	assert_parser(":grinning:",
 	"[img]res://addons/emojis-for-godot/emojis/16x16/1f600.tres[/img]")
-	assert_parser(":grinning, 32:",
-	"[img]res://addons/emojis-for-godot/emojis/32x32/1f600.tres[/img]")
+	assert_parser(":grinning, 36:",
+	"[img]res://addons/emojis-for-godot/emojis/36x36/1f600.tres[/img]")
 
 func test_icons():
 	setup_parser()
@@ -45,13 +45,12 @@ func test_icons():
 
 func test_rakugo_integration():
 	setup_parser()
-	var r = parser.rakugo
-	r.set_variable("test_string", "test_string")
+	Rakugo.set_variable("test_string", "test_string")
 	assert_parser("<test_string>", "test_string")
 
-	r.set_variable("test_int", 32)
+	Rakugo.set_variable("test_int", 32)
 	assert_parser("<test_int>", "32")
 	
-	r.set_variable("test_bool", true)
+	Rakugo.set_variable("test_bool", true)
 	assert_parser("<test_bool>", "true")
 
