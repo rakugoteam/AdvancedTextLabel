@@ -55,14 +55,12 @@ text = "[font_size=22]Header Level 1[/font_size]
 test_string = <test_string>
 test_int = <test_int>
 test_bool = <test_bool>
-test_list[0] = <test_list[0]>
-test_dict.key1 = <test_dict.key1>
 [color=<test_color>]text in custom color from variable[/color]
 
-:grinning:
-:grinning, 32:
-[icon:folder-open]
-[icon:folder-open, 32]
+[img]res://addons/emojis-for-godot/emojis/16x16/1f600.tres[/img]
+[img]res://addons/emojis-for-godot/emojis/36x36/1f600.tres[/img]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[font_size=32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -114,14 +112,12 @@ text = "[font_size=22]Header Level 1[/font_size]
 test_string = <test_string>
 test_bool = <test_bool>
 test_int = <test_int>
-test_list[0] = <test_list[0]>
-test_dict.key1 = <test_dict.key1>
 [color=<test_color>]text in custom color from variable[/color]
 
-:grinning:
-:grinning, 32:
-[icon:folder-open]
-[icon:folder-open, 32]
+[img]res://addons/emojis-for-godot/emojis/16x16/1f600.tres[/img]
+[img]res://addons/emojis-for-godot/emojis/36x36/1f600.tres[/img]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[font_size=32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -174,14 +170,12 @@ https://some_domain.com
 test_string = <test_string>
 test_int = <test_int>
 test_bool = <test_bool>
-test_list[0] = <test_list[0]>
-test_dict.key1 = <test_dict.key1>
 @color=<test_color> {text in custom color from variable}
 
-:grinning:
-:grinning, 32:
-[icon:folder-open]
-[icon:folder-open, 32]
+[img]res://addons/emojis-for-godot/emojis/16x16/1f600.tres[/img]
+[img]res://addons/emojis-for-godot/emojis/36x36/1f600.tres[/img]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[font_size=32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
