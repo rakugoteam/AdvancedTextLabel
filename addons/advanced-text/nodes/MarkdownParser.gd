@@ -1,12 +1,23 @@
 @tool
 @icon("res://addons/advanced-text/icons/md.svg")
 extends ExtendedBBCodeParser
+
+# TODO: Add support for bulleted list
+
+## This parser is every limited as its just translates Markdown to BBCode
+## This parser also adds :emojis: and icons {icon:name} add Rakugo variables with <var_name>
 class_name MarkdownParser
 
+## choose to use * or _ to open/close italics tag
 @export_enum("*", "_") var italics = "*"
+
+## choose to use * or _ to open/close bold tag
 @export_enum("**", "__") var bold = "**"
+
+## choose to use - or * to make points in bulleted list
 @export_enum("-", "*") var points = "-"
 
+## returns given text parsed to BBCode
 func parse(text: String) -> String:
 	text = parse_imgs(text)
 	text = parse_imgs_size(text)
@@ -59,8 +70,8 @@ func parse(text: String) -> String:
 
 	return super.parse(text)
 
+## Parse md # Headers in given text into BBCode
 func parse_headers(text:String) -> String:
-
 	re.compile("(#+)\\s+(.+)\n")
 	result = re.search(text)
 	while result != null:
@@ -75,8 +86,9 @@ func parse_headers(text:String) -> String:
 	
 	return text
 
+## Parse md images to in given text to BBCode
+## Example of md image: ![](path/to/img)
 func parse_imgs(text:String) -> String:
-	# ![](path/to/img)
 	re.compile("!\\[\\]\\((.*?)\\)")
 	result = re.search(text)
 	while result != null:
@@ -86,8 +98,9 @@ func parse_imgs(text:String) -> String:
 	
 	return text
 
+## Parse md images with size to in given text to BBCode
+## Example of md image with size: ![height x width](path/to/img)
 func parse_imgs_size(text:String) -> String:
-	# ![height x width](path/to/img)
 	re.compile("!\\[(\\d+)x(\\d+)\\]\\((.*?)\\)")
 	result = re.search(text)
 	while result != null:
@@ -100,6 +113,10 @@ func parse_imgs_size(text:String) -> String:
 	
 	return text
 
+## Parse md links to in given text to BBCode
+## Examples of md link:
+## [link](path/to/file.md)
+## <https://www.example.com>
 func parse_links(text:String) -> String:
 	# [link](path/to/file.md)
 	re.compile("\\[(.+)\\]\\((.+)\\)")
@@ -121,6 +138,10 @@ func parse_links(text:String) -> String:
 
 	return text
 
+## Parse md italics to in given text to BBCode
+## Example of md italics:
+## If italics = "*" : *italics*
+## If italics = "_" : _italics_
 func parse_italics(text: String) -> String:
 	var search := ""
 	match italics:
@@ -139,6 +160,10 @@ func parse_italics(text: String) -> String:
 
 	return text
 
+## Parse md bold to in given text to BBCode
+## Example of md bold:
+## If bold = "**" : **bold**
+## If bold = "__" : __bold__
 func parse_bold(text: String) -> String:
 	var search := ""
 	match bold:
@@ -157,6 +182,8 @@ func parse_bold(text: String) -> String:
 	
 	return text
 
+## Parse md strike through to in given text to BBCode
+## Example of md strike through: ~~strike through~~
 func parse_strike_through(text:String) -> String:
 	# ~~strike through~~
 	re.compile("~~(.*?)~~")
@@ -168,8 +195,12 @@ func parse_strike_through(text:String) -> String:
 	
 	return text
 
+## Parse md code to in given text to BBCode
+## Example of md code:
+## one line code: `code`
+## multiline code: ```code```
 func parse_code(text:String) -> String:
-	# `code`
+	# `code` or ```code```
 	re.compile("`{1,3}(.*?)`{1,3}")
 	result = re.search(text)
 	while result != null:
@@ -179,6 +210,11 @@ func parse_code(text:String) -> String:
 	
 	return text
 
+## Parse md table to in given text to BBCode
+## Example of md table:
+## @tabel=2 {
+## | cell1 | cell2 |
+## }
 func parse_table(text:String) -> String:
 	# @tabel=2 {
 	# | cell1 | cell2 |
@@ -203,6 +239,7 @@ func parse_table(text:String) -> String:
 		result = re.search(text, result.get_end())
 	
 	return text
+
 
 func parse_color_key(text:String) -> String:
 	# @color=red { text }
