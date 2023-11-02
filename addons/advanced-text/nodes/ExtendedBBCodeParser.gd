@@ -17,59 +17,21 @@ class_name ExtendedBBCodeParser
 ## If not null it will be used by headers
 @export var custom_header_font : Font
 
-## Safe way of getting EmojisDB singleton
-var emojis_db : Node :
-	get:
-		if Engine.has_singleton("/root/EmojisDB"):
-			return Engine.get_singleton("/root/EmojisDB")
-
-		return null
-
-## Safe way of getting MaterialIconsDB singleton
-var icons_db : Node :
-	get:
-		if Engine.has_singleton("/root/MaterialIconsDB"):
-			return Engine.get_singleton("/root/MaterialIconsDB")
-		
-		return null
-
-## Safe way of getting Rakugo singleton
-var rakugo : Node :
-	get:
-		if Engine.has_singleton("/root/Rakugo"):
-			return Engine.get_singleton("/root/Rakugo")
-	
-		return null
-
-## Returns given text parsed to BBCode
+## Returns given ExtendedBBCode parsed into BBCode
 func parse(text:String) -> String:
 	text = parse_headers(text)
+	text = EmojisDB.parse_emojis(text)
+	text = MaterialIconsDB.parse_icons(text)
 	
-	if emojis_db:
-		text = parse_emojis(text)
-	
-	if icons_db:
-		text = parse_icons(text)
-	
-	if rakugo:
-		text = rakugo.replace_variables(text)
+	if !Engine.is_editor_hint():
+		text = Rakugo.replace_variables(text)
 	
 	return text
 
-## Restores default headers settings
+## Restores default parser settings
 func reset_parser():
 	headers = [22, 20, 18, 16]
 	custom_header_font = null
-
-## Parse emojis in given text into BBCode
-## You need Emojis-For-Godot addon for this
-func parse_emojis(text:String) -> String:
-	return emojis_db.parse_emojis(text)
-
-## Parse icons in given text into BBCode
-## You need Godot-Material-Icons addon for this
-func parse_icons(text:String) -> String:
-	return icons_db.parse_icons(text)
 
 ## Parse headers in given text into BBCode
 func parse_headers(text:String) -> String:
