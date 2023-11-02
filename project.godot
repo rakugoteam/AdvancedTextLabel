@@ -26,8 +26,8 @@ config/icon="res://addons/advanced-text/icons/AdvancedTextLabel.svg"
 [autoload]
 
 Rakugo="*res://addons/Rakugo/Rakugo.gd"
-EmojisDB="*res://addons/emojis-for-godot/emojis/emojis.gd"
 MaterialIconsDB="*res://addons/material-design-icons/icons/icons.gd"
+EmojisDB="*res://addons/emojis-for-godot/emojis/emojis.gd"
 
 [debug]
 
@@ -44,7 +44,7 @@ script/search_in_file_extensions=PackedStringArray("gd", "gdshader", "rk")
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Rakugo/plugin.cfg", "res://addons/advanced-text/plugin.cfg", "res://addons/emojis-for-godot/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/material-design-icons/plugin.cfg")
+enabled=PackedStringArray("res://addons/Rakugo/plugin.cfg", "res://addons/advanced-text/plugin.cfg", "res://addons/emojis-for-godot/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/material-design-icons/plugin.cfg", "res://addons/nv.file_system/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [global]
 

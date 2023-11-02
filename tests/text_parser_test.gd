@@ -7,7 +7,6 @@ var parser : TextParser
 func setup_parser():
 	if !parser:
 		parser = TextParser.new()
-		add_child(parser)
 
 func assert_parser(test_string:String, expected:String, text:=""):
 	var result : String = parser.parse(test_string)
