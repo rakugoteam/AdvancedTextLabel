@@ -54,3 +54,10 @@ func test_rakugo_integration():
 	Rakugo.set_variable("test_bool", true)
 	assert_parser("<test_bool>", "true")
 
+	Rakugo.set_variable("test_color", "#3268")
+	assert_parser("[color=<test_color>]colored text[/color]", "[color=#3268]colored text[/color]")
+
+	var hex_red := Color.RED.to_html()
+	Rakugo.set_variable("red_color", "#" + hex_red)
+	assert_parser("[color=#%s]colored text[/color]" % hex_red, "[color=#%s]colored text[/color]" % hex_red)
+
