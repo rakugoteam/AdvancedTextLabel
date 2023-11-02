@@ -6,7 +6,7 @@ extends ExtendedBBCodeParser
 ## This parser also adds Headers {h1}, :emojis: and icons {icon:name} add Rakugo variables with <var_name>
 class_name RenPyMarkupParser
 
-## returns given text parsed to BBCode
+## Returns given RenPyMarkup parsed into BBCode
 func parse(text: String) -> String:
 	text = parse_links(text)
 	text = parse_imgs(text)
@@ -19,10 +19,10 @@ func parse(text: String) -> String:
 
 	return super.parse(text)
 
-# parse Ren'Py links into BBCode
-# Ren'Py links examples:
-# {a=https://some_domain.com}link{/a}
-# {a}https://some_domain.com{/a}
+## parse Ren'Py links into BBCode
+## Ren'Py links examples:
+## {a=https://some_domain.com}link{/a}
+## {a}https://some_domain.com{/a}
 func parse_links(text: String) -> String:
 	re.compile("(?<!\\{)\\{(\\/{0,1})a(?:(=[^\\}]+)\\}|\\})")
 	result = re.search(text)
