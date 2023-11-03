@@ -19,7 +19,7 @@ class_name ExtendedBBCodeParser
 
 ## Must be run at start of parsing
 ## Needed for plugins with other addons to work
-func _start(text:String) -> String:
+func run_plugins_on_start(text:String) -> String:
 	if !Engine.is_editor_hint():
 		text = Rakugo.replace_variables(text)
 	
@@ -27,7 +27,7 @@ func _start(text:String) -> String:
 
 ## Must be run at end of parsing
 ## Needed for plugins with other addons to work
-func _end(text:String) -> String:
+func run_plugins_on_end(text:String) -> String:
 	text = EmojisDB.parse_emojis(text)
 	text = MaterialIconsDB.parse_icons(text)
 	
@@ -36,9 +36,9 @@ func _end(text:String) -> String:
 ## Returns given ExtendedBBCode parsed into BBCode
 func parse(text:String) -> String:
 	in_code = find_all_in_code(text)
-	text = _start(text)
+	text = run_plugins_on_start(text)
 	text = parse_headers(text)
-	text = _end(text)
+	text = run_plugins_on_end(text)
 	return text
 
 ## Restores default parser settings

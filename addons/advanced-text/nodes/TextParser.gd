@@ -46,6 +46,7 @@ func to_bbcode_link(path:String, link_text := "") -> String:
 ## It find all code in between code tags in given text
 ## And add its start and end paris into in_code array,
 ## to make easy to skip them in parsing process
+## This func should be run as first in parse()
 func find_all_in_code(text:String, open_code_tag:="[code]", close_code_tag:="[/code]") -> Array:
 	var _in_code := []
 	re.compile("%s(.*)%s" % [open_code_tag, close_code_tag])
