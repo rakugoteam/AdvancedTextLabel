@@ -7,6 +7,10 @@ func setup_parser():
 	
 	parser.reset_parser()
 
+func test_code():
+	setup_parser()
+	assert_parser("[code][h1]text[/h1][/code]", "[code][h1]text[/h1][/code]")
+
 func test_headers():
 	setup_parser()
 	assert_parser("[h1]text[/h1]", "[font_size=22]text[/font_size]")
@@ -43,8 +47,11 @@ func test_icons():
 	assert_parser("[icon:folder-open]", "[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]")
 	assert_parser("[icon:folder-open, 32]", "[font_size=32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]")
 
-func test_rakugo_integration():
+func test_rakugo_vars():
 	setup_parser()
+	Rakugo.define_character("syl", "Sylvia")
+	assert_parser("<syl.name>", "Sylvia")
+
 	Rakugo.set_variable("test_string", "test_string")
 	assert_parser("<test_string>", "test_string")
 
@@ -54,10 +61,18 @@ func test_rakugo_integration():
 	Rakugo.set_variable("test_bool", true)
 	assert_parser("<test_bool>", "true")
 
+func test_rakugo_vars_tricks():
 	Rakugo.set_variable("test_color", "#3268")
 	assert_parser("[color=<test_color>]colored text[/color]", "[color=#3268]colored text[/color]")
 
 	var hex_red := Color.RED.to_html()
 	Rakugo.set_variable("red_color", "#" + hex_red)
 	assert_parser("[color=#%s]colored text[/color]" % hex_red, "[color=#%s]colored text[/color]" % hex_red)
+
+	Rakugo.set_variable("test_link", "https://some_domain.com")
+	assert_parser("[url]<test_link>[/url]", "[url]https://some_domain.com[/url]")
+
+	Rakugo.set_variable("path_to_img", "res://icon.png")
+	assert_parser("[img]<path_to_img>[/img]", "[img]res://icon.png[/img]")
+
 

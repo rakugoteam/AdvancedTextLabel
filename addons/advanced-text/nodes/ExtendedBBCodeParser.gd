@@ -17,15 +17,28 @@ class_name ExtendedBBCodeParser
 ## If not null it will be used by headers
 @export var custom_header_font : Font
 
-## Returns given ExtendedBBCode parsed into BBCode
-func parse(text:String) -> String:
-	text = parse_headers(text)
-	text = EmojisDB.parse_emojis(text)
-	text = MaterialIconsDB.parse_icons(text)
-	
+## Must be run at start of parsing
+## Needed for plugins with other addons to work
+func _start(text:String) -> String:
 	if !Engine.is_editor_hint():
 		text = Rakugo.replace_variables(text)
 	
+	return text
+
+## Must be run at end of parsing
+## Needed for plugins with other addons to work
+func _end(text:String) -> String:
+	text = EmojisDB.parse_emojis(text)
+	text = MaterialIconsDB.parse_icons(text)
+	
+	return text
+
+## Returns given ExtendedBBCode parsed into BBCode
+func parse(text:String) -> String:
+	in_code = find_all_in_code(text)
+	text = _start(text)
+	text = parse_headers(text)
+	text = _end(text)
 	return text
 
 ## Restores default parser settings
@@ -39,16 +52,27 @@ func parse_headers(text:String) -> String:
 
 	result = re.search(text)
 	while result != null:
-		var h_size := result.get_string("size").to_int()
-		var h_text := result.get_string("text")
-		var font_size := headers[h_size - 1]
-		replacement = "[font_size=%s]%s[/font_size]" % [str(font_size), h_text]
-		
-		if custom_header_font:
-			var font_path := custom_header_font.resource_path
-			replacement = "[font=%s]%s[/font]" % [font_path, replacement]
+		if is_in_code(result):
+			result = re.search(text, result.get_end())
+			continue
 
+		var h_size := result.get_string("size").to_int() - 1
+		var h_text := result.get_string("text")
+		replacement = add_header(h_size, h_text)
 		text = replace_regex_match(text, result, replacement)
 		result = re.search(text, result.get_end())
 	
 	return text
+
+## Returns given text with added BBCode for header with given size (1-4) to it
+func add_header(header_size:int, text:String) -> String:
+	var font_size := headers[header_size]
+	replacement = "[font_size=%s]%s[/font_size]" % [str(font_size), text]
+
+	if custom_header_font:
+		var font_path := custom_header_font.resource_path
+		replacement = "[font=%s]%s[/font]" % [font_path, replacement]
+
+	return replacement
+
+
