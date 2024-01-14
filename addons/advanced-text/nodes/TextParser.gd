@@ -14,12 +14,6 @@ var in_code := []
 func parse(text:String) -> String:
 	return text
 
-## Restores default parser settings
-## This only exits to be override by Parsers classes that inherits from it
-## In this calls is do nothing
-func reset_parser():
-	pass
-
 ## Func that my parsers uses to replace result in given text with replacement.
 func replace_regex_match(text:String, result:RegExMatch, replacement:String) -> String:
 	var start_string := text.substr(0, result.get_start())
