@@ -4,8 +4,6 @@ extends TextParserTest
 func setup_parser():
 	if !parser:
 		parser = ExtendedBBCodeParser.new()
-	
-	parser.reset_parser()
 
 func test_code():
 	setup_parser()
