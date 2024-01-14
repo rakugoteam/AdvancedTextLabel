@@ -17,15 +17,10 @@ class_name MarkdownParser
 ## choose to use - or * to make points in bulleted list
 @export_enum("-", "*") var points = "-"
 
-## Restores default parser settings
-func reset_parser():
-	super.reset_parser()
-	italics = "*"
-	bold = "**"
-	points = "-"
-
 ## returns given Markdown parsed into BBCode
 func parse(text: String) -> String:
+	in_code = find_all_in_code(text, "`{1,3}" , "`{1,3}")
+	text = _start(text)
 	text = parse_imgs(text)
 	text = parse_imgs_size(text)
 	text = parse_links(text)
@@ -75,19 +70,18 @@ func parse(text: String) -> String:
 
 	# text = parse_points(text)
 
-	return super.parse(text)
+	text = _end(text)
+
+	return text
 
 ## Parse md # Headers in given text into BBCode
 func parse_headers(text:String) -> String:
 	re.compile("(#+)\\s+(.+)\n")
 	result = re.search(text)
 	while result != null:
-		var header_level = headers.size() - result.get_string(1).length()
-		header_level = clamp(header_level, 0, headers.size())
+		var header_level = result.get_string(1).length() - 1
 		var header_text = result.get_string(2)
-		var header_size = headers[header_level]
-		var replacement = "[font_size=%s]%s[/font_size]\n" % [
-			header_size, header_text]
+		replacement = add_header(header_level, header_text)
 		text = replace_regex_match(text, result, replacement)
 		result = re.search(text, result.get_end())
 	
