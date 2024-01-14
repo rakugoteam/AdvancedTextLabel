@@ -7,24 +7,19 @@ extends TextParser
 class_name ExtendedBBCodeParser
 
 ## Setting for headers
-## There can be a 4 settings for headers max
 ## By default those settings are just sizes: 22, 20, 18 and 16
 ## Due to BBCode limitations shadow_color is used as background color
-@export var headers : Array[LabelSettings]:
-	set (value):
-		headers = value
-	
-	get:
-		if headers.is_empty():
-			for size in [22, 20, 18, 16]:
-				var ls := LabelSettings.new()
-				ls.font_size = size
-				headers.append(ls)
-		
-		return headers
+## Ignored properties: line_spacing, shadow_offset and shadow_size
+@export var headers := _gen_headers([22, 20, 18, 16])
 
-## If not null it will be used by headers
-@export var custom_header_font : Font
+func _gen_headers(sizes : Array[int]) -> Array[LabelSettings]:
+	var _headers : Array[LabelSettings] = []
+	for size in sizes:
+		var ls := LabelSettings.new()
+		ls.font_size = size
+		_headers.append(ls)
+	
+	return _headers
 
 ## Must be run at start of parsing
 ## Needed for plugins with other addons to work
@@ -70,6 +65,9 @@ func parse_headers(text:String) -> String:
 
 ## Returns given text with added BBCode for header with given size (1-4) to it
 func add_header(header_size:int, text:String) -> String:
+	if !headers: return text
+	if headers.is_empty(): return text
+	
 	var label_settings := headers[header_size]
 	var size = label_settings.font_size
 	replacement = "[font_size=%s]%s[/font_size]" % [str(size), text]
@@ -91,7 +89,7 @@ func add_header(header_size:int, text:String) -> String:
 		replacement = "[outline_size=%s]%s[/outline_size]" % [osize, replacement]
 	
 	if label_settings.shadow_color:
-		var bgcolor := label_settings.shadow_color
+		var bgcolor := "#" + label_settings.shadow_color.to_html()
 		replacement = "[bgcolor=%s]%s[/bgcolor]" % [bgcolor, replacement]
 		
 

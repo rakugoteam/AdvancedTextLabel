@@ -25,8 +25,16 @@ class_name AdvancedTextLabel
 @export var parser : TextParser:
 	set (value):
 		parser = value
-		_parse_text()
 		
+		if parser:
+			parser.changed.connect(_parse_text)
+
+			if parser is ExtendedBBCodeParser:
+				for h in parser.headers:
+					h.changed.connect(_parse_text)
+
+		_parse_text()
+	
 	get: return parser
 
 func _ready():
