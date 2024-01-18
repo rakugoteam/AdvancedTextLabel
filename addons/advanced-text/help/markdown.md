@@ -7,8 +7,14 @@
 ~~strike through~~
 `mono-spaced text`
 
+- point 1
+- point 2
+	- sub point A
+	- sub point B
+- point 3
+
 [link](https://some_domain.com)
-https://some_domain.com
+<https://some_domain.com>
 
 test_string = <test_string>
 test_int = <test_int>

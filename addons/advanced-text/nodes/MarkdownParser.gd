@@ -21,6 +21,7 @@ class_name MarkdownParser
 func parse(text: String) -> String:
 	in_code = find_all_in_code(text, "`{1,3}" , "`{1,3}")
 	text = _start(text)
+	text = parse_headers(text)
 	text = parse_imgs(text)
 	text = parse_imgs_size(text)
 	text = parse_links(text)
@@ -68,7 +69,7 @@ func parse(text: String) -> String:
 	# @rainbow freq=0.2 sat=10 val=20{ text }
 	text = parse_effect(text, "rainbow", ["freq", "sat", "val"])
 
-	# text = parse_points(text)
+	text = parse_points(text)
 
 	text = _end(text)
 
@@ -76,7 +77,7 @@ func parse(text: String) -> String:
 
 ## Parse md # Headers in given text into BBCode
 func parse_headers(text:String) -> String:
-	re.compile("(#+)\\s+(.+)\n")
+	re.compile("(#+)\\s+(.+\n)")
 	result = re.search(text)
 	while result != null:
 		var header_level = result.get_string(1).length() - 1
@@ -241,7 +242,6 @@ func parse_table(text:String) -> String:
 	
 	return text
 
-
 func parse_color_key(text:String) -> String:
 	# @color=red { text }
 	re.compile("@color=([a-z]+)\\s*\\{\\s*([^\\}]+)\\s*\\}")
@@ -313,16 +313,50 @@ func parse_points(text: String) -> String:
 	# this will turn:
 	# - point 1
 	# - point 2
+	re.compile("^(\\t*)-\\s+(.+)$")
 
 	# into:
-	# [ul] point 1
-	# point 2 [/ul]
+	# [ul]
+	# point 1
+	# point 2
+	# [/ul]
 
-	# this need to be done line by line, so we can check if next line has a point or not, if not then we close the list
-
+	# this need to be done line by line,
+	# so we can check if next line has a point or not,
+	# if not then we close the list
 	var lines := text.split("\n")
-	var new_lines := []
+	var new_lines : Array[String] = []
 	var in_list := false
+	var indent := 0
+
+	for line in lines:
+		var result := re.search(line)
+		if result == null:
+			
+			if in_list:
+				in_list = false
+				new_lines.append("[/ul]")
+
+			new_lines.append(line)
+			continue
+
+		if not in_list:
+			in_list = true
+			new_lines.append("[ul]")
+
+		var current_indent := result.get_string(1).count("\t")
+		if indent < current_indent:
+			indent = current_indent
+			new_lines.append("[ul]")
+		
+		if indent > current_indent:
+			indent = current_indent
+			new_lines.append("[/ul]")
+		
+		new_lines.append(result.get_string(2))
+
+	text = "\n".join(new_lines)
+
 	return text
 
 

@@ -10,6 +10,16 @@
 {a=https://some_domain.com}link{/a}
 {a}https://some_domain.com{/a}
 
+{ul}
+point 1
+point 2
+{ul}
+sub point A
+sub point B
+{/ul}
+point 3
+{/ul}
+
 test_string = <test_string>
 test_bool = <test_bool>
 test_int = <test_int>

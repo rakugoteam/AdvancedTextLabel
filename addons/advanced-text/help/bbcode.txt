@@ -7,6 +7,16 @@
 [s]strike through[/s]
 [code]mono-spaced text[/code]
 
+[ul]
+point 1
+point 2
+[ul]
+sub point A
+sub point B
+[/ul]
+point 3
+[/ul]
+
 [url=https://some_domain.com]link[/url]
 [url]https://some_domain.com[/url]
 

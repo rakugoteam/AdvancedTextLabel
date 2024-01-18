@@ -4,8 +4,6 @@ extends TextParserTest
 func setup_parser():
 	if !parser:
 		parser = RenPyMarkupParser.new()
-	
-	parser.reset_parser()
 
 func test_code():
 	setup_parser()
@@ -20,8 +18,7 @@ func test_headers():
 
 func test_headers_custom_font():
 	setup_parser()
-	parser.custom_header_font = load(
-		"res://addons/advanced-text/font/DejaVuSans-Oblique.ttf")
+	parser.custom_header_font = load("res://addons/advanced-text/font/DejaVuSans-Oblique.ttf")
 	assert_parser("{h1}text{/h1}", "[font=res://addons/advanced-text/font/DejaVuSans-Oblique.ttf][font_size=22]text[/font_size][/font]")
 	assert_parser("{h2}text{/h2}", "[font=res://addons/advanced-text/font/DejaVuSans-Oblique.ttf][font_size=20]text[/font_size][/font]")
 	assert_parser("{h3}text{/h3}", "[font=res://addons/advanced-text/font/DejaVuSans-Oblique.ttf][font_size=18]text[/font_size][/font]")
