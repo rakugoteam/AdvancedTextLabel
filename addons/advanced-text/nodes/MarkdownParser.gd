@@ -2,8 +2,6 @@
 @icon("res://addons/advanced-text/icons/md.svg")
 extends ExtendedBBCodeParser
 
-# TODO: Add support for bulleted list
-
 ## This parser is every limited as its just translates Markdown to BBCode
 ## This parser also adds :emojis: and icons {icon:name} add Rakugo variables with <var_name>
 class_name MarkdownParser
@@ -70,6 +68,7 @@ func parse(text: String) -> String:
 	text = parse_effect(text, "rainbow", ["freq", "sat", "val"])
 
 	text = parse_points(text)
+	text = parse_number_points(text)
 
 	text = _end(text)
 
@@ -310,20 +309,14 @@ func parse_keyword(text:String, keyword:String, tag:String) -> String:
 	return text
 
 func parse_points(text: String) -> String:
-	# this will turn:
-	# - point 1
-	# - point 2
-	re.compile("^(\\t*)-\\s+(.+)$")
+	return parse_list(text, "[ul]", "[/ul]", "^(\\t*)-\\s+(.+)$")
 
-	# into:
-	# [ul]
-	# point 1
-	# point 2
-	# [/ul]
+func parse_number_points(text: String) -> String:
+	return parse_list(text, "[ol type=1]", "[/ol]", "^(\\t*)\\d+\\.\\s+(.+)$")
 
-	# this need to be done line by line,
-	# so we can check if next line has a point or not,
-	# if not then we close the list
+func parse_list(text: String, open: String, close: String, regex: String):
+	re.compile(regex)
+
 	var lines := text.split("\n")
 	var new_lines : Array[String] = []
 	var in_list := false
@@ -335,28 +328,27 @@ func parse_points(text: String) -> String:
 			
 			if in_list:
 				in_list = false
-				new_lines.append("[/ul]")
+				new_lines.append(close)
 
 			new_lines.append(line)
 			continue
 
 		if not in_list:
 			in_list = true
-			new_lines.append("[ul]")
+			new_lines.append(open)
 
 		var current_indent := result.get_string(1).count("\t")
 		if indent < current_indent:
 			indent = current_indent
-			new_lines.append("[ul]")
+			new_lines.append(open)
 		
 		if indent > current_indent:
 			indent = current_indent
-			new_lines.append("[/ul]")
+			new_lines.append(close)
 		
 		new_lines.append(result.get_string(2))
 
 	text = "\n".join(new_lines)
 
 	return text
-
 

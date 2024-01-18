@@ -13,6 +13,12 @@
 	- sub point B
 - point 3
 
+1. point 1
+	1. point 1
+	1. point 2
+1. point 2
+
+
 [link](https://some_domain.com)
 <https://some_domain.com>
 

@@ -66,6 +66,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ExBBCodeLabel" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
@@ -81,6 +82,16 @@ text = "[bgcolor=#00000000][color=#ffffffff][font_size=22]Header Level 1[/font_s
 [i]italic[/i]
 [s]strike through[/s]
 [code]mono-spaced text[/code]
+
+[ul]
+point 1
+point 2
+[ul]
+sub point A
+sub point B
+[/ul]
+point 3
+[/ul]
 
 [url=https://some_domain.com]link[/url]
 [url]https://some_domain.com[/url]
@@ -142,6 +153,16 @@ text = "[bgcolor=#00000000][color=#ffffffff][font_size=22]Header Level 1[/font_s
 [url=https://some_domain.com]link[/url]
 [url]https://some_domain.com[/url]
 
+[ul]
+point 1
+point 2
+[ul]
+sub point A
+sub point B
+[/ul]
+point 3
+[/ul]
+
 test_string = <test_string>
 test_bool = <test_bool>
 test_int = <test_int>
@@ -180,7 +201,6 @@ text_file = "res://addons/advanced-text/help/renpy.rpy"
 parser = SubResource("Resource_foavq")
 
 [node name="MarkdownLabel" type="RichTextLabel" parent="."]
-visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
@@ -188,10 +208,10 @@ theme_override_fonts/italics_font = ExtResource("3_7l8y2")
 theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
 bbcode_enabled = true
-text = "# Header Level 1
-## Header Level 2
-### Header Level 3
-
+text = "[bgcolor=#00000000][color=#ffffffff][font_size=22]Header Level 1
+[/font_size][/color][/bgcolor][bgcolor=#00000000][color=#ffffffff][font_size=20]Header Level 2
+[/font_size][/color][/bgcolor][bgcolor=#00000000][color=#ffffffff][font_size=18]Header Level 3
+[/font_size][/color][/bgcolor]
 [b]bold[/b]
 [i]italic[/i]
 [s]strike through[/s]
