@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dw681hislg41h"]
+[gd_scene load_steps=32 format=3 uid="uid://dw681hislg41h"]
 
 [ext_resource type="FontFile" uid="uid://dopnqhkanf1f7" path="res://addons/advanced-text/font/DejaVuSans.ttf" id="1_nhc5f"]
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="1_uinld"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/ExtendedBBCodeParser.gd" id="7_eq8f8"]
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/RenPyMarkupParser.gd" id="8_7ej7h"]
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/MarkdownParser.gd" id="9_ybtq3"]
+[ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextButton.gd" id="10_w4hpi"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_w2wcg"]
 font_size = 22
@@ -57,6 +58,36 @@ italics = "*"
 bold = "**"
 points = "-"
 headers = Array[LabelSettings]([SubResource("LabelSettings_l82il"), SubResource("LabelSettings_pik7c"), SubResource("LabelSettings_ntp3g"), SubResource("LabelSettings_wo0q8")])
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8052n"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_mly2y"]
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_p4bpb"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_vlotq"]
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_fur6o"]
+
+[sub_resource type="Resource" id="Resource_741mf"]
+script = ExtResource("9_ybtq3")
+italics = "*"
+bold = "**"
+points = "-"
+headers = Array[LabelSettings]([SubResource("LabelSettings_mly2y"), SubResource("LabelSettings_p4bpb"), SubResource("LabelSettings_vlotq"), SubResource("LabelSettings_fur6o")])
 
 [node name="AdvancedTextLabels" type="TabContainer"]
 anchors_preset = 15
@@ -201,6 +232,7 @@ text_file = "res://addons/advanced-text/help/renpy.rpy"
 parser = SubResource("Resource_foavq")
 
 [node name="MarkdownLabel" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
@@ -226,6 +258,16 @@ sub point B
 [/ul]
 point 3
 [/ul]
+
+[ol type=1]
+point 1
+[ol type=1]
+point 1
+point 2
+[/ol]
+point 2
+[/ol]
+
 
 [url=https://some_domain.com]link[/url]
 [url]https://some_domain.com[/url]
@@ -280,3 +322,29 @@ test_bool = <test_bool>
 script = ExtResource("1_uinld")
 text_file = "res://addons/advanced-text/help/markdown.md"
 parser = SubResource("Resource_fh6e0")
+
+[node name="AdvancedTextButton" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -15.5
+offset_right = 111.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_8052n")
+bbcode_enabled = true
+text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button[/b][/rainbow][/center]"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("10_w4hpi")
+_text = "@center{@rainbow freq=0.2 sat=10 val=20 {**Markdown Button**}}"
+parser = SubResource("Resource_741mf")
