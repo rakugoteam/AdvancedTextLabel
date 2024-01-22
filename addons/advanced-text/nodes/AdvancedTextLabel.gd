@@ -2,8 +2,10 @@
 @icon("res://addons/advanced-text/icons/AdvancedTextLabel.svg")
 extends RichTextLabel
 
+## This class parses given text to bbcode using given TextParser
 class_name AdvancedTextLabel
 
+## If any file is set, then text form this file will be used instead of `_text` string.
 @export_file var text_file := "" :
 	set(value):
 		text_file = value
@@ -11,6 +13,9 @@ class_name AdvancedTextLabel
 	
 	get: return text_file
 
+## Text to be parsed in too BBCode
+## Use it instead of `text` var
+## I had to make this way as I can't override `text` var behavior
 @export_multiline var _text := "":
 	set(value):
 		_text = value
@@ -22,6 +27,7 @@ class_name AdvancedTextLabel
 	
 	get : return _text
 
+## TextParser that will be used to parse `_text`
 @export var parser : TextParser:
 	set (value):
 		parser = value

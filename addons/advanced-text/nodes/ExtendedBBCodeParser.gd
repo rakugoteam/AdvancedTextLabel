@@ -12,6 +12,8 @@ class_name ExtendedBBCodeParser
 ## Ignored properties: line_spacing, shadow_offset and shadow_size
 @export var headers := _gen_headers([22, 20, 18, 16])
 
+## Generates LabelSettings set based on the given sizes
+## It is used to generate headers initial settings.
 func _gen_headers(sizes : Array[int]) -> Array[LabelSettings]:
 	var _headers : Array[LabelSettings] = []
 	for size in sizes:

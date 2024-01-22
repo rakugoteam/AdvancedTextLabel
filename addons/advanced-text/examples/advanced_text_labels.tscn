@@ -59,7 +59,7 @@ bold = "**"
 points = "-"
 headers = Array[LabelSettings]([SubResource("LabelSettings_l82il"), SubResource("LabelSettings_pik7c"), SubResource("LabelSettings_ntp3g"), SubResource("LabelSettings_wo0q8")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1hbx"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d54hg"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -80,7 +80,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ar38"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qlb1n"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -118,6 +118,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ExBBCodeLabel" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
@@ -152,8 +153,8 @@ test_int = <test_int>
 test_bool = <test_bool>
 [color=<test_color>]text in custom color from variable[/color]
 
-:grinning:
-:grinning, 36:
+[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
+[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
 [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
 [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
 [img]res://icon.png[/img]
@@ -219,8 +220,8 @@ test_bool = <test_bool>
 test_int = <test_int>
 [color=<test_color>]text in custom color from variable[/color]
 
-:grinning:
-:grinning, 36:
+[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
+[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
 [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
 [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
 [img]res://icon.png[/img]
@@ -297,8 +298,8 @@ test_int = <test_int>
 test_bool = <test_bool>
 @color=<test_color> {text in custom color from variable}
 
-:grinning:
-:grinning, 36:
+[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
+[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
 [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
 [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
 [img]res://icon.png[/img]
@@ -344,29 +345,46 @@ text_file = "res://addons/advanced-text/help/markdown.md"
 parser = SubResource("Resource_fh6e0")
 
 [node name="AdvancedTextButton" type="Panel" parent="."]
-visible = false
 layout_mode = 2
 
-[node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton"]
+[node name="VBoxContainer" type="VBoxContainer" parent="AdvancedTextButton"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 14
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -111.0
 offset_top = -15.5
-offset_right = 111.0
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_v1hbx")
-theme_override_styles/normal = SubResource("StyleBoxFlat_3ar38")
+
+[node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_d54hg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qlb1n")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button[/b][/rainbow][/center]"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("10_w4hpi")
-_text = "@center{@rainbow freq=0.2 sat=10 val=20 {**Markdown Button**}}"
+toggle_mode = true
+button_group = &"test_btn"
+_text = "@center{@rainbow freq=0.2 sat=10 val=20 {**Markdown Button A**}}"
+parser = SubResource("Resource_741mf")
+
+[node name="AdvancedTextButton2" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_d54hg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qlb1n")
+bbcode_enabled = true
+text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button B[/b][/rainbow][/center]"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("10_w4hpi")
+toggle_mode = true
+button_pressed = null
+button_group = &"test_btn"
+_text = "@center{@rainbow freq=0.2 sat=10 val=20 {**Markdown Button B**}}"
 parser = SubResource("Resource_741mf")
