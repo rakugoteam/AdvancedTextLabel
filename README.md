@@ -1,21 +1,24 @@
 # AdvancedText
 
-Extends RichTextLabel and adds support for Markdown and RenPy
-Soon there will be docs for most of the features.
+Extends RichTextLabel and adds support for Markdown and RenPy.
+Our RenPy Markup and Markdown have some extra stuff so read docs to learn it.
+This new version is designed in way so any one can crate its own TextParser to use with AdvancedText nodes.
 
 ## Features
 - Supports Markdown and RenPy
-- Variables use `<var>` in Markdown, Renpy and BBCode
 - Adds headers supports RenPy and BBCode
+- Support for variables in [Rakugo Dialogue System](https://github.com/rakugoteam/Rakugo-Dialogue-System) use`<var_name>`
 - Support [Emojis For Godot](https://github.com/rakugoteam/Emojis-For-Godot) use `:emoji:`
-- Adds **MarkupTextEditor** tool to the editor for easy editing text in nodes and files
+- Support [Godot Material Icons](https://github.com/rakugoteam/Godot-Material-Icons) use `[icon:icon_name]`
 
 ### Nodes
-- **AdvancedTextLabel** - A label that supports Markdown and RenPy
-- **CodeEditAlt** - A text edit that supports Markdown, RenPy, BBCode, GDScript and JSON all with code highlighting
+- **AdvancedTextLabel** - **RichTextLabel** that allow to use one of included TextParsers
+- **AdvancedTextButton** - **AdvancedTextLabel** that behaves like a button
 
-### Examples
-- **AdvancedTextButton** - how combine **AdvancedTextLabel** with a **Button**
-- **EditTextOnClick** - how combine **AdvancedTextButton** with a **CodeEditAlt**, so you can edit the text on click
-- **EditTextOnClickPopup** - the same as **AdvancedTextButton** but with use popup
-- **TextBrowser** - a simple text browser that supports Markdown, RenPy and BBCode, links to other text files in project and web links
+### Resources
+- **TextParser** - base class for our TextParsers
+- **ExtendedBBCodeParser**:
+	- base of for our RenPy Markup and Markdown parsers
+	- includes support for things mentioned in [Features](#features)
+- **RenPyMarkup** - RenPy Markup Parser with extra tags so it is 100% replaceable with Godot's BBCode
+- **MarkdownParser** - Markdown Parser with extra stuff so it is 100% replaceable with Godot's BBCode

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dw681hislg41h"]
+[gd_scene load_steps=33 format=3 uid="uid://dw681hislg41h"]
 
 [ext_resource type="FontFile" uid="uid://dopnqhkanf1f7" path="res://addons/advanced-text/font/DejaVuSans.ttf" id="1_nhc5f"]
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="1_uinld"]
@@ -59,7 +59,28 @@ bold = "**"
 points = "-"
 headers = Array[LabelSettings]([SubResource("LabelSettings_l82il"), SubResource("LabelSettings_pik7c"), SubResource("LabelSettings_ntp3g"), SubResource("LabelSettings_wo0q8")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8052n"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1hbx"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ar38"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -97,7 +118,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ExBBCodeLabel" type="RichTextLabel" parent="."]
-visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
@@ -324,6 +344,7 @@ text_file = "res://addons/advanced-text/help/markdown.md"
 parser = SubResource("Resource_fh6e0")
 
 [node name="AdvancedTextButton" type="Panel" parent="."]
+visible = false
 layout_mode = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton"]
@@ -339,7 +360,8 @@ offset_right = 111.0
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_8052n")
+theme_override_styles/focus = SubResource("StyleBoxFlat_v1hbx")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3ar38")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button[/b][/rainbow][/center]"
 fit_content = true
