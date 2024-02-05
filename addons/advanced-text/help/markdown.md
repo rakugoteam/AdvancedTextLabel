@@ -42,12 +42,17 @@ test_bool = <test_bool>
 
 @u{underlined text}
 @center{centered text}
+@>centered text using `@>` and `<@`<@
+
 @right{right aligned text}
+@>right aligned text using `@>` and `>@`>@
 
 @fill{fill aligned text}
+@<fill aligned text using `@<` and `>@`>@
 @justified{justified text *(alt to @fill)* }
 
 @indent{indent text}
+@|indent text using `@|` and `|@`|@
 @tab {indent text *(alt to @indent)*}
 
 @color=red {red text}

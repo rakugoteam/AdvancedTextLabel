@@ -34,11 +34,19 @@ func parse(text: String) -> String:
 	# @center { text }
 	text = parse_keyword(text, "center", "center")
 
+	# alt
+	# @> text <@
+	text = parse_sing(text, "@>", "<@", "center")
+
 	# @u { text }
 	text = parse_keyword(text, "u", "u")
 
 	# @right { text }
 	text = parse_keyword(text, "right", "right")
+
+	# alt
+	# @> text >@
+	text = parse_sing(text, "@>", ">@", "right")
 
 	# @fill { text }
 	text = parse_keyword(text, "fill", "fill")
@@ -46,11 +54,19 @@ func parse(text: String) -> String:
 	# @justified { text }
 	text = parse_keyword(text, "justified", "fill")
 
+	# alt
+	# @< text >@
+	text = parse_sing(text, "@<", ">@", "fill")
+
 	# @indent { text }
 	text = parse_keyword(text, "indent", "indent")
 
 	# @tab { text }
 	text = parse_keyword(text, "tab", "indent")
+
+	# alt
+	# @| text |@
+	text = parse_sing(text, "@|", "|@", "indent")
 
 	# @wave amp=50 freq=2{ text }
 	text = parse_effect(text, "wave", ["amp", "freq"])
@@ -139,62 +155,54 @@ func parse_links(text:String) -> String:
 
 	return text
 
+func parse_sing(text: String, open: String, close: String, tag: String):
+	var search := "%s(.*?)%s" % [open, close]
+	re.compile(search)
+	result = re.search(text)
+
+	while result != null:
+		var r := result.get_string(1)
+		replacement = "[%s]%s[/%s]" % [tag, r, tag]
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text, result.get_end())
+
+	return text
+
 ## Parse md italics to in given text to BBCode
 ## Example of md italics:
 ## If italics = "*" : *italics*
 ## If italics = "_" : _italics_
 func parse_italics(text: String) -> String:
-	var search := ""
+	var sing := ""
+	# *italic*
 	match italics:
 		"*":
-			search = "\\*(.*?)\\*"
+			sing = "\\*"
 		"_":
-			search = "\\_(.*?)\\_"
-	
-	# *italic*
-	re.compile(search)
-	result = re.search(text)
-	while result != null:
-		replacement = "[i]%s[/i]" % result.get_string(1)
-		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+			sing = "\\_"
 
-	return text
+	return parse_sing(text, sing, sing, "i")
 
 ## Parse md bold to in given text to BBCode
 ## Example of md bold:
 ## If bold = "**" : **bold**
 ## If bold = "__" : __bold__
 func parse_bold(text: String) -> String:
-	var search := ""
+	var sing := ""
+	# **bold**
 	match bold:
 		"**":
-			search = "\\*\\*(.*?)\\*\\*"
+			sing = "\\*\\*"
 		"__":
-			search = "\\_\\_(.*?)\\_\\_"
-
-	# **bold**
-	re.compile(search)
-	result = re.search(text)
-	while result != null:
-		replacement = "[b]%s[/b]" % result.get_string(1)
-		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+			sing = "\\_\\_"
 	
-	return text
+	return parse_sing(text, sing, sing, "b")
 
 ## Parse md strike through to in given text to BBCode
 ## Example of md strike through: ~~strike through~~
 func parse_strike_through(text:String) -> String:
 	# ~~strike through~~
-	re.compile("~~(.*?)~~")
-	result = re.search(text)
-	while result != null:
-		replacement = "[s]%s[/s]" % result.get_string(1)
-		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
-	
-	return text
+	return parse_sing(text, "~~", "~~", "s")
 
 ## Parse md code to in given text to BBCode
 ## Example of md code:
@@ -202,14 +210,7 @@ func parse_strike_through(text:String) -> String:
 ## multiline code: ```code```
 func parse_code(text:String) -> String:
 	# `code` or ```code```
-	re.compile("`{1,3}(.*?)`{1,3}")
-	result = re.search(text)
-	while result != null:
-		replacement = "[code]%s[/code]" % result.get_string(1)
-		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
-	
-	return text
+	return parse_sing(text, "`{1,3}", "`{1,3}", "code")
 
 ## Parse md table to in given text to BBCode
 ## Example of md table:

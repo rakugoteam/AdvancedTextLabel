@@ -59,7 +59,7 @@ bold = "**"
 points = "-"
 headers = Array[LabelSettings]([SubResource("LabelSettings_l82il"), SubResource("LabelSettings_pik7c"), SubResource("LabelSettings_ntp3g"), SubResource("LabelSettings_wo0q8")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d54hg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mrgpc"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -80,7 +80,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qlb1n"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2lao4"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -118,7 +118,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ExBBCodeLabel" type="RichTextLabel" parent="."]
-visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
@@ -312,12 +311,17 @@ test_bool = <test_bool>
 
 [u]underlined text[/u]
 [center]centered text[/center]
+[center]centered text using [code]@>[/code] and [code][/center][/code]<@
+
 [right]right aligned text[/right]
+[right]right aligned text using [code]@>[/code] and [code][/right][/code]>@
 
 [fill]fill aligned text[/fill]
+[fill]fill aligned text using [code]@<[/code] and [code][/fill][/code]>@
 [fill]justified text [i](alt to @fill)[/i] [/fill]
 
 [indent]indent text[/indent]
+@>indent text using [code]@>[/code] and [code]|@[/code]|@
 [indent]indent text [i](alt to @indent)[/i][/indent]
 
 [color=red]red text[/color]
@@ -345,6 +349,7 @@ text_file = "res://addons/advanced-text/help/markdown.md"
 parser = SubResource("Resource_fh6e0")
 
 [node name="AdvancedTextButton" type="Panel" parent="."]
+visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="AdvancedTextButton"]
@@ -360,8 +365,8 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_d54hg")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qlb1n")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mrgpc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2lao4")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button[/b][/rainbow][/center]"
 fit_content = true
@@ -375,8 +380,8 @@ parser = SubResource("Resource_741mf")
 
 [node name="AdvancedTextButton2" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_d54hg")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qlb1n")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mrgpc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2lao4")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button B[/b][/rainbow][/center]"
 fit_content = true
@@ -384,7 +389,6 @@ scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("10_w4hpi")
 toggle_mode = true
-button_pressed = null
 button_group = &"test_btn"
 _text = "@center{@rainbow freq=0.2 sat=10 val=20 {**Markdown Button B**}}"
 parser = SubResource("Resource_741mf")
