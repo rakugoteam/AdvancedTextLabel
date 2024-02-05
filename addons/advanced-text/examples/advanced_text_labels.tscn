@@ -59,7 +59,7 @@ bold = "**"
 points = "-"
 headers = Array[LabelSettings]([SubResource("LabelSettings_l82il"), SubResource("LabelSettings_pik7c"), SubResource("LabelSettings_ntp3g"), SubResource("LabelSettings_wo0q8")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mrgpc"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvj7u"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -80,7 +80,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2lao4"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnr57"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -321,7 +321,7 @@ test_bool = <test_bool>
 [fill]justified text [i](alt to @fill)[/i] [/fill]
 
 [indent]indent text[/indent]
-@>indent text using [code]@>[/code] and [code]|@[/code]|@
+@|indent text using [code]@|[/code] and [code]|@[/code]|@
 [indent]indent text [i](alt to @indent)[/i][/indent]
 
 [color=red]red text[/color]
@@ -365,8 +365,8 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_mrgpc")
-theme_override_styles/normal = SubResource("StyleBoxFlat_2lao4")
+theme_override_styles/focus = SubResource("StyleBoxFlat_uvj7u")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bnr57")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button[/b][/rainbow][/center]"
 fit_content = true
@@ -380,8 +380,8 @@ parser = SubResource("Resource_741mf")
 
 [node name="AdvancedTextButton2" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_mrgpc")
-theme_override_styles/normal = SubResource("StyleBoxFlat_2lao4")
+theme_override_styles/focus = SubResource("StyleBoxFlat_uvj7u")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bnr57")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button B[/b][/rainbow][/center]"
 fit_content = true
