@@ -66,7 +66,7 @@ func parse(text: String) -> String:
 
 	# alt
 	# @| text |@
-	# text = parse_sing(text, "@|", "|@", "indent")
+	text = parse_sing(text, "@\\|", "\\|@", "indent")
 
 	# @wave amp=50 freq=2{ text }
 	text = parse_effect(text, "wave", ["amp", "freq"])

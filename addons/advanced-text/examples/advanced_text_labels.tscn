@@ -11,36 +11,6 @@
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/MarkdownParser.gd" id="9_ybtq3"]
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextButton.gd" id="10_w4hpi"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_w2wcg"]
-font_size = 22
-
-[sub_resource type="LabelSettings" id="LabelSettings_k67jx"]
-font_size = 20
-
-[sub_resource type="LabelSettings" id="LabelSettings_2l15q"]
-font_size = 18
-
-[sub_resource type="LabelSettings" id="LabelSettings_kx71r"]
-
-[sub_resource type="Resource" id="Resource_dayfq"]
-script = ExtResource("7_eq8f8")
-headers = Array[LabelSettings]([SubResource("LabelSettings_w2wcg"), SubResource("LabelSettings_k67jx"), SubResource("LabelSettings_2l15q"), SubResource("LabelSettings_kx71r")])
-
-[sub_resource type="LabelSettings" id="LabelSettings_kuqfo"]
-font_size = 22
-
-[sub_resource type="LabelSettings" id="LabelSettings_1qi5e"]
-font_size = 20
-
-[sub_resource type="LabelSettings" id="LabelSettings_shura"]
-font_size = 18
-
-[sub_resource type="LabelSettings" id="LabelSettings_qxiog"]
-
-[sub_resource type="Resource" id="Resource_foavq"]
-script = ExtResource("8_7ej7h")
-headers = Array[LabelSettings]([SubResource("LabelSettings_kuqfo"), SubResource("LabelSettings_1qi5e"), SubResource("LabelSettings_shura"), SubResource("LabelSettings_qxiog")])
-
 [sub_resource type="LabelSettings" id="LabelSettings_l82il"]
 font_size = 22
 
@@ -59,7 +29,37 @@ bold = "**"
 points = "-"
 headers = Array[LabelSettings]([SubResource("LabelSettings_l82il"), SubResource("LabelSettings_pik7c"), SubResource("LabelSettings_ntp3g"), SubResource("LabelSettings_wo0q8")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvj7u"]
+[sub_resource type="LabelSettings" id="LabelSettings_kuqfo"]
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_1qi5e"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_shura"]
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_qxiog"]
+
+[sub_resource type="Resource" id="Resource_foavq"]
+script = ExtResource("8_7ej7h")
+headers = Array[LabelSettings]([SubResource("LabelSettings_kuqfo"), SubResource("LabelSettings_1qi5e"), SubResource("LabelSettings_shura"), SubResource("LabelSettings_qxiog")])
+
+[sub_resource type="LabelSettings" id="LabelSettings_w2wcg"]
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_k67jx"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_2l15q"]
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_kx71r"]
+
+[sub_resource type="Resource" id="Resource_dayfq"]
+script = ExtResource("7_eq8f8")
+headers = Array[LabelSettings]([SubResource("LabelSettings_w2wcg"), SubResource("LabelSettings_k67jx"), SubResource("LabelSettings_2l15q"), SubResource("LabelSettings_kx71r")])
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sdnwg"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -80,7 +80,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnr57"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37vn7"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -116,140 +116,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ExBBCodeLabel" type="RichTextLabel" parent="."]
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("1_nhc5f")
-theme_override_fonts/bold_font = ExtResource("2_aml2b")
-theme_override_fonts/italics_font = ExtResource("3_7l8y2")
-theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
-theme_override_fonts/mono_font = ExtResource("5_fmnql")
-bbcode_enabled = true
-text = "[bgcolor=#00000000][color=#ffffffff][font_size=22]Header Level 1[/font_size][/color][/bgcolor]
-[bgcolor=#00000000][color=#ffffffff][font_size=20]Header Level 2[/font_size][/color][/bgcolor]
-[bgcolor=#00000000][color=#ffffffff][font_size=18]Header Level 3[/font_size][/color][/bgcolor]
-
-[b]bold[/b]
-[i]italic[/i]
-[s]strike through[/s]
-[code]mono-spaced text[/code]
-
-[ul]
-point 1
-point 2
-[ul]
-sub point A
-sub point B
-[/ul]
-point 3
-[/ul]
-
-[url=https://some_domain.com]link[/url]
-[url]https://some_domain.com[/url]
-
-test_string = <test_string>
-test_int = <test_int>
-test_bool = <test_bool>
-[color=<test_color>]text in custom color from variable[/color]
-
-[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
-[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[img]res://icon.png[/img]
-[img=24x24]res://icon.png[/img]
-
-[table=3]
-[cell]1[/cell][cell]2[/cell][cell]3[/cell]
-[cell]4[/cell][cell]5[/cell][cell]6[/cell]
-[cell]7[/cell][cell]8[/cell][cell]9[/cell]
-[/table]
-
-[u]underline[/u]
-[center]center[/center]
-[right]right[/right]
-[fill]fill[/fill]
-[indent]text[/indent]
-[color=red]red[/color]
-[color=#c39f00]colored text[/color]
-
-[wave amp=50 freq=2]wave[/wave]
-[tornado radius=5 freq=2]tornado[/tornado]
-[shake rate=5 level=10]shake[/shake]
-[fade start=4 length=14]fade[/fade]
-[rainbow freq=0.2 sat=10 val=20]rainbow[/rainbow]
-"
-script = ExtResource("1_uinld")
-text_file = "res://addons/advanced-text/help/bbcode.txt"
-parser = SubResource("Resource_dayfq")
-
-[node name="RenPyStringLabel" type="RichTextLabel" parent="."]
-visible = false
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("1_nhc5f")
-theme_override_fonts/bold_font = ExtResource("2_aml2b")
-theme_override_fonts/italics_font = ExtResource("3_7l8y2")
-theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
-theme_override_fonts/mono_font = ExtResource("5_fmnql")
-bbcode_enabled = true
-text = "[bgcolor=#00000000][color=#ffffffff][font_size=22]Header Level 1[/font_size][/color][/bgcolor]
-[bgcolor=#00000000][color=#ffffffff][font_size=20]Header Level 2[/font_size][/color][/bgcolor]
-[bgcolor=#00000000][color=#ffffffff][font_size=18]Header Level 3[/font_size][/color][/bgcolor]
-
-[b]bold[/b]
-[i]italic[/i]
-[s]strike through[/s]
-[code]mono-spaced text[/code]
-
-[url=https://some_domain.com]link[/url]
-[url]https://some_domain.com[/url]
-
-[ul]
-point 1
-point 2
-[ul]
-sub point A
-sub point B
-[/ul]
-point 3
-[/ul]
-
-test_string = <test_string>
-test_bool = <test_bool>
-test_int = <test_int>
-[color=<test_color>]text in custom color from variable[/color]
-
-[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
-[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[img]res://icon.png[/img]
-[img=24x24]res://icon.png[/img]
-
-[table=3]
-[cell]1[/cell][cell]2[/cell][cell]3[/cell]
-[cell]4[/cell][cell]5[/cell][cell]6[/cell]
-[cell]7[/cell][cell]8[/cell][cell]9[/cell]
-[/table]
-
-[u]underline[/u]
-[center]center[/center]
-[right]right[/right]
-[fill]fill[/fill]
-[indent]text[/indent]
-[color=red]red[/color]
-[color=#c39f00]colored text[/color]
-[color=<test_color>]text in custom color from variable[/color]
-
-
-[wave amp=50 freq=2]wave[/wave]
-[tornado radius=5 freq=2]tornado[/tornado]
-[shake rate=5 level=10]shake[/shake]
-[fade start=4 length=14]fade[/fade]
-[rainbow freq=0.2 sat=10 val=20]rainbow[/rainbow]"
-script = ExtResource("1_uinld")
-text_file = "res://addons/advanced-text/help/renpy.rpy"
-parser = SubResource("Resource_foavq")
 
 [node name="MarkdownLabel" type="RichTextLabel" parent="."]
 visible = false
@@ -321,7 +187,7 @@ test_bool = <test_bool>
 [fill]justified text [i](alt to @fill)[/i] [/fill]
 
 [indent]indent text[/indent]
-@|indent text using [code]@|[/code] and [code]|@[/code]|@
+[indent]indent text using [code]@|[/code] and [code][/indent][/code]|@
 [indent]indent text [i](alt to @indent)[/i][/indent]
 
 [color=red]red text[/color]
@@ -348,6 +214,140 @@ script = ExtResource("1_uinld")
 text_file = "res://addons/advanced-text/help/markdown.md"
 parser = SubResource("Resource_fh6e0")
 
+[node name="RenPyStringLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_nhc5f")
+theme_override_fonts/bold_font = ExtResource("2_aml2b")
+theme_override_fonts/italics_font = ExtResource("3_7l8y2")
+theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
+theme_override_fonts/mono_font = ExtResource("5_fmnql")
+bbcode_enabled = true
+text = "[bgcolor=#00000000][color=#ffffffff][font_size=22]Header Level 1[/font_size][/color][/bgcolor]
+[bgcolor=#00000000][color=#ffffffff][font_size=20]Header Level 2[/font_size][/color][/bgcolor]
+[bgcolor=#00000000][color=#ffffffff][font_size=18]Header Level 3[/font_size][/color][/bgcolor]
+
+[b]bold[/b]
+[i]italic[/i]
+[s]strike through[/s]
+[code]mono-spaced text[/code]
+
+[url=https://some_domain.com]link[/url]
+[url]https://some_domain.com[/url]
+
+[ul]
+point 1
+point 2
+[ul]
+sub point A
+sub point B
+[/ul]
+point 3
+[/ul]
+
+test_string = <test_string>
+test_bool = <test_bool>
+test_int = <test_int>
+[color=<test_color>]text in custom color from variable[/color]
+
+[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
+[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[img]res://icon.png[/img]
+[img=24x24]res://icon.png[/img]
+
+[table=3]
+[cell]1[/cell][cell]2[/cell][cell]3[/cell]
+[cell]4[/cell][cell]5[/cell][cell]6[/cell]
+[cell]7[/cell][cell]8[/cell][cell]9[/cell]
+[/table]
+
+[u]underline[/u]
+[center]center[/center]
+[right]right[/right]
+[fill]fill[/fill]
+[indent]text[/indent]
+[color=red]red[/color]
+[color=#c39f00]colored text[/color]
+[color=<test_color>]text in custom color from variable[/color]
+
+
+[wave amp=50 freq=2]wave[/wave]
+[tornado radius=5 freq=2]tornado[/tornado]
+[shake rate=5 level=10]shake[/shake]
+[fade start=4 length=14]fade[/fade]
+[rainbow freq=0.2 sat=10 val=20]rainbow[/rainbow]"
+script = ExtResource("1_uinld")
+text_file = "res://addons/advanced-text/help/renpy.rpy"
+parser = SubResource("Resource_foavq")
+
+[node name="ExBBCodeLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_nhc5f")
+theme_override_fonts/bold_font = ExtResource("2_aml2b")
+theme_override_fonts/italics_font = ExtResource("3_7l8y2")
+theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
+theme_override_fonts/mono_font = ExtResource("5_fmnql")
+bbcode_enabled = true
+text = "[bgcolor=#00000000][color=#ffffffff][font_size=22]Header Level 1[/font_size][/color][/bgcolor]
+[bgcolor=#00000000][color=#ffffffff][font_size=20]Header Level 2[/font_size][/color][/bgcolor]
+[bgcolor=#00000000][color=#ffffffff][font_size=18]Header Level 3[/font_size][/color][/bgcolor]
+
+[b]bold[/b]
+[i]italic[/i]
+[s]strike through[/s]
+[code]mono-spaced text[/code]
+
+[ul]
+point 1
+point 2
+[ul]
+sub point A
+sub point B
+[/ul]
+point 3
+[/ul]
+
+[url=https://some_domain.com]link[/url]
+[url]https://some_domain.com[/url]
+
+test_string = <test_string>
+test_int = <test_int>
+test_bool = <test_bool>
+[color=<test_color>]text in custom color from variable[/color]
+
+[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
+[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[img]res://icon.png[/img]
+[img=24x24]res://icon.png[/img]
+
+[table=3]
+[cell]1[/cell][cell]2[/cell][cell]3[/cell]
+[cell]4[/cell][cell]5[/cell][cell]6[/cell]
+[cell]7[/cell][cell]8[/cell][cell]9[/cell]
+[/table]
+
+[u]underline[/u]
+[center]center[/center]
+[right]right[/right]
+[fill]fill[/fill]
+[indent]text[/indent]
+[color=red]red[/color]
+[color=#c39f00]colored text[/color]
+
+[wave amp=50 freq=2]wave[/wave]
+[tornado radius=5 freq=2]tornado[/tornado]
+[shake rate=5 level=10]shake[/shake]
+[fade start=4 length=14]fade[/fade]
+[rainbow freq=0.2 sat=10 val=20]rainbow[/rainbow]
+"
+script = ExtResource("1_uinld")
+text_file = "res://addons/advanced-text/help/bbcode.txt"
+parser = SubResource("Resource_dayfq")
+
 [node name="AdvancedTextButton" type="Panel" parent="."]
 visible = false
 layout_mode = 2
@@ -365,8 +365,8 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_uvj7u")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bnr57")
+theme_override_styles/focus = SubResource("StyleBoxFlat_sdnwg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_37vn7")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button[/b][/rainbow][/center]"
 fit_content = true
@@ -380,8 +380,8 @@ parser = SubResource("Resource_741mf")
 
 [node name="AdvancedTextButton2" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_uvj7u")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bnr57")
+theme_override_styles/focus = SubResource("StyleBoxFlat_sdnwg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_37vn7")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button B[/b][/rainbow][/center]"
 fit_content = true
