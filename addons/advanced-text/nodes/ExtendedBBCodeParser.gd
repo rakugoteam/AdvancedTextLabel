@@ -27,15 +27,22 @@ func _gen_headers(sizes : Array[int]) -> Array[LabelSettings]:
 ## Needed for plugins with other addons to work
 func _start(text:String) -> String:
 	if !Engine.is_editor_hint():
-		text = Rakugo.replace_variables(text)
+		var raku = get_singleton("Rakugo")
+		if raku:
+			text = raku.replace_variables(text)
 	
 	return text
 
 ## Must be run at end of parsing
 ## Needed for plugins with other addons to work
 func _end(text:String) -> String:
-	text = EmojisDB.parse_emojis(text)
-	text = MaterialIconsDB.parse_icons(text)
+	var emojis = get_singleton("EmojisDB")
+	if emojis:
+		text = emojis.parse_emojis(text)
+	
+	var icons = get_singleton("MaterialIconsDB")
+	if icons:
+		text = icons.parse_icons(text)
 	
 	return text
 
@@ -44,13 +51,13 @@ func parse(text:String) -> String:
 	in_code = find_all_in_code(text)
 	text = _start(text)
 	text = parse_headers(text)
+	text = parse_spaces(text)
 	text = _end(text)
 	return text
 
 ## Parse headers in given text into BBCode
 func parse_headers(text:String) -> String:
 	re.compile("\\[h(?P<size>[1-4])\\](?P<text>.+?)\\[/h(?P=size)\\]")
-
 	result = re.search(text)
 	while result != null:
 		if is_in_code(result):
@@ -65,6 +72,22 @@ func parse_headers(text:String) -> String:
 	
 	return text
 
+## Parse [space=x], that it add space in text in size of x
+func parse_spaces(text:String) -> String:
+	re.compile("\\[space=(?P<size>\\d+)\\]\n")
+	result = re.search(text)
+	while result != null:
+		if is_in_code(result):
+			result = re.search(text, result.get_end())
+			continue
+
+		var size := result.get_string("size").to_int()
+		replacement = "[font_size=%d] [/font_size]\n" % size
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text, result.get_end())
+
+	return text
+
 ## Returns given text with added BBCode for header with given size (1-4) to it
 func add_header(header_size:int, text:String) -> String:
 	if !headers: return text
@@ -72,7 +95,7 @@ func add_header(header_size:int, text:String) -> String:
 	
 	var label_settings := headers[header_size]
 	var size = label_settings.font_size
-	replacement = "[font_size=%s]%s[/font_size]" % [str(size), text]
+	replacement = "[font_size=%s]%s[/font_size]" % [size, text]
 
 	if label_settings.font:
 		var path := label_settings.font.resource_path
@@ -93,7 +116,6 @@ func add_header(header_size:int, text:String) -> String:
 	if label_settings.shadow_color:
 		var bgcolor := "#" + label_settings.shadow_color.to_html()
 		replacement = "[bgcolor=%s]%s[/bgcolor]" % [bgcolor, replacement]
-		
 
 	return replacement
 

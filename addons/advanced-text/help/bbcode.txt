@@ -7,6 +7,10 @@
 [s]strike through[/s]
 [code]mono-spaced text[/code]
 
+text with spacex 6
+[space=6]
+text with spacex 6
+
 [ul]
 point 1
 point 2

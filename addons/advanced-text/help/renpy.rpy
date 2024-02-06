@@ -10,6 +10,10 @@
 {a=https://some_domain.com}link{/a}
 {a}https://some_domain.com{/a}
 
+text with space 6
+{space=6}
+text with space 6
+
 {ul}
 point 1
 point 2

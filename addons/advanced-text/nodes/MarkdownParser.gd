@@ -30,6 +30,7 @@ func parse(text: String) -> String:
 	text = parse_table(text)
 	text = parse_color_key(text)
 	text = parse_color_hex(text)
+	text = parse_spaces(text)
 	
 	# @center { text }
 	text = parse_keyword(text, "center", "center")
@@ -90,11 +91,31 @@ func parse(text: String) -> String:
 
 	return text
 
+## Parse @space=x, that it add space in text in size of x
+func parse_spaces(text:String) -> String:
+	re.compile("@space=(?P<size>\\d+)\n")
+	result = re.search(text)
+	while result != null:
+		if is_in_code(result):
+			result = re.search(text, result.get_end())
+			continue
+
+		var size := result.get_string("size").to_int()
+		replacement = "[font_size=%d] [/font_size]\n" % size
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text, result.get_end())
+
+	return text
+
 ## Parse md # Headers in given text into BBCode
 func parse_headers(text:String) -> String:
 	re.compile("(#+)\\s+(.+\n)")
 	result = re.search(text)
 	while result != null:
+		if is_in_code(result):
+			result = re.search(text, result.get_end())
+			continue
+		
 		var header_level = result.get_string(1).length() - 1
 		var header_text = result.get_string(2)
 		replacement = add_header(header_level, header_text)

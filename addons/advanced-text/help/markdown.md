@@ -7,6 +7,10 @@
 ~~strike through~~
 `mono-spaced text`
 
+text with space 6
+@space=6
+text with space 6
+
 - point 1
 - point 2
 	- sub point A

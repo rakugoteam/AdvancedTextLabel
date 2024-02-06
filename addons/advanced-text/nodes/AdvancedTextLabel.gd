@@ -9,7 +9,7 @@ class_name AdvancedTextLabel
 @export_file var text_file := "" :
 	set(value):
 		text_file = value
-		_parse_text()
+		_text = load_text_file()
 	
 	get: return text_file
 
@@ -24,14 +24,17 @@ class_name AdvancedTextLabel
 			return
 		
 		_parse_text()
-	
+		
+		if text_file:
+			save_text_file(_text)
+		
 	get : return _text
 
 ## TextParser that will be used to parse `_text`
 @export var parser : TextParser:
 	set (value):
 		parser = value
-		
+		update_configuration_warnings()
 		if parser:
 			parser.changed.connect(_parse_text)
 
@@ -39,7 +42,7 @@ class_name AdvancedTextLabel
 				for h in parser.headers:
 					h.changed.connect(_parse_text)
 
-		_parse_text()
+			_parse_text()
 	
 	get: return parser
 
@@ -49,9 +52,10 @@ func _ready():
 
 func _parse_text() -> void:
 	if !is_node_ready(): return
+	if !parser.root:
+		parser.root = get_tree().root
 
 	if !parser:
-		text = _text
 		if !Engine.is_editor_hint():
 			push_warning("parser is null at " + str(get_path()))
 
@@ -61,19 +65,29 @@ func _parse_text() -> void:
 		
 		return
 	
-	if text_file:
-		var f := FileAccess.open(text_file, FileAccess.READ)
-		if f.get_open_error() == OK:
-			_text = ""
-			text = parser.parse(f.get_as_text())
-		
-		else:
-			push_error("can't load file: " + text_file)
-
-		f.close()
-		return
-	
 	text = parser.parse(_text)
+
+func load_text_file() -> String:
+	var f := FileAccess.open(text_file, FileAccess.READ)
+	var content := "" 
+	if f.get_open_error() == OK:
+		content = f.get_as_text()
+	
+	else:
+		push_error("can't load file: " + text_file)
+
+	f.close()
+	return content
+
+func save_text_file(value:String):
+	var f := FileAccess.open(text_file, FileAccess.WRITE)
+	if f.get_open_error() == OK:
+		f.store_string(value)
+	
+	else:
+		push_error("can't save to file: " + text_file)
+
+	f.close()
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings : PackedStringArray = []
