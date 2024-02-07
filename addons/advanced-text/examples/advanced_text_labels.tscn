@@ -60,7 +60,7 @@ font_size = 18
 script = ExtResource("9_xqqk6")
 headers = Array[LabelSettings]([SubResource("LabelSettings_mq4wt"), SubResource("LabelSettings_3fkcx"), SubResource("LabelSettings_5l6r2"), SubResource("LabelSettings_wlo5y")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dni7j"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_70pxe"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -81,7 +81,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_saucg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56ft7"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -185,6 +185,7 @@ point 2
 point 2
 [/ol]
 
+cccs
 [hint=hint]text whit hint[/hint]
 [url=https://some_domain.com]link[/url]
 [url]https://some_domain.com[/url]
@@ -267,6 +268,7 @@ text with space 6
 	1. point 2
 1. point 2
 
+cccs
 @[text whit hint](hint)
 [link](https://some_domain.com)
 <https://some_domain.com>
@@ -603,8 +605,8 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_dni7j")
-theme_override_styles/normal = SubResource("StyleBoxFlat_saucg")
+theme_override_styles/focus = SubResource("StyleBoxFlat_70pxe")
+theme_override_styles/normal = SubResource("StyleBoxFlat_56ft7")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button A[/b][/rainbow][/center]"
 fit_content = true

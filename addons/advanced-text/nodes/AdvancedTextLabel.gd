@@ -19,16 +19,20 @@ class_name AdvancedTextLabel
 @export_multiline var _text := "":
 	set(value):
 		_text = value
-		if _text.is_empty():
-			text = ""
-			return
-		
 		_parse_text()
 		
+	get : return _text
+
+@export var save_to_text_file := false:
+	set (value):
 		if text_file:
 			save_text_file(_text)
+			prints("Saved", get_path(), "_text to", text_file)
 		
-	get : return _text
+		else:
+			prints("Try saved", get_path(), "_text to with out selecting text_file")
+	
+	get: return false
 
 ## TextParser that will be used to parse `_text`
 @export var parser : TextParser:
@@ -48,8 +52,7 @@ class_name AdvancedTextLabel
 
 func _ready():
 	bbcode_enabled = true
-	if text_file:
-		_text = load_text_file()
+	_text = load_text_file()
 	_parse_text()
 
 func _parse_text() -> void:
