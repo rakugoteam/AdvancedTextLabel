@@ -22,6 +22,7 @@ func parse(text: String) -> String:
 	text = parse_headers(text)
 	text = parse_imgs(text)
 	text = parse_imgs_size(text)
+	text = parse_hints(text)
 	text = parse_links(text)
 	text = parse_bold(text)
 	text = parse_italics(text)
@@ -174,6 +175,21 @@ func parse_links(text:String) -> String:
 		text = replace_regex_match(text, result, replacement)
 		result = re.search(text, result.get_end())
 
+	return text
+
+## Parse md hint to in given text to BBCode
+## @[text](hint)
+func parse_hints(text:String) -> String:
+	# @[text](hint)
+	re.compile("@\\[(.+)\\]\\((.+)\\)")
+	result = re.search(text)
+	while result != null:
+		var t = result.get_string(1)
+		var hint = result.get_string(2)
+		replacement = "[hint=%s]%s[/hint]" % [hint, t]
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text, result.get_end())
+	
 	return text
 
 func parse_sing(text: String, open: String, close: String, tag: String):
