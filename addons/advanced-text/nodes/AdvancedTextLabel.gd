@@ -48,6 +48,8 @@ class_name AdvancedTextLabel
 
 func _ready():
 	bbcode_enabled = true
+	if text_file:
+		_text = load_text_file()
 	_parse_text()
 
 func _parse_text() -> void:
