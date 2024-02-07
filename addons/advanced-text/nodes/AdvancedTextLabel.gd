@@ -14,7 +14,7 @@ class_name AdvancedTextLabel
 	get: return text_file
 
 ## Text to be parsed in too BBCode
-## Use it instead of `text` var
+## Use it instead of `text` from RichTextLabel
 ## I had to make this way as I can't override `text` var behavior
 @export_multiline var _text := "":
 	set(value):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dw681hislg41h"]
+[gd_scene load_steps=41 format=3 uid="uid://dw681hislg41h"]
 
 [ext_resource type="FontFile" uid="uid://dopnqhkanf1f7" path="res://addons/advanced-text/font/DejaVuSans.ttf" id="1_nhc5f"]
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="1_uinld"]
@@ -6,10 +6,11 @@
 [ext_resource type="FontFile" uid="uid://dv5f7ykw422ft" path="res://addons/advanced-text/font/DejaVuSans-Oblique.ttf" id="3_7l8y2"]
 [ext_resource type="FontFile" uid="uid://3spkwr34s2bq" path="res://addons/advanced-text/font/DejaVuSans-BoldOblique.ttf" id="4_rc1wt"]
 [ext_resource type="FontFile" uid="uid://buj02o26lgfif" path="res://addons/advanced-text/font/DejaVuSansMono.ttf" id="5_fmnql"]
-[ext_resource type="Script" path="res://addons/advanced-text/nodes/ExtendedBBCodeParser.gd" id="7_eq8f8"]
-[ext_resource type="Script" path="res://addons/advanced-text/nodes/RenPyMarkupParser.gd" id="8_7ej7h"]
-[ext_resource type="Script" path="res://addons/advanced-text/nodes/MarkdownParser.gd" id="9_ybtq3"]
+[ext_resource type="Script" path="res://addons/advanced-text/parsers/MarkdownParser.gd" id="7_ypvyr"]
+[ext_resource type="Script" path="res://addons/advanced-text/parsers/RenPyMarkupParser.gd" id="8_8yudh"]
+[ext_resource type="Script" path="res://addons/advanced-text/parsers/ExtendedBBCodeParser.gd" id="9_xqqk6"]
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextButton.gd" id="10_w4hpi"]
+[ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextCheckButton.gd" id="11_fk62q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_btict"]
 font_size = 22
@@ -23,7 +24,7 @@ font_size = 18
 [sub_resource type="LabelSettings" id="LabelSettings_lsbhc"]
 
 [sub_resource type="Resource" id="Resource_dn452"]
-script = ExtResource("9_ybtq3")
+script = ExtResource("7_ypvyr")
 italics = "*"
 bold = "**"
 points = "-"
@@ -41,7 +42,7 @@ font_size = 18
 [sub_resource type="LabelSettings" id="LabelSettings_dbhjy"]
 
 [sub_resource type="Resource" id="Resource_1176o"]
-script = ExtResource("8_7ej7h")
+script = ExtResource("8_8yudh")
 headers = Array[LabelSettings]([SubResource("LabelSettings_lvv03"), SubResource("LabelSettings_k7lbg"), SubResource("LabelSettings_p2ep4"), SubResource("LabelSettings_dbhjy")])
 
 [sub_resource type="LabelSettings" id="LabelSettings_mq4wt"]
@@ -56,10 +57,10 @@ font_size = 18
 [sub_resource type="LabelSettings" id="LabelSettings_wlo5y"]
 
 [sub_resource type="Resource" id="Resource_xt6yb"]
-script = ExtResource("7_eq8f8")
+script = ExtResource("9_xqqk6")
 headers = Array[LabelSettings]([SubResource("LabelSettings_mq4wt"), SubResource("LabelSettings_3fkcx"), SubResource("LabelSettings_5l6r2"), SubResource("LabelSettings_wlo5y")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_psbp7"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sg57j"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -80,7 +81,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mgil4"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1l6l4"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -104,29 +105,56 @@ font_size = 18
 [sub_resource type="LabelSettings" id="LabelSettings_6db8y"]
 
 [sub_resource type="Resource" id="Resource_061s4"]
-script = ExtResource("9_ybtq3")
+script = ExtResource("7_ypvyr")
 italics = "*"
 bold = "**"
 points = "-"
 headers = Array[LabelSettings]([SubResource("LabelSettings_1xfa5"), SubResource("LabelSettings_fdguu"), SubResource("LabelSettings_ii7pd"), SubResource("LabelSettings_6db8y")])
 
-[sub_resource type="LabelSettings" id="LabelSettings_odtb8"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mhiy7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b2f2b"]
+content_margin_left = 6.0
+content_margin_top = 4.0
+content_margin_right = 6.0
+content_margin_bottom = 4.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_6nqat"]
 font_size = 22
 
-[sub_resource type="LabelSettings" id="LabelSettings_6i63m"]
+[sub_resource type="LabelSettings" id="LabelSettings_o05rn"]
 font_size = 20
 
-[sub_resource type="LabelSettings" id="LabelSettings_5vtd1"]
+[sub_resource type="LabelSettings" id="LabelSettings_r0by3"]
 font_size = 18
 
-[sub_resource type="LabelSettings" id="LabelSettings_o4yuw"]
+[sub_resource type="LabelSettings" id="LabelSettings_nnwbf"]
 
-[sub_resource type="Resource" id="Resource_bfol1"]
-script = ExtResource("9_ybtq3")
+[sub_resource type="Resource" id="Resource_ok87h"]
+script = ExtResource("7_ypvyr")
 italics = "*"
 bold = "**"
 points = "-"
-headers = Array[LabelSettings]([SubResource("LabelSettings_odtb8"), SubResource("LabelSettings_6i63m"), SubResource("LabelSettings_5vtd1"), SubResource("LabelSettings_o4yuw")])
+headers = Array[LabelSettings]([SubResource("LabelSettings_6nqat"), SubResource("LabelSettings_o05rn"), SubResource("LabelSettings_r0by3"), SubResource("LabelSettings_nnwbf")])
 
 [node name="AdvancedTextLabels" type="TabContainer"]
 anchors_preset = 15
@@ -136,6 +164,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MarkdownLabel" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
@@ -187,7 +216,7 @@ test_bool = <test_bool>
 [font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
 [font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
 [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[font_size= 32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -359,7 +388,7 @@ test_int = <test_int>
 [font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
 [font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
 [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[font_size= 32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -490,7 +519,7 @@ test_bool = <test_bool>
 [font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
 [font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
 [font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[font_size= 32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -577,7 +606,6 @@ test_bool = <test_bool>
 parser = SubResource("Resource_xt6yb")
 
 [node name="AdvancedTextButton" type="Panel" parent="."]
-visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="AdvancedTextButton"]
@@ -593,8 +621,8 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_psbp7")
-theme_override_styles/normal = SubResource("StyleBoxFlat_mgil4")
+theme_override_styles/focus = SubResource("StyleBoxFlat_sg57j")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1l6l4")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button A[/b][/rainbow][/center]"
 fit_content = true
@@ -606,17 +634,18 @@ button_group = &"test_btn"
 _text = "@center{@rainbow freq=0.2 sat=10 val=20 {**Markdown Button A**}}"
 parser = SubResource("Resource_061s4")
 
-[node name="AdvancedTextButton2" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
+[node name="AdvancedTextCheckButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_psbp7")
-theme_override_styles/normal = SubResource("StyleBoxFlat_mgil4")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mhiy7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_b2f2b")
 bbcode_enabled = true
-text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button B[/b][/rainbow][/center]"
+text = "[center] [rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button B[/b] [font_size= 24][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰨙[/font][/font_size][/rainbow] [/center]"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
-script = ExtResource("10_w4hpi")
+script = ExtResource("11_fk62q")
+main_text = "@> @rainbow freq=0.2 sat=10 val=20 {**Markdown Button B** [switch]} <@"
 toggle_mode = true
 button_group = &"test_btn"
-_text = "@center{@rainbow freq=0.2 sat=10 val=20 {**Markdown Button B**}}"
-parser = SubResource("Resource_bfol1")
+_text = "@> @rainbow freq=0.2 sat=10 val=20 {**Markdown Button B** [icon:toggle-switch-off-outline, 24]} <@"
+parser = SubResource("Resource_ok87h")
