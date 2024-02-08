@@ -21,7 +21,11 @@ class_name AdvancedTextLabel
 		_text = value
 		_parse_text()
 		
-	get : return _text
+	get :
+		if text and _text.is_empty():
+			_text = text
+		
+		return _text
 
 @export var save_to_text_file := false:
 	set (value):
@@ -52,7 +56,6 @@ class_name AdvancedTextLabel
 
 func _ready():
 	bbcode_enabled = true
-	_text = load_text_file()
 	_parse_text()
 
 func _parse_text() -> void:
