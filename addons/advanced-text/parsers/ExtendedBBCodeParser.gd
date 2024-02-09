@@ -14,11 +14,12 @@ class_name ExtendedBBCodeParser
 
 ## Generates LabelSettings set based on the given sizes
 ## It is used to generate headers initial settings.
-func _gen_headers(sizes : Array[int]) -> Array[LabelSettings]:
+func _gen_headers(sizes : Array[int], color := Color.BLACK) -> Array[LabelSettings]:
 	var _headers : Array[LabelSettings] = []
 	for size in sizes:
 		var ls := LabelSettings.new()
 		ls.font_size = size
+		ls.font_color = color
 		_headers.append(ls)
 	
 	return _headers
