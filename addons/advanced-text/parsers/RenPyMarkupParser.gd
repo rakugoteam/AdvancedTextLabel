@@ -20,6 +20,7 @@ func parse(text: String) -> String:
 	text = safe_replace("{", "[", text)
 	text = safe_replace("}", "]", text)
 	text = parse_headers(text)
+	text = parse_spaces(text)
 	text = _end(text)
 	
 	return text
@@ -46,7 +47,7 @@ func parse_links(text: String) -> String:
 ## parse Ren'Py images with out size into BBCode
 ## Ren'Py images example:
 ## {img=<path>}
-func parse_imgs(text:String) -> String:
+func parse_imgs(text: String) -> String:
 	re.compile("(?<!\\{)\\{img=([^\\}\\s]+)\\}")
 	result = re.search(text)
 	while result != null:
@@ -63,7 +64,7 @@ func parse_imgs(text:String) -> String:
 ## parse Ren'Py images with size into BBCode
 ## Ren'Py images with size example:
 # {img=<path> size=<height>x<width>}
-func parse_imgs_size(text:String) -> String:
+func parse_imgs_size(text: String) -> String:
 	re.compile("(?<!\\{)\\{img=([^\\}\\s]+) size=([^\\}]+)\\}")
 	result = re.search(text)
 	while result != null:
