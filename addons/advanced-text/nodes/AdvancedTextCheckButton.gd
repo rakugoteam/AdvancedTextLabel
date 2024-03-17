@@ -1,12 +1,13 @@
 @tool
 extends AdvancedTextButton
 
+## This is AdvancedTextLabel that baves like toggle switch
 ## This node needs Godot Material Icons addon to work
 class_name AdvancedTextCheckButton
 
 ## Size of Matrial Icon that will be used as toggle icon
 @export var toggle_icon_size := 24:
-	set (value):
+	set(value):
 		toggle_icon_size = value
 		_update_switch(_toggled)
 
@@ -15,7 +16,7 @@ class_name AdvancedTextCheckButton
 ## Name of Matrial Icon that will be used when button is toggle on
 ## This will replace `[switch]` in text
 @export var toggle_on_icon := "toggle-switch-outline":
-	set (value):
+	set(value):
 		toggle_on_icon = value
 		_update_switch(_toggled)
 
@@ -24,7 +25,7 @@ class_name AdvancedTextCheckButton
 ## Name of Matrial Icon that will be used when button is toggle off
 ## This will replace `[switch]` in text
 @export var toggle_off_icon := "toggle-switch-off-outline":
-	set (value):
+	set(value):
 		toggle_off_icon = value
 		_update_switch(_toggled)
 
@@ -33,7 +34,7 @@ class_name AdvancedTextCheckButton
 ## Use this instead of _text
 ## `[switch]` will be replaced with toggle icon
 @export_multiline var main_text := "label [switch]":
-	set (value):
+	set(value):
 		main_text = value
 		_update_switch(_toggled)
 	
@@ -42,7 +43,7 @@ class_name AdvancedTextCheckButton
 func _ready() -> void:
 	toggled.connect(_update_switch)
 
-func _update_switch(value:bool):
+func _update_switch(value: bool):
 	var icon = toggle_off_icon
 	if value: icon = toggle_on_icon
 	_text = main_text.replace(
