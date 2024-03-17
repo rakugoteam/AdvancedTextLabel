@@ -60,7 +60,7 @@ font_size = 18
 script = ExtResource("9_xqqk6")
 headers = Array[LabelSettings]([SubResource("LabelSettings_mq4wt"), SubResource("LabelSettings_3fkcx"), SubResource("LabelSettings_5l6r2"), SubResource("LabelSettings_wlo5y")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_70pxe"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0hx8"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -81,7 +81,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56ft7"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wvtpd"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -185,7 +185,6 @@ point 2
 point 2
 [/ol]
 
-cccs
 [hint=hint]text whit hint[/hint]
 [url=https://some_domain.com]link[/url]
 [url]https://some_domain.com[/url]
@@ -195,10 +194,10 @@ test_int = <test_int>
 test_bool = <test_bool>
 @color=<test_color> {text in custom color from variable}
 
-[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
-[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font_size= 32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]
+:grinning:
+:grinning, 36:
+[icon:folder-open]
+[icon:folder-open, 32]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -243,7 +242,6 @@ test_bool = <test_bool>
 
 "
 script = ExtResource("1_uinld")
-text_file = "res://addons/advanced-text/help/markdown.md"
 _text = "# Header Level 1
 ## Header Level 2
 ### Header Level 3
@@ -268,7 +266,6 @@ text with space 6
 	1. point 2
 1. point 2
 
-cccs
 @[text whit hint](hint)
 [link](https://some_domain.com)
 <https://some_domain.com>
@@ -350,7 +347,7 @@ text = "[bgcolor=#00000000][color=#ffffffff][font_size=22]Header Level 1[/font_s
 [url]https://some_domain.com[/url]
 
 text with space 6
-[space=6]
+[font_size=6] [/font_size]
 text with space 6
 
 [ul]
@@ -363,15 +360,25 @@ sub point B
 point 3
 [/ul]
 
+[ol type=1]
+point 1
+[ol type=1]
+point 1
+point 2
+[/ol]
+point 2
+[/ol]
+
+
 test_string = <test_string>
 test_bool = <test_bool>
 test_int = <test_int>
 [color=<test_color>]text in custom color from variable[/color]
 
-[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
-[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font_size= 32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]
+:grinning:
+:grinning, 36:
+[icon:folder-open]
+[icon:folder-open, 32]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -397,7 +404,6 @@ test_int = <test_int>
 [fade start=4 length=14]fade[/fade]
 [rainbow freq=0.2 sat=10 val=20]rainbow[/rainbow]"
 script = ExtResource("1_uinld")
-text_file = "res://addons/advanced-text/help/renpy.rpy"
 _text = "{h1}Header Level 1{/h1}
 {h2}Header Level 2{/h2}
 {h3}Header Level 3{/h3}
@@ -423,6 +429,16 @@ sub point B
 {/ul}
 point 3
 {/ul}
+
+{ol type=1}
+point 1
+{ol type=1}
+point 1
+point 2
+{/ol}
+point 2
+{/ol}
+
 
 test_string = <test_string>
 test_bool = <test_bool>
@@ -491,6 +507,15 @@ sub point B
 point 3
 [/ul]
 
+[ol type=1]
+point 1
+[ol type=1]
+point 1
+point 2
+[/ol]
+point 2
+[/ol]s
+
 [url=https://some_domain.com]link[/url]
 [url]https://some_domain.com[/url]
 
@@ -499,10 +524,10 @@ test_int = <test_int>
 test_bool = <test_bool>
 [color=<test_color>]text in custom color from variable[/color]
 
-[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
-[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font_size= 32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]
+:grinning:
+:grinning, 36:
+[icon:folder-open]
+[icon:folder-open, 32]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -527,7 +552,6 @@ test_bool = <test_bool>
 [rainbow freq=0.2 sat=10 val=20]rainbow[/rainbow]
 "
 script = ExtResource("1_uinld")
-text_file = "res://addons/advanced-text/help/bbcode.txt"
 _text = "[h1]Header Level 1[/h1]
 [h2]Header Level 2[/h2]
 [h3]Header Level 3[/h3]
@@ -550,6 +574,15 @@ sub point B
 [/ul]
 point 3
 [/ul]
+
+[ol type=1]
+point 1
+[ol type=1]
+point 1
+point 2
+[/ol]
+point 2
+[/ol]s
 
 [url=https://some_domain.com]link[/url]
 [url]https://some_domain.com[/url]
@@ -605,8 +638,8 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_70pxe")
-theme_override_styles/normal = SubResource("StyleBoxFlat_56ft7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_t0hx8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wvtpd")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button A[/b][/rainbow][/center]"
 fit_content = true
