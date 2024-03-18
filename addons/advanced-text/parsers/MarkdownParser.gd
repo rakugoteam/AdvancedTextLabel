@@ -17,7 +17,7 @@ class_name MarkdownParser
 
 ## returns given Markdown parsed into BBCode
 func parse(text: String) -> String:
-	in_code = find_all_in_code(text, "`{1,3}" , "`{1,3}")
+	in_code = find_all_in_code(text, "`{1,3}", "`{1,3}")
 	text = _start(text)
 	text = parse_headers(text)
 	text = parse_imgs(text)
@@ -93,7 +93,7 @@ func parse(text: String) -> String:
 	return text
 
 ## Parse @space=x, that it add space in text in size of x
-func parse_spaces(text:String) -> String:
+func parse_spaces(text: String) -> String:
 	re.compile("@space=(?P<size>\\d+)\n")
 	result = re.search(text)
 	while result != null:
@@ -109,7 +109,7 @@ func parse_spaces(text:String) -> String:
 	return text
 
 ## Parse md # Headers in given text into BBCode
-func parse_headers(text:String) -> String:
+func parse_headers(text: String) -> String:
 	re.compile("(#+)\\s+(.+\n)")
 	result = re.search(text)
 	while result != null:
@@ -127,7 +127,7 @@ func parse_headers(text:String) -> String:
 
 ## Parse md images to in given text to BBCode
 ## Example of md image: ![](path/to/img)
-func parse_imgs(text:String) -> String:
+func parse_imgs(text: String) -> String:
 	re.compile("!\\[\\]\\((.*?)\\)")
 	result = re.search(text)
 	while result != null:
@@ -139,7 +139,7 @@ func parse_imgs(text:String) -> String:
 
 ## Parse md images with size to in given text to BBCode
 ## Example of md image with size: ![height x width](path/to/img)
-func parse_imgs_size(text:String) -> String:
+func parse_imgs_size(text: String) -> String:
 	re.compile("!\\[(\\d+)x(\\d+)\\]\\((.*?)\\)")
 	result = re.search(text)
 	while result != null:
@@ -156,7 +156,7 @@ func parse_imgs_size(text:String) -> String:
 ## Examples of md link:
 ## [link](path/to/file.md)
 ## <https://www.example.com>
-func parse_links(text:String) -> String:
+func parse_links(text: String) -> String:
 	# [link](path/to/file.md)
 	re.compile("\\[(.+)\\]\\((.+)\\)")
 	result = re.search(text)
@@ -179,7 +179,7 @@ func parse_links(text:String) -> String:
 
 ## Parse md hint to in given text to BBCode
 ## @[text](hint)
-func parse_hints(text:String) -> String:
+func parse_hints(text: String) -> String:
 	# @[text](hint)
 	re.compile("@\\[(.+)\\]\\((.+)\\)")
 	result = re.search(text)
@@ -193,17 +193,25 @@ func parse_hints(text:String) -> String:
 	return text
 
 func parse_sing(text: String, open: String, close: String, tag: String):
-	var search := "%s(.*?)%s" % [open, close]
+	var search := "(.*)%s(.*?)%s(.*)" % [open, close]
 	re.compile(search)
 	result = re.search(text)
 
 	while result != null:
-		var r := result.get_string(1)
-		replacement = "[%s]%s[/%s]" % [tag, r, tag]
+		var r := result.get_string(2)
+		
+		var r_start := result.get_string(1)
+		if r_start.ends_with(open):
+			return text
+
+		var r_end := result.get_string(3)
+		if r_end.begins_with(close):
+			return text
+
+		var arr := [r_start, tag, r, tag, r_end]
+		replacement = "%s[%s]%s[/%s]%s" % arr
 		text = replace_regex_match(text, result, replacement)
 		result = re.search(text, result.get_end())
-
-	return text
 
 ## Parse md italics to in given text to BBCode
 ## Example of md italics:
@@ -237,7 +245,7 @@ func parse_bold(text: String) -> String:
 
 ## Parse md strike through to in given text to BBCode
 ## Example of md strike through: ~~strike through~~
-func parse_strike_through(text:String) -> String:
+func parse_strike_through(text: String) -> String:
 	# ~~strike through~~
 	return parse_sing(text, "~~", "~~", "s")
 
@@ -245,7 +253,7 @@ func parse_strike_through(text:String) -> String:
 ## Example of md code:
 ## one line code: `code`
 ## multiline code: ```code```
-func parse_code(text:String) -> String:
+func parse_code(text: String) -> String:
 	# `code` or ```code```
 	return parse_sing(text, "`{1,3}", "`{1,3}", "code")
 
@@ -254,7 +262,7 @@ func parse_code(text:String) -> String:
 ## @tabel=2 {
 ## | cell1 | cell2 |
 ## }
-func parse_table(text:String) -> String:
+func parse_table(text: String) -> String:
 	# @tabel=2 {
 	# | cell1 | cell2 |
 	# }
@@ -267,7 +275,7 @@ func parse_table(text:String) -> String:
 		var lines = r.split("\n")
 		for line in lines:
 			if line.begins_with("|"):
-				var cells : Array = line.split("|", false)
+				var cells: Array = line.split("|", false)
 
 				for cell in cells:
 					replacement += "[cell]%s[/cell]" % cell
@@ -279,7 +287,7 @@ func parse_table(text:String) -> String:
 	
 	return text
 
-func parse_color_key(text:String) -> String:
+func parse_color_key(text: String) -> String:
 	# @color=red { text }
 	re.compile("@color=([a-z]+)\\s*\\{\\s*([^\\}]+)\\s*\\}")
 	result = re.search(text)
@@ -292,7 +300,7 @@ func parse_color_key(text:String) -> String:
 	
 	return text
 
-func parse_color_hex(text:String) -> String:
+func parse_color_hex(text: String) -> String:
 	# @color=#ffe820 { text }
 	re.compile("@color=(#[0-9a-f]{6})\\s*\\{\\s*([^\\}]+)\\s*\\}")
 	result = re.search(text)
@@ -305,7 +313,7 @@ func parse_color_hex(text:String) -> String:
 	
 	return text
 
-func parse_effect(text:String, effect:String, args:Array) -> String:
+func parse_effect(text: String, effect: String, args: Array) -> String:
 	# @effect args { text }
 	# where args: arg_name=arg_value, arg_name=arg_value
 	re.compile("@%s([\\s\\w=0-9\\.]+)\\s*{(.+)}" % effect)
@@ -327,7 +335,7 @@ func parse_effect(text:String, effect:String, args:Array) -> String:
 		var _text = result.get_string(2)
 		var _args = ""
 		for i in range(0, _values.size()):
-			_args += "%s=%s " % [args[i], _values[i]]
+			_args += "%s=%s " % [args[i],_values[i]]
 
 		replacement = "[%s %s]%s[/%s]" % [effect, _args, _text, effect]
 		text = replace_regex_match(text, result, replacement)
@@ -335,7 +343,7 @@ func parse_effect(text:String, effect:String, args:Array) -> String:
 	
 	return text
 
-func parse_keyword(text:String, keyword:String, tag:String) -> String:
+func parse_keyword(text: String, keyword: String, tag: String) -> String:
 	# @keyword {text}
 	re.compile("@%s\\s*{(.+)}" % keyword)
 	result = re.search(text)
@@ -356,7 +364,7 @@ func parse_list(text: String, open: String, close: String, regex: String):
 	re.compile(regex)
 
 	var lines := text.split("\n")
-	var new_lines : Array[String] = []
+	var new_lines: Array[String] = []
 	var in_list := false
 	var indent := 0
 
@@ -389,4 +397,3 @@ func parse_list(text: String, open: String, close: String, regex: String):
 	text = "\n".join(new_lines)
 
 	return text
-
