@@ -28,7 +28,7 @@ func _gen_headers(sizes : Array[int], color := Color.BLACK) -> Array[LabelSettin
 ## Needed for plugins with other addons to work
 func _start(text:String) -> String:
 	if !Engine.is_editor_hint():
-		var raku = get_singleton("Rakugo")
+		var raku = ATHelper.get_singleton("Rakugo")
 		if raku:
 			text = raku.replace_variables(text)
 	
@@ -37,11 +37,11 @@ func _start(text:String) -> String:
 ## Must be run at end of parsing
 ## Needed for plugins with other addons to work
 func _end(text:String) -> String:
-	var emojis = get_singleton("EmojisDB")
+	var emojis = ATHelper.get_singleton("EmojisDB")
 	if emojis:
 		text = emojis.parse_emojis(text)
 	
-	var icons = get_singleton("MaterialIconsDB")
+	var icons = ATHelper.get_singleton("MaterialIconsDB")
 	if icons:
 		text = icons.parse_icons(text)
 	

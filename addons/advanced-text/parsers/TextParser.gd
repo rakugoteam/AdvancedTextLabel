@@ -9,18 +9,10 @@ var result : RegExMatch
 var replacement := ""
 var in_code := []
 
-## Root ref is needed to check if other compatible addons are installed
-var root : Node
-
 ## This only exits to be override by Parsers classes that inherits from it
 ## This func just returns given with out any changes
 func parse(text:String) -> String:
 	return text
-
-func get_singleton(singleton:String) -> Node:
-	if root.has_node(singleton):
-		return root.get_node(singleton)
-	return null
 
 ## Func that my parsers uses to replace result in given text with replacement.
 func replace_regex_match(text:String, result:RegExMatch, replacement:String) -> String:

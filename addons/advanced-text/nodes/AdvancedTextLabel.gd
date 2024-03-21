@@ -41,21 +41,9 @@ func _ready():
 
 func _parse_text() -> void:
 	if !is_node_ready(): return
-	if !parser.root:
-		if Engine.is_editor_hint():
-			parser.root = get_tree().edited_scene_root
-			
-		else:
-			parser.root = get_tree().root
-
+	
 	if !parser:
-		if !Engine.is_editor_hint():
-			push_warning("parser is null at " + str(name))
-
-		else:
-			var root := Engine.get_main_loop().edited_scene_root as Node
-			push_warning("parser is null at " + str(root.get_path_to(self)))
-		
+		push_warning("parser is null at " + str(name))
 		return
 	
 	text = parser.parse(_text)
