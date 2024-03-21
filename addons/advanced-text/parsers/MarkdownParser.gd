@@ -212,6 +212,8 @@ func parse_sing(text: String, open: String, close: String, tag: String):
 		replacement = "%s[%s]%s[/%s]%s" % arr
 		text = replace_regex_match(text, result, replacement)
 		result = re.search(text, result.get_end())
+	
+	return text
 
 ## Parse md italics to in given text to BBCode
 ## Example of md italics:

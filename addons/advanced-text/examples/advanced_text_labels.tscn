@@ -60,7 +60,7 @@ font_size = 18
 script = ExtResource("9_xqqk6")
 headers = Array[LabelSettings]([SubResource("LabelSettings_mq4wt"), SubResource("LabelSettings_3fkcx"), SubResource("LabelSettings_5l6r2"), SubResource("LabelSettings_wlo5y")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0hx8"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12c3q"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -81,7 +81,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wvtpd"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h12gj"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -208,17 +208,17 @@ test_bool = <test_bool>
 
 [u]underlined text[/u]
 [center]centered text[/center]
-[center]centered text using [code]@>[/code] and [code][/center][/code]<@
+@>centered text using `[center]` and [code][/center][/code]<@
 
 [right]right aligned text[/right]
-[right]right aligned text using [code]@>[/code] and [code][/right][/code]>@
+@>right aligned text using `[right]` and [code][/right][/code]>@
 
 [fill]fill aligned text[/fill]
-[fill]fill aligned text using [code]@<[/code] and [code][/fill][/code]>@
+@<fill aligned text using `[fill]` and [code][/fill][/code]>@
 [fill]justified text [i](alt to @fill)[/i] [/fill]
 
 [indent]indent text[/indent]
-[indent]indent text using [code]@|[/code] and [code][/indent][/code]|@
+@|indent text using `[indent]` and [code][/indent][/code]|@
 [indent]indent text [i](alt to @indent)[/i][/indent]
 
 [color=red]red text[/color]
@@ -328,6 +328,7 @@ parser = SubResource("Resource_n6q2u")
 [node name="RenPyStringLabel" type="RichTextLabel" parent="."]
 visible = false
 layout_mode = 2
+auto_translate = false
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
 theme_override_fonts/italics_font = ExtResource("3_7l8y2")
@@ -638,8 +639,8 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_t0hx8")
-theme_override_styles/normal = SubResource("StyleBoxFlat_wvtpd")
+theme_override_styles/focus = SubResource("StyleBoxFlat_12c3q")
+theme_override_styles/normal = SubResource("StyleBoxFlat_h12gj")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button A[/b][/rainbow][/center]"
 fit_content = true
