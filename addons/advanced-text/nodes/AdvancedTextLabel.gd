@@ -5,6 +5,10 @@ extends RichTextLabel
 ## This class parses given text to bbcode using given TextParser
 class_name AdvancedTextLabel
 
+## By default links (staring from `http`) will be opened in web browser
+## For custom links you can connect to `custom_link` signal
+signal custom_link(args)
+
 ## Text to be parsed in too BBCode
 ## Use it instead of `text` from RichTextLabel
 ## I had to make this way as I can't override `text` var behavior
@@ -37,6 +41,7 @@ class_name AdvancedTextLabel
 
 func _ready():
 	bbcode_enabled = true
+	meta_clicked.connect(_on_meta)
 	_parse_text()
 
 func _parse_text() -> void:
@@ -57,3 +62,10 @@ func _get_configuration_warnings() -> PackedStringArray:
 		warnings.append("Need parser.")
 
 	return warnings
+
+func _on_meta(url: String) -> void:
+	if url.begins_with("http"):
+		OS.shell_open(url)
+		return
+	
+	emit_signal("custom_link", url)
