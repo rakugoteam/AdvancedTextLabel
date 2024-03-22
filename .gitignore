@@ -8,3 +8,5 @@ mono_crash.*.json
 !/addons/gut/
 .gut_editor_config.json
 .gutconfig.json
+
+/.venv/
