@@ -11,6 +11,7 @@ signal pressed
 ## Works only if `toggle_mode` is on.
 signal toggled(value)
 
+## If true, button will be disabled
 @export var disabled := false:
 	set (value):
 		disabled = value
@@ -22,10 +23,12 @@ signal toggled(value)
 	
 	get: return disabled
 
+## If true, button will be in toggle mode
 @export var toggle_mode := false
 var _toggled := false:
 	get: return _toggled
 
+## If true, button will be in pressed state
 @export var button_pressed := false:
 	set (value):
 		if toggle_mode:

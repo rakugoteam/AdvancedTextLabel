@@ -289,6 +289,8 @@ func parse_table(text: String) -> String:
 	
 	return text
 
+
+## Parse md color name from Color class tag to in given text to BBCode
 func parse_color_key(text: String) -> String:
 	# @color=red { text }
 	re.compile("@color=([a-z]+)\\s*\\{\\s*([^\\}]+)\\s*\\}")
@@ -302,6 +304,7 @@ func parse_color_key(text: String) -> String:
 	
 	return text
 
+## Parse md color hex to in given text to BBCode
 func parse_color_hex(text: String) -> String:
 	# @color=#ffe820 { text }
 	re.compile("@color=(#[0-9a-f]{6})\\s*\\{\\s*([^\\}]+)\\s*\\}")
@@ -315,6 +318,7 @@ func parse_color_hex(text: String) -> String:
 	
 	return text
 
+## Parse md effects to in given text to BBCode
 func parse_effect(text: String, effect: String, args: Array) -> String:
 	# @effect args { text }
 	# where args: arg_name=arg_value, arg_name=arg_value
@@ -345,6 +349,7 @@ func parse_effect(text: String, effect: String, args: Array) -> String:
 	
 	return text
 
+## Parse md keyword to in given text to BBCode
 func parse_keyword(text: String, keyword: String, tag: String) -> String:
 	# @keyword {text}
 	re.compile("@%s\\s*{(.+)}" % keyword)
@@ -356,12 +361,15 @@ func parse_keyword(text: String, keyword: String, tag: String) -> String:
 
 	return text
 
+## Parse md points list to in given text to BBCode
 func parse_points(text: String) -> String:
 	return parse_list(text, "[ul]", "[/ul]", "^(\\t*)-\\s+(.+)$")
 
+## Parse md number points list to in given text to BBCode
 func parse_number_points(text: String) -> String:
 	return parse_list(text, "[ol type=1]", "[/ol]", "^(\\t*)\\d+\\.\\s+(.+)$")
 
+## Parse md list to in given text to BBCode
 func parse_list(text: String, open: String, close: String, regex: String):
 	re.compile(regex)
 

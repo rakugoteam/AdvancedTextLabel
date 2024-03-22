@@ -4,9 +4,16 @@ extends Resource
 ## Base class used by AdvancedTexts addon Parsers
 class_name TextParser
 
+## RegEx used by this class
 var re := RegEx.new()
+
+## Used to store result of last RegEx search
 var result : RegExMatch
+
+## Used to store replacement for RegEx search
 var replacement := ""
+
+## Here will be stored all code between code tags in given text
 var in_code := []
 
 ## This only exits to be override by Parsers classes that inherits from it
@@ -51,6 +58,8 @@ func find_all_in_code(text:String, open_code_tag:="[code]", close_code_tag:="[/c
 
 	return _in_code
 
+## It checks if given result is in code tags
+## used to skip parts of text that are in code tags in parsing process
 func is_in_code(result:RegExMatch) -> bool:
 
 	for pair in in_code:
