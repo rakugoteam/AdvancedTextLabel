@@ -62,14 +62,14 @@ func parse_headers(text: String) -> String:
 	result = re.search(text)
 	while result != null:
 		if is_in_code(result):
-			result = re.search(text, result.get_end())
+			result = re.search(text)
 			continue
 
 		var h_size := result.get_string("size").to_int() - 1
 		var h_text := result.get_string("text")
 		replacement = add_header(h_size, h_text)
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 	
 	return text
 
@@ -79,13 +79,13 @@ func parse_spaces(text: String) -> String:
 	result = re.search(text)
 	while result != null:
 		if is_in_code(result):
-			result = re.search(text, result.get_end())
+			result = re.search(text)
 			continue
 
 		var size := result.get_string("size").to_int()
 		replacement = "[font_size=%d] [/font_size]\n" % size
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 
 	return text
 

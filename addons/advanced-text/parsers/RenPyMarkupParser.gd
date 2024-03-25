@@ -34,13 +34,13 @@ func parse_links(text: String) -> String:
 	result = re.search(text)
 	while result != null:
 		if is_in_code(result):
-			result = re.search(text, result.get_end())
+			result = re.search(text)
 			continue
 		
 		replacement = "[%surl%s]" % [
 			result.get_string(1), result.get_string(2)]
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 		
 	return text
 
@@ -52,12 +52,12 @@ func parse_imgs(text: String) -> String:
 	result = re.search(text)
 	while result != null:
 		if is_in_code(result):
-			result = re.search(text, result.get_end())
+			result = re.search(text)
 			continue
 		
 		replacement = to_bbcode_img(result.get_string(1))
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 
 	return text
 
@@ -69,11 +69,11 @@ func parse_imgs_size(text: String) -> String:
 	result = re.search(text)
 	while result != null:
 		if is_in_code(result):
-			result = re.search(text, result.get_end())
+			result = re.search(text)
 			continue
 		
 		replacement = to_bbcode_img(result.get_string(1), result.get_string(2))
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 
 	return text

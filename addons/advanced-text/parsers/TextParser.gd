@@ -63,7 +63,7 @@ func find_all_in_code(text: String, open_code_tag:="[code]", close_code_tag:="[/
 	result = re.search(text)
 	while result != null:
 		_in_code.append([result.get_start(1), result.get_end(1)])
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 
 	return _in_code
 
@@ -88,10 +88,10 @@ func safe_replace(what: String, for_what: String, text: String) -> String:
 	result = re.search(text)
 	while result != null:
 		if is_in_code(result):
-			result = re.search(text, result.get_end())
+			result = re.search(text)
 			continue
 		
 		text = replace_regex_match(text, result, for_what)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 
 	return text

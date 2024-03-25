@@ -98,13 +98,13 @@ func parse_spaces(text: String) -> String:
 	result = re.search(text)
 	while result != null:
 		if is_in_code(result):
-			result = re.search(text, result.get_end())
+			result = re.search(text)
 			continue
 
 		var size := result.get_string("size").to_int()
 		replacement = "[font_size=%d] [/font_size]\n" % size
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 
 	return text
 
@@ -114,14 +114,14 @@ func parse_headers(text: String) -> String:
 	result = re.search(text)
 	while result != null:
 		if is_in_code(result):
-			result = re.search(text, result.get_end())
+			result = re.search(text)
 			continue
 		
 		var header_level = result.get_string(1).length() - 1
 		var header_text = result.get_string(2)
 		replacement = add_header(header_level, header_text)
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 	
 	return text
 
@@ -133,7 +133,7 @@ func parse_imgs(text: String) -> String:
 	while result != null:
 		replacement = "[img]%s[/img]" % result.get_string(1)
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 	
 	return text
 
@@ -148,7 +148,7 @@ func parse_imgs_size(text: String) -> String:
 		var path = result.get_string(3)
 		replacement = "[img=%sx%s]%s[/img]" % [height, width, path]
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 	
 	return text
 
@@ -165,7 +165,7 @@ func parse_links(text: String) -> String:
 		var url = result.get_string(2)
 		replacement = "[url=%s]%s[/url]" % [url, link]
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 
 	# <https://www.example.com>
 	re.compile("<(\\w+:\\/\\/[A-Za-z0-9\\.\\-\\_\\@\\/]+)>")
@@ -173,7 +173,7 @@ func parse_links(text: String) -> String:
 	while result != null:
 		replacement = "[url]%s[/url]" % result.get_string(1)
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 
 	return text
 
@@ -188,7 +188,7 @@ func parse_hints(text: String) -> String:
 		var hint = result.get_string(2)
 		replacement = "[hint=%s]%s[/hint]" % [hint, t]
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 	
 	return text
 
@@ -202,18 +202,18 @@ func parse_sing(text: String, open: String, close: String, tag: String):
 		
 		var r_start := result.get_string(1)
 		if r_start.ends_with(open):
-			result = re.search(text, result.get_end())
+			result = re.search(text)
 			continue
 
 		var r_end := result.get_string(3)
 		if r_end.begins_with(close):
-			result = re.search(text, result.get_end())
+			result = re.search(text)
 			continue
 
 		var arr := [r_start, tag, r, tag, r_end]
 		replacement = "%s[%s]%s[/%s]%s" % arr
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 	
 	return text
 
@@ -287,7 +287,7 @@ func parse_table(text: String) -> String:
 				replacement += "\n"
 		replacement += "[/table]"
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 	
 	return text
 
@@ -302,7 +302,7 @@ func parse_color_key(text: String) -> String:
 		var _text = result.get_string(2)
 		replacement = "[color=%s]%s[/color]" % [color, _text]
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 	
 	return text
 
@@ -316,7 +316,7 @@ func parse_color_hex(text: String) -> String:
 		var _text = result.get_string(2)
 		replacement = "[color=%s]%s[/color]" % [color, _text]
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 	
 	return text
 
@@ -331,7 +331,7 @@ func parse_effect(text: String, effect: String, args: Array) -> String:
 		var _text = result.get_string(2)
 		replacement = "[%s %s]%s[/%s]" % [effect, _args, _text, effect]
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 
 	# @effect val1,val2 { text }
 	re.compile("@%s\\s([0-9\\.\\,\\s]+)\\s*{(.+)}" % effect)
@@ -347,7 +347,7 @@ func parse_effect(text: String, effect: String, args: Array) -> String:
 
 		replacement = "[%s %s]%s[/%s]" % [effect, _args, _text, effect]
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 	
 	return text
 
@@ -359,7 +359,7 @@ func parse_keyword(text: String, keyword: String, tag: String) -> String:
 	while result != null:
 		replacement = "[%s]%s[/%s]" % [tag, result.get_string(1), tag]
 		text = replace_regex_match(text, result, replacement)
-		result = re.search(text, result.get_end())
+		result = re.search(text)
 
 	return text
 
