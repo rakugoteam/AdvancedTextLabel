@@ -14,8 +14,8 @@ class_name ExtendedBBCodeParser
 
 ## Generates LabelSettings set based on the given sizes
 ## It is used to generate headers initial settings.
-func _gen_headers(sizes : Array[int], color := Color.BLACK) -> Array[LabelSettings]:
-	var _headers : Array[LabelSettings] = []
+func _gen_headers(sizes: Array[int], color:=Color.BLACK) -> Array[LabelSettings]:
+	var _headers: Array[LabelSettings] = []
 	for size in sizes:
 		var ls := LabelSettings.new()
 		ls.font_size = size
@@ -26,9 +26,9 @@ func _gen_headers(sizes : Array[int], color := Color.BLACK) -> Array[LabelSettin
 
 ## Must be run at start of parsing
 ## Needed for plugins with other addons to work
-func _start(text:String) -> String:
+func _start(text: String) -> String:
 	if !Engine.is_editor_hint():
-		var raku = ATHelper.get_singleton("Rakugo")
+		var raku = get_singleton("Rakugo")
 		if raku:
 			text = raku.replace_variables(text)
 	
@@ -36,19 +36,19 @@ func _start(text:String) -> String:
 
 ## Must be run at end of parsing
 ## Needed for plugins with other addons to work
-func _end(text:String) -> String:
-	var emojis = ATHelper.get_singleton("EmojisDB")
+func _end(text: String) -> String:
+	var emojis = get_singleton("EmojisDB")
 	if emojis:
 		text = emojis.parse_emojis(text)
 	
-	var icons = ATHelper.get_singleton("MaterialIconsDB")
+	var icons = get_singleton("MaterialIconsDB")
 	if icons:
 		text = icons.parse_icons(text)
 	
 	return text
 
 ## Returns given ExtendedBBCode parsed into BBCode
-func parse(text:String) -> String:
+func parse(text: String) -> String:
 	in_code = find_all_in_code(text)
 	text = _start(text)
 	text = parse_headers(text)
@@ -57,7 +57,7 @@ func parse(text:String) -> String:
 	return text
 
 ## Parse headers in given text into BBCode
-func parse_headers(text:String) -> String:
+func parse_headers(text: String) -> String:
 	re.compile("\\[h(?P<size>[1-4])\\](?P<text>.+?)\\[/h(?P=size)\\]")
 	result = re.search(text)
 	while result != null:
@@ -74,7 +74,7 @@ func parse_headers(text:String) -> String:
 	return text
 
 ## Parse [space=x], that it add space in text in size of x
-func parse_spaces(text:String) -> String:
+func parse_spaces(text: String) -> String:
 	re.compile("\\[space=(?P<size>\\d+)\\]\n")
 	result = re.search(text)
 	while result != null:
@@ -90,7 +90,7 @@ func parse_spaces(text:String) -> String:
 	return text
 
 ## Returns given text with added BBCode for header with given size (1-4) to it
-func add_header(header_size:int, text:String) -> String:
+func add_header(header_size: int, text: String) -> String:
 	if !headers: return text
 	if headers.is_empty(): return text
 	
@@ -119,5 +119,3 @@ func add_header(header_size:int, text:String) -> String:
 		replacement = "[bgcolor=%s]%s[/bgcolor]" % [bgcolor, replacement]
 
 	return replacement
-
-

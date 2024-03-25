@@ -29,7 +29,6 @@ config/icon="res://addons/advanced-text/icons/AdvancedTextLabel.svg"
 Rakugo="*res://addons/Rakugo/Rakugo.gd"
 MaterialIconsDB="*res://addons/material-design-icons/icons/icons.gd"
 EmojisDB="*res://addons/emojis-for-godot/emojis/emojis.gd"
-ATHelper="*res://addons/advanced-text/ATHelper.gd"
 
 [debug]
 
