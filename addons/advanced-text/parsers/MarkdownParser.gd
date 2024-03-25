@@ -202,11 +202,13 @@ func parse_sing(text: String, open: String, close: String, tag: String):
 		
 		var r_start := result.get_string(1)
 		if r_start.ends_with(open):
-			return text
+			result = re.search(text, result.get_end())
+			continue
 
 		var r_end := result.get_string(3)
 		if r_end.begins_with(close):
-			return text
+			result = re.search(text, result.get_end())
+			continue
 
 		var arr := [r_start, tag, r, tag, r_end]
 		replacement = "%s[%s]%s[/%s]%s" % arr
