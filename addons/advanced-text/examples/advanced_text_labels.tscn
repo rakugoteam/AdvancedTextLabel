@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dw681hislg41h"]
+[gd_scene load_steps=41 format=3 uid="uid://dw681hislg41h"]
 
 [ext_resource type="FontFile" uid="uid://dopnqhkanf1f7" path="res://addons/advanced-text/font/DejaVuSans.ttf" id="1_nhc5f"]
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="1_uinld"]
@@ -6,29 +6,33 @@
 [ext_resource type="FontFile" uid="uid://dv5f7ykw422ft" path="res://addons/advanced-text/font/DejaVuSans-Oblique.ttf" id="3_7l8y2"]
 [ext_resource type="FontFile" uid="uid://3spkwr34s2bq" path="res://addons/advanced-text/font/DejaVuSans-BoldOblique.ttf" id="4_rc1wt"]
 [ext_resource type="FontFile" uid="uid://buj02o26lgfif" path="res://addons/advanced-text/font/DejaVuSansMono.ttf" id="5_fmnql"]
-[ext_resource type="Script" path="res://addons/advanced-text/parsers/MarkdownParser.gd" id="7_vsfcy"]
+[ext_resource type="Script" path="res://addons/advanced-text/parsers/MarkdownParser.gd" id="7_r0mph"]
 [ext_resource type="Script" path="res://addons/advanced-text/parsers/RenPyMarkupParser.gd" id="8_8yudh"]
 [ext_resource type="Script" path="res://addons/advanced-text/parsers/ExtendedBBCodeParser.gd" id="9_xqqk6"]
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextButton.gd" id="10_w4hpi"]
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextCheckButton.gd" id="11_fk62q"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_e2bmy"]
+[sub_resource type="LabelSettings" id="LabelSettings_0sox2"]
 font_size = 22
+font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_6c46x"]
+[sub_resource type="LabelSettings" id="LabelSettings_1rb2p"]
 font_size = 20
+font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_o31ih"]
+[sub_resource type="LabelSettings" id="LabelSettings_cllr0"]
 font_size = 18
+font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_i4t8b"]
+[sub_resource type="LabelSettings" id="LabelSettings_633q0"]
+font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Resource" id="Resource_n6q2u"]
-script = ExtResource("7_vsfcy")
+[sub_resource type="Resource" id="Resource_uxkq8"]
+script = ExtResource("7_r0mph")
 italics = "*"
 bold = "**"
 points = "-"
-headers = Array[LabelSettings]([SubResource("LabelSettings_e2bmy"), SubResource("LabelSettings_6c46x"), SubResource("LabelSettings_o31ih"), SubResource("LabelSettings_i4t8b")])
+headers = Array[LabelSettings]([SubResource("LabelSettings_0sox2"), SubResource("LabelSettings_1rb2p"), SubResource("LabelSettings_cllr0"), SubResource("LabelSettings_633q0")])
 
 [sub_resource type="LabelSettings" id="LabelSettings_lvv03"]
 font_size = 22
@@ -60,7 +64,7 @@ font_size = 18
 script = ExtResource("9_xqqk6")
 headers = Array[LabelSettings]([SubResource("LabelSettings_mq4wt"), SubResource("LabelSettings_3fkcx"), SubResource("LabelSettings_5l6r2"), SubResource("LabelSettings_wlo5y")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u0mth"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxhd5"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -81,7 +85,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q0wk0"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_awodd"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -93,23 +97,27 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[sub_resource type="LabelSettings" id="LabelSettings_638rk"]
+[sub_resource type="LabelSettings" id="LabelSettings_2lewr"]
 font_size = 22
+font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_7tjgv"]
+[sub_resource type="LabelSettings" id="LabelSettings_58a6f"]
 font_size = 20
+font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_s0lau"]
+[sub_resource type="LabelSettings" id="LabelSettings_1573r"]
 font_size = 18
+font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_h44u4"]
+[sub_resource type="LabelSettings" id="LabelSettings_hrlc5"]
+font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Resource" id="Resource_13def"]
-script = ExtResource("7_vsfcy")
+[sub_resource type="Resource" id="Resource_oxcqf"]
+script = ExtResource("7_r0mph")
 italics = "*"
 bold = "**"
 points = "-"
-headers = Array[LabelSettings]([SubResource("LabelSettings_638rk"), SubResource("LabelSettings_7tjgv"), SubResource("LabelSettings_s0lau"), SubResource("LabelSettings_h44u4")])
+headers = Array[LabelSettings]([SubResource("LabelSettings_2lewr"), SubResource("LabelSettings_58a6f"), SubResource("LabelSettings_1573r"), SubResource("LabelSettings_hrlc5")])
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mhiy7"]
 content_margin_left = 4.0
@@ -138,6 +146,28 @@ content_margin_top = 4.0
 content_margin_right = 6.0
 content_margin_bottom = 4.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_g4did"]
+font_size = 22
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fi24r"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f0kok"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_67rn5"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_n88j2"]
+script = ExtResource("7_r0mph")
+italics = "*"
+bold = "**"
+points = "-"
+headers = Array[LabelSettings]([SubResource("LabelSettings_g4did"), SubResource("LabelSettings_fi24r"), SubResource("LabelSettings_f0kok"), SubResource("LabelSettings_67rn5")])
+
 [node name="AdvancedTextLabels" type="TabContainer"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -153,10 +183,10 @@ theme_override_fonts/italics_font = ExtResource("3_7l8y2")
 theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
 bbcode_enabled = true
-text = "[bgcolor=#00000000][color=#ffffffff][font_size=22]Header Level 1
-[/font_size][/color][/bgcolor][bgcolor=#00000000][color=#ffffffff][font_size=20]Header Level 2
-[/font_size][/color][/bgcolor][bgcolor=#00000000][color=#ffffffff][font_size=18]Header Level 3
-[/font_size][/color][/bgcolor]
+text = "[bgcolor=#00000000][font_size=22]Header Level 1
+[/font_size][/bgcolor][bgcolor=#00000000][font_size=20]Header Level 2
+[/font_size][/bgcolor][bgcolor=#00000000][font_size=18]Header Level 3
+[/font_size][/bgcolor]
 [b]bold[/b]
 [i]italic[/i]
 [s]strike through[/s]
@@ -309,7 +339,7 @@ test_bool = <test_bool>
 
 
 "
-parser = SubResource("Resource_n6q2u")
+parser = SubResource("Resource_uxkq8")
 
 [node name="RenPyStringLabel" type="RichTextLabel" parent="."]
 visible = false
@@ -619,8 +649,8 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_u0mth")
-theme_override_styles/normal = SubResource("StyleBoxFlat_q0wk0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_vxhd5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_awodd")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button A[/b][/rainbow][/center]"
 fit_content = true
@@ -630,14 +660,14 @@ script = ExtResource("10_w4hpi")
 toggle_mode = true
 button_group = &"test_btn"
 _text = "@center{@rainbow freq=0.2 sat=10 val=20 {**Markdown Button A**}}"
-parser = SubResource("Resource_13def")
+parser = SubResource("Resource_oxcqf")
 
 [node name="AdvancedTextCheckButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxFlat_mhiy7")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_b2f2b")
 bbcode_enabled = true
-text = "[center] [rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button B[/b] [font_size= 24][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰨙[/font][/font_size][/rainbow] [/center]"
+text = "[center] [rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button B[/b] [icon:toggle-switch-off-outline, 24][/rainbow] [/center]"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
@@ -646,4 +676,4 @@ main_text = "@> @rainbow freq=0.2 sat=10 val=20 {**Markdown Button B** [switch]}
 toggle_mode = true
 button_group = &"test_btn"
 _text = "@> @rainbow freq=0.2 sat=10 val=20 {**Markdown Button B** [icon:toggle-switch-off-outline, 24]} <@"
-parser = SubResource("Resource_13def")
+parser = SubResource("Resource_n88j2")
