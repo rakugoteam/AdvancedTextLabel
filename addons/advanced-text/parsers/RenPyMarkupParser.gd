@@ -8,7 +8,6 @@ class_name RenPyMarkupParser
 
 ## Returns given RenPyMarkup parsed into BBCode
 func parse(text: String) -> String:
-	in_code = find_all_in_code(text, "{code}", "{/code}")
 	text = _start(text)
 	text = parse_links(text)
 	text = parse_imgs(text)
@@ -33,9 +32,6 @@ func parse_links(text: String) -> String:
 	re.compile("(?<!\\{)\\{(\\/{0,1})a(?:(=[^\\}]+)\\}|\\})")
 	result = re.search(text)
 	while result != null:
-		if is_in_code(result):
-			result = re.search(text)
-			continue
 		
 		replacement = "[%surl%s]" % [
 			result.get_string(1), result.get_string(2)]
@@ -51,9 +47,6 @@ func parse_imgs(text: String) -> String:
 	re.compile("(?<!\\{)\\{img=([^\\}\\s]+)\\}")
 	result = re.search(text)
 	while result != null:
-		if is_in_code(result):
-			result = re.search(text)
-			continue
 		
 		replacement = to_bbcode_img(result.get_string(1))
 		text = replace_regex_match(text, result, replacement)
@@ -68,9 +61,6 @@ func parse_imgs_size(text: String) -> String:
 	re.compile("(?<!\\{)\\{img=([^\\}\\s]+) size=([^\\}]+)\\}")
 	result = re.search(text)
 	while result != null:
-		if is_in_code(result):
-			result = re.search(text)
-			continue
 		
 		replacement = to_bbcode_img(result.get_string(1), result.get_string(2))
 		text = replace_regex_match(text, result, replacement)

@@ -49,7 +49,6 @@ func _end(text: String) -> String:
 
 ## Returns given ExtendedBBCode parsed into BBCode
 func parse(text: String) -> String:
-	in_code = find_all_in_code(text)
 	text = _start(text)
 	text = parse_headers(text)
 	text = parse_spaces(text)
@@ -61,10 +60,6 @@ func parse_headers(text: String) -> String:
 	re.compile("\\[h(?P<size>[1-4])\\](?P<text>.+?)\\[/h(?P=size)\\]")
 	result = re.search(text)
 	while result != null:
-		if is_in_code(result):
-			result = re.search(text)
-			continue
-
 		var h_size := result.get_string("size").to_int() - 1
 		var h_text := result.get_string("text")
 		replacement = add_header(h_size, h_text)
@@ -78,10 +73,6 @@ func parse_spaces(text: String) -> String:
 	re.compile("\\[space=(?P<size>\\d+)\\]\n")
 	result = re.search(text)
 	while result != null:
-		if is_in_code(result):
-			result = re.search(text)
-			continue
-
 		var size := result.get_string("size").to_int()
 		replacement = "[font_size=%d] [/font_size]\n" % size
 		text = replace_regex_match(text, result, replacement)
