@@ -13,9 +13,6 @@ var result: RegExMatch
 ## Used to store replacement for RegEx search
 var replacement := ""
 
-## Here will be stored all code between code tags in given text
-var in_code := []
-
 ## Root ref is needed to check if other compatible addons are installed
 var root: Node
 
@@ -55,8 +52,6 @@ func to_bbcode_link(path: String, link_text:="") -> String:
 
 ## Used to replace given `what` Regex String
 ## with `for_what` String in given text,
-## skipping parts of text that are in code tags,
-## for this to work `in_code = find_all_in_code(text)`
 ## must be called first.
 func safe_replace(what: String, for_what: String, text: String) -> String:
 	re.compile(what)
