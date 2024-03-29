@@ -42,11 +42,14 @@ class_name AdvancedTextCheckButton
 
 func _ready() -> void:
 	toggled.connect(_update_switch)
+	_update_switch(_toggled)
 
 func _update_switch(value: bool):
 	var icon = toggle_off_icon
 	if value: icon = toggle_on_icon
 	_text = main_text.replace(
 		"[switch]",
-		"[icon:%s, %d]" % [icon, toggle_icon_size]
+		"[icon:%s, %d]" % [
+			icon, toggle_icon_size
+		]
 	)

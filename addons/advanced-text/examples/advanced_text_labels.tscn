@@ -65,7 +65,7 @@ font_size = 18
 script = ExtResource("9_xqqk6")
 headers = Array[LabelSettings]([SubResource("LabelSettings_mq4wt"), SubResource("LabelSettings_3fkcx"), SubResource("LabelSettings_5l6r2"), SubResource("LabelSettings_wlo5y")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mk3q2"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dnm41"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -86,7 +86,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_14ceh"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_653p2"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -660,17 +660,17 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_mk3q2")
-theme_override_styles/normal = SubResource("StyleBoxFlat_14ceh")
+theme_override_styles/focus = SubResource("StyleBoxFlat_dnm41")
+theme_override_styles/normal = SubResource("StyleBoxFlat_653p2")
 bbcode_enabled = true
-text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button A[/b][/rainbow][/center]"
+text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button[/b][/rainbow][/center]"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("10_w4hpi")
 toggle_mode = true
 button_group = &"test_btn"
-_text = "@center{@rainbow freq=0.2 sat=10 val=20 {**Markdown Button A**}}"
+_text = "@center{@rainbow freq=0.2 sat=10 val=20 {**Markdown Button**}}"
 parser = SubResource("Resource_oxcqf")
 
 [node name="AdvancedTextCheckButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
@@ -678,15 +678,15 @@ layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxFlat_mhiy7")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_b2f2b")
 bbcode_enabled = true
-text = "[center] [rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button B[/b] [icon:toggle-switch-off-outline, 24][/rainbow] [/center]"
+text = "[center] [rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Toggle[/b] [icon:toggle-switch-off-outline, 24][/rainbow] [/center]"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("11_fk62q")
-main_text = "@> @rainbow freq=0.2 sat=10 val=20 {**Markdown Button B** [switch]} <@"
+main_text = "@> @rainbow freq=0.2 sat=10 val=20 {**Markdown Toggle** [switch]} <@"
 toggle_mode = true
 button_group = &"test_btn"
-_text = "@> @rainbow freq=0.2 sat=10 val=20 {**Markdown Button B** [icon:toggle-switch-off-outline, 24]} <@"
+_text = "@> @rainbow freq=0.2 sat=10 val=20 {**Markdown Toggle** [icon:toggle-switch-off-outline, 24]} <@"
 parser = SubResource("Resource_n88j2")
 
 [node name="InitTestRakugoVars" type="Timer" parent="."]
