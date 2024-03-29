@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dw681hislg41h"]
+[gd_scene load_steps=42 format=3 uid="uid://dw681hislg41h"]
 
 [ext_resource type="FontFile" uid="uid://dopnqhkanf1f7" path="res://addons/advanced-text/font/DejaVuSans.ttf" id="1_nhc5f"]
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="1_uinld"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://addons/advanced-text/parsers/ExtendedBBCodeParser.gd" id="9_xqqk6"]
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextButton.gd" id="10_w4hpi"]
 [ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextCheckButton.gd" id="11_fk62q"]
+[ext_resource type="Script" path="res://addons/advanced-text/examples/InitTestRakugoVars.gd" id="12_wngyp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0sox2"]
 font_size = 22
@@ -64,7 +65,7 @@ font_size = 18
 script = ExtResource("9_xqqk6")
 headers = Array[LabelSettings]([SubResource("LabelSettings_mq4wt"), SubResource("LabelSettings_3fkcx"), SubResource("LabelSettings_5l6r2"), SubResource("LabelSettings_wlo5y")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxhd5"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mk3q2"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -85,7 +86,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_awodd"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_14ceh"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -183,10 +184,10 @@ theme_override_fonts/italics_font = ExtResource("3_7l8y2")
 theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
 bbcode_enabled = true
-text = "[bgcolor=#00000000][font_size=22]Header Level 1
-[/font_size][/bgcolor][bgcolor=#00000000][font_size=20]Header Level 2
-[/font_size][/bgcolor][bgcolor=#00000000][font_size=18]Header Level 3
-[/font_size][/bgcolor]
+text = "[bgcolor=#00000000][font_size=22]Header Level 1[/font_size][/bgcolor]
+[bgcolor=#00000000][font_size=20]Header Level 2[/font_size][/bgcolor]
+[bgcolor=#00000000][font_size=18]Header Level 3[/font_size][/bgcolor]
+
 [b]bold[/b]
 [i]italic[/i]
 [s]strike through[/s]
@@ -222,6 +223,7 @@ point 2
 test_string = <test_string>
 test_int = <test_int>
 test_bool = <test_bool>
+test_color = <test_color>
 @color=<test_color> {text in custom color from variable}
 
 :grinning:
@@ -296,6 +298,7 @@ text with space 6
 test_string = <test_string>
 test_int = <test_int>
 test_bool = <test_bool>
+test_color = <test_color>
 @color=<test_color> {text in custom color from variable}
 
 :grinning:
@@ -390,6 +393,7 @@ point 2
 test_string = <test_string>
 test_bool = <test_bool>
 test_int = <test_int>
+test_color = <test_color>
 [color=<test_color>]text in custom color from variable[/color]
 
 :grinning:
@@ -410,6 +414,7 @@ test_int = <test_int>
 [right]right[/right]
 [fill]fill[/fill]
 [indent]text[/indent]
+
 [color=red]red[/color]
 [color=#c39f00]colored text[/color]
 [color=<test_color>]text in custom color from variable[/color]
@@ -458,6 +463,7 @@ point 2
 test_string = <test_string>
 test_bool = <test_bool>
 test_int = <test_int>
+test_color = <test_color>
 {color=<test_color>}text in custom color from variable{/color}
 
 :grinning:
@@ -478,6 +484,7 @@ test_int = <test_int>
 {right}right{/right}
 {fill}fill{/fill}
 {indent}text{/indent}
+
 {color=red}red{/color}
 {color=#c39f00}colored text{/color}
 {color=<test_color>}text in custom color from variable{/color}
@@ -535,6 +542,7 @@ point 2
 test_string = <test_string>
 test_int = <test_int>
 test_bool = <test_bool>
+test_color = <test_color>
 [color=<test_color>]text in custom color from variable[/color]
 
 :grinning:
@@ -555,6 +563,7 @@ test_bool = <test_bool>
 [right]right[/right]
 [fill]fill[/fill]
 [indent]text[/indent]
+s
 [color=red]red[/color]
 [color=#c39f00]colored text[/color]
 
@@ -602,6 +611,7 @@ point 2
 test_string = <test_string>
 test_int = <test_int>
 test_bool = <test_bool>
+test_color = <test_color>
 [color=<test_color>]text in custom color from variable[/color]
 
 :grinning:
@@ -622,6 +632,7 @@ test_bool = <test_bool>
 [right]right[/right]
 [fill]fill[/fill]
 [indent]text[/indent]
+s
 [color=red]red[/color]
 [color=#c39f00]colored text[/color]
 
@@ -649,8 +660,8 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_vxhd5")
-theme_override_styles/normal = SubResource("StyleBoxFlat_awodd")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mk3q2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_14ceh")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button A[/b][/rainbow][/center]"
 fit_content = true
@@ -677,3 +688,7 @@ toggle_mode = true
 button_group = &"test_btn"
 _text = "@> @rainbow freq=0.2 sat=10 val=20 {**Markdown Button B** [icon:toggle-switch-off-outline, 24]} <@"
 parser = SubResource("Resource_n88j2")
+
+[node name="InitTestRakugoVars" type="Timer" parent="."]
+one_shot = true
+script = ExtResource("12_wngyp")
