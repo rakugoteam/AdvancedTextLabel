@@ -8,7 +8,7 @@ class_name RenPyMarkupParser
 
 ## Returns given RenPyMarkup parsed into BBCode
 func parse(text: String) -> String:
-	text = _start(text)
+	text = _addons(text)
 	text = parse_links(text)
 	text = parse_imgs(text)
 	text = parse_imgs_size(text)
@@ -20,7 +20,6 @@ func parse(text: String) -> String:
 	text = safe_replace("}", "]", text)
 	text = parse_headers(text)
 	text = parse_spaces(text)
-	text = _end(text)
 	
 	return text
 

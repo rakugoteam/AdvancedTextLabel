@@ -17,7 +17,7 @@ class_name MarkdownParser
 
 ## returns given Markdown parsed into BBCode
 func parse(text: String) -> String:
-	text = _start(text)
+	text = _addons(text)
 	text = parse_headers(text)
 	text = parse_imgs(text)
 	text = parse_imgs_size(text)
@@ -86,8 +86,6 @@ func parse(text: String) -> String:
 
 	text = parse_points(text)
 	text = parse_number_points(text)
-
-	text = _end(text)
 
 	return text
 

@@ -26,17 +26,12 @@ func _gen_headers(sizes: Array[int], color:=Color.BLACK) -> Array[LabelSettings]
 
 ## Must be run at start of parsing
 ## Needed for plugins with other addons to work
-func _start(text: String) -> String:
+func _addons(text: String) -> String:
 	if !Engine.is_editor_hint():
 		var raku = get_singleton("Rakugo")
 		if raku:
 			text = raku.replace_variables(text)
 	
-	return text
-
-## Must be run at end of parsing
-## Needed for plugins with other addons to work
-func _end(text: String) -> String:
 	var emojis = get_singleton("EmojisDB")
 	if emojis:
 		text = emojis.parse_emojis(text)
@@ -49,10 +44,9 @@ func _end(text: String) -> String:
 
 ## Returns given ExtendedBBCode parsed into BBCode
 func parse(text: String) -> String:
-	text = _start(text)
+	text = _addons(text)
 	text = parse_headers(text)
 	text = parse_spaces(text)
-	text = _end(text)
 	return text
 
 ## Parse headers in given text into BBCode
