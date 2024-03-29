@@ -109,7 +109,7 @@ func parse_headers(text: String) -> String:
 		
 		var header_level = result.get_string(1).length() - 1
 		var header_text = result.get_string(2)
-		replacement = add_header(header_level, header_text)
+		replacement = add_header(header_level, header_text, true)
 		text = replace_regex_match(text, result, replacement)
 		result = re.search(text)
 	

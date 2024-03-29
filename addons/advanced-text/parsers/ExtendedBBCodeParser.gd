@@ -75,12 +75,13 @@ func parse_spaces(text: String) -> String:
 	return text
 
 ## Returns given text with added BBCode for header with given size (1-4) to it
-func add_header(header_size: int, text: String) -> String:
+func add_header(header_size: int, text: String, add_new_line:=false) -> String:
 	if !headers: return text
 	if headers.is_empty(): return text
 	
 	var label_settings := headers[header_size]
 	var size = label_settings.font_size
+	text = text.replace("\n", "")
 	replacement = "[font_size=%s]%s[/font_size]" % [size, text]
 
 	if label_settings.font:
@@ -103,4 +104,7 @@ func add_header(header_size: int, text: String) -> String:
 		var bgcolor := "#" + label_settings.shadow_color.to_html()
 		replacement = "[bgcolor=%s]%s[/bgcolor]" % [bgcolor, replacement]
 
+	if add_new_line:
+		return replacement + "\n"
+	
 	return replacement
