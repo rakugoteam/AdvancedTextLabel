@@ -106,7 +106,6 @@ func parse_headers(text: String) -> String:
 	re.compile("(#+)\\s+(.+\n)")
 	result = re.search(text)
 	while result != null:
-		
 		var header_level = result.get_string(1).length() - 1
 		var header_text = result.get_string(2)
 		replacement = add_header(header_level, header_text, true)
@@ -121,7 +120,6 @@ func parse_imgs(text: String) -> String:
 	re.compile("!\\[\\]\\((.*?)\\)")
 	result = re.search(text)
 	while result != null:
-		
 		replacement = "[img]%s[/img]" % result.get_string(1)
 		text = replace_regex_match(text, result, replacement)
 		result = re.search(text)
@@ -152,7 +150,6 @@ func parse_links(text: String) -> String:
 	re.compile("\\[(.+)\\]\\((.+)\\)")
 	result = re.search(text)
 	while result != null:
-		
 		var link = result.get_string(1)
 		var url = result.get_string(2)
 		replacement = "[url=%s]%s[/url]" % [url, link]
@@ -163,7 +160,6 @@ func parse_links(text: String) -> String:
 	re.compile("<(\\w+:\\/\\/[A-Za-z0-9\\.\\-\\_\\@\\/]+)>")
 	result = re.search(text)
 	while result != null:
-		
 		replacement = "[url]%s[/url]" % result.get_string(1)
 		text = replace_regex_match(text, result, replacement)
 		result = re.search(text)
@@ -177,7 +173,6 @@ func parse_hints(text: String) -> String:
 	re.compile("@\\[(.+)\\]\\((.+)\\)")
 	result = re.search(text)
 	while result != null:
-		
 		var t = result.get_string(1)
 		var hint = result.get_string(2)
 		replacement = "[hint=%s]%s[/hint]" % [hint, t]
@@ -267,7 +262,6 @@ func parse_table(text: String) -> String:
 	re.compile("@table=([0-9]+)\\s*\\{\\s*((\\|.+)\n)+\\}")
 	result = re.search(text)
 	while result != null:
-		
 		replacement = "[table=%s]" % result.get_string(1)
 		# cell 1 | cell 2
 		var r = result.get_string()
@@ -286,14 +280,12 @@ func parse_table(text: String) -> String:
 	
 	return text
 
-
 ## Parse md color name from Color class tag to in given text to BBCode
 func parse_color_key(text: String) -> String:
 	# @color=red { text }
 	re.compile("@color=([a-z]+)\\s*\\{\\s*([^\\}]+)\\s*\\}")
 	result = re.search(text)
 	while result != null:
-		
 		var color = result.get_string(1)
 		var _text = result.get_string(2)
 		replacement = "[color=%s]%s[/color]" % [color, _text]
@@ -305,15 +297,16 @@ func parse_color_key(text: String) -> String:
 ## Parse md color hex to in given text to BBCode
 func parse_color_hex(text: String) -> String:
 	# @color=#ffe820 { text }
-	re.compile("@color=(#[0-9a-f]{6})\\s*\\{\\s*([^\\}]+)\\s*\\}")
-	result = re.search(text)
-	while result != null:
-		
-		var color = result.get_string(1)
-		var _text = result.get_string(2)
-		replacement = "[color=%s]%s[/color]" % [color, _text]
-		text = replace_regex_match(text, result, replacement)
+	re.compile("@color=(#[0-9a-f]+)\\s*\\{\\s*([^\\}]+)\\s*\\}")
+	for i in range(0, 3):
 		result = re.search(text)
+		while result != null:
+			var color = result.get_string(1)
+			var _text = result.get_string(2)
+			replacement = "[color=%s]%s[/color]" % [color, _text]
+			text = replace_regex_match(text, result, replacement)
+			result = re.search(text)
+		i += 1
 	
 	return text
 
@@ -324,7 +317,6 @@ func parse_effect(text: String, effect: String, args: Array) -> String:
 	re.compile("@%s([\\s\\w=0-9\\.]+)\\s*{(.+)}" % effect)
 	result = re.search(text)
 	while result != null:
-		
 		var _args = result.get_string(1)
 		var _text = result.get_string(2)
 		replacement = "[%s %s]%s[/%s]" % [effect, _args, _text, effect]
@@ -335,12 +327,12 @@ func parse_effect(text: String, effect: String, args: Array) -> String:
 	re.compile("@%s\\s([0-9\\.\\,\\s]+)\\s*{(.+)}" % effect)
 	result = re.search(text)
 	while result != null:
-		
 		var _values = result.get_string(1)
 		_values = _values.replace(" ", "")
 		_values = _values.split(",", false)
 		var _text = result.get_string(2)
 		var _args = ""
+
 		for i in range(0, _values.size()):
 			_args += "%s=%s " % [args[i],_values[i]]
 
@@ -356,7 +348,6 @@ func parse_keyword(text: String, keyword: String, tag: String) -> String:
 	re.compile("@%s\\s*{(.+)}" % keyword)
 	result = re.search(text)
 	while result != null:
-		
 		replacement = "[%s]%s[/%s]" % [tag, result.get_string(1), tag]
 		text = replace_regex_match(text, result, replacement)
 		result = re.search(text)
@@ -384,7 +375,6 @@ func parse_list(text: String, open: String, close: String, regex: String):
 		var result := re.search(line)
 		
 		if result == null:
-			
 			if in_list:
 				in_list = false
 				new_lines.append(close)
