@@ -58,7 +58,7 @@ func _parse_text() -> void:
 			else:
 				parser.root = get_tree().root
 		
-		if parser.root:
+		if parser.root and !Engine.is_editor_hint():
 			if !raku:
 				if parser.root.has_node("Rakugo"):
 					raku = parser.root.get_node("Rakugo")
@@ -76,7 +76,8 @@ func _parse_text() -> void:
 	text = parser.parse(_text)
 
 func _on_rakuvars_changed(var_name, value) -> void:
-	_parse_text()
+	if "<%s>" % var_name in _text:
+		_parse_text()
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: PackedStringArray = []
