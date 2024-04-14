@@ -11,7 +11,7 @@ var raku: Node
 
 ## By default links (staring from `http`) will be opened in web browser
 ## For custom links you can connect to `custom_link` signal
-signal custom_link(args)
+signal custom_link(url:String)
 
 ## Text to be parsed in too BBCode
 ## Use it instead of `text` from RichTextLabel
