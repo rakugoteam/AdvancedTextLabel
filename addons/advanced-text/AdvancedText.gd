@@ -6,15 +6,15 @@
 extends Node
 
 ## Reference to root
-## It is setted automaicly
+## Its a getter that returns [code]get_node("/root/")[/code]
 var root : Node:
 	get:
 		if !root:
-			root = get_node("/root/")
+			root = get_node("/root")
 		return root
 
 ## Reference to Rakugo singleton
-## It is setted automaicly
+## Its a getter that returns Rakugo singelton if it exist
 var rakugo: Node:
 	get:
 		if Engine.is_editor_hint():
@@ -24,7 +24,7 @@ var rakugo: Node:
 		return rakugo
 
 ## Reference to EmojisDB singleton
-## It is setted automaicly
+## Its a getter that returns EmojisDB singelton if it exist
 var emojis: Node:
 	get:
 		if !emojis:
@@ -32,7 +32,7 @@ var emojis: Node:
 		return emojis
 
 ## Reference to IconsDB singleton
-## It is setted automaicly
+## Its a getter that returns MaterialIconsDB singelton if it exist
 var icons: Node:
 	get:
 		if !icons:
