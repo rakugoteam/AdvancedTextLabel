@@ -21,12 +21,6 @@ var root: Node
 func parse(text: String) -> String:
 	return text
 
-## Func used get singletons from other addons
-func get_singleton(singleton: String) -> Node:
-	if root.has_node(singleton):
-		return root.get_node(singleton)
-	return null
-
 ## Func that my parsers uses to replace result in given text with replacement.
 func replace_regex_match(text: String, result: RegExMatch, replacement: String) -> String:
 	var start_string := text.substr(0, result.get_start())

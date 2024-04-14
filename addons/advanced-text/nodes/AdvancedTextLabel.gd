@@ -5,10 +5,6 @@ extends RichTextLabel
 ## This class parses given text to bbcode using given TextParser
 class_name AdvancedTextLabel
 
-## Rakugo singleton reference
-## Used only if RDS addon is enabled
-var raku: Node
-
 ## By default links (staring from `http`) will be opened in web browser
 ## For custom links you can connect to `custom_link` signal
 signal custom_link(url:String)
@@ -52,17 +48,12 @@ func _ready():
 func _parse_text() -> void:
 	if !is_node_ready(): return
 	if parser:
-		if !parser.root:
-			parser.root = get_node("/root/")
 			
-		if parser.root and !Engine.is_editor_hint():
-			if !raku:
-				raku = parser.get_singleton("Rakugo")
-			
-			if raku:
-				var sg = raku.sg_variable_changed
-				if !sg.is_connected(_on_rakuvars_changed):
-					sg.connect(_on_rakuvars_changed)
+		if AdvancedText.rakugo:
+			var r = AdvancedText.rakugo
+			var sg = r.sg_variable_changed
+			if !sg.is_connected(_on_rakuvars_changed):
+				sg.connect(_on_rakuvars_changed)
 	
 	if !parser:
 		push_warning("parser is null at " + str(name))

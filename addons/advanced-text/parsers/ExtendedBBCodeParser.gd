@@ -12,10 +12,6 @@ class_name ExtendedBBCodeParser
 ## Ignored properties: line_spacing, shadow_offset and shadow_size
 @export var headers := _gen_headers([22, 20, 18, 16])
 
-var raku: Node
-var emojis: Node
-var icons: Node
-
 ## Generates LabelSettings set based on the given sizes
 ## It is used to generate headers initial settings.
 func _gen_headers(sizes: Array[int], color:=Color.BLACK) -> Array[LabelSettings]:
@@ -31,21 +27,14 @@ func _gen_headers(sizes: Array[int], color:=Color.BLACK) -> Array[LabelSettings]
 ## Must be run at start of parsing
 ## Needed for plugins with other addons to work
 func _addons(text: String) -> String:
-	if !Engine.is_editor_hint():
-		if !raku:
-			raku = get_singleton("Rakugo")
-		if raku:
-			text = raku.replace_variables(text)
+	if AdvancedText.rakugo:
+		text = AdvancedText.rakugo.replace_variables(text)
 	
-	if !emojis:
-		emojis = get_singleton("EmojisDB")
-	if emojis:
-		text = emojis.parse_emojis(text)
+	if AdvancedText.emojis:
+		text = AdvancedText.emojis.parse_emojis(text)
 	
-	if !icons:
-		icons = get_singleton("MaterialIconsDB")
-	if icons:
-		text = icons.parse_icons(text)
+	if AdvancedText.icons:
+		text = AdvancedText.icons.parse_icons(text)
 	
 	return text
 
