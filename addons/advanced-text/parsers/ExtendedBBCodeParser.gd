@@ -1,5 +1,5 @@
-@icon("res://addons/advanced-text/icons/bbcode.svg")
 @tool
+@icon("res://addons/advanced-text/icons/bbcode.svg")
 extends TextParser
 
 ## This parser adds Headers {h1}, :emojis: and icons [icon:name]
@@ -11,6 +11,10 @@ class_name ExtendedBBCodeParser
 ## Due to BBCode limitations shadow_color is used as background color
 ## Ignored properties: line_spacing, shadow_offset and shadow_size
 @export var headers := _gen_headers([22, 20, 18, 16])
+
+var raku: Node
+var emojis: Node
+var icons: Node
 
 ## Generates LabelSettings set based on the given sizes
 ## It is used to generate headers initial settings.
@@ -28,15 +32,18 @@ func _gen_headers(sizes: Array[int], color:=Color.BLACK) -> Array[LabelSettings]
 ## Needed for plugins with other addons to work
 func _addons(text: String) -> String:
 	if !Engine.is_editor_hint():
-		var raku = get_singleton("Rakugo")
+		if !raku:
+			raku = get_singleton("Rakugo")
 		if raku:
 			text = raku.replace_variables(text)
 	
-	var emojis = get_singleton("EmojisDB")
+	if !emojis:
+		emojis = get_singleton("EmojisDB")
 	if emojis:
 		text = emojis.parse_emojis(text)
 	
-	var icons = get_singleton("MaterialIconsDB")
+	if !icons:
+		icons = get_singleton("MaterialIconsDB")
 	if icons:
 		text = icons.parse_icons(text)
 	

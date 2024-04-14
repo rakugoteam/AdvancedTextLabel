@@ -40,6 +40,7 @@ signal custom_link(url:String)
 					h.changed.connect(_parse_text)
 
 			_parse_text()
+			print("parse text")
 	
 	get: return parser
 
@@ -52,16 +53,11 @@ func _parse_text() -> void:
 	if !is_node_ready(): return
 	if parser:
 		if !parser.root:
-			if Engine.is_editor_hint():
-				parser.root = get_tree().edited_scene_root
-				
-			else:
-				parser.root = get_tree().root
-		
+			parser.root = get_node("/root/")
+			
 		if parser.root and !Engine.is_editor_hint():
 			if !raku:
-				if parser.root.has_node("Rakugo"):
-					raku = parser.root.get_node("Rakugo")
+				raku = parser.get_singleton("Rakugo")
 			
 			if raku:
 				var sg = raku.sg_variable_changed
