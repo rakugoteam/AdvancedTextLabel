@@ -87,7 +87,7 @@ bold = "**"
 points = "-"
 headers = Array[LabelSettings]([SubResource("LabelSettings_mqb2n"), SubResource("LabelSettings_c8yh7"), SubResource("LabelSettings_faw0r"), SubResource("LabelSettings_n4lgb")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_teovj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttfn2"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -108,7 +108,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u12m2"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_omdtg"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -701,8 +701,8 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_teovj")
-theme_override_styles/normal = SubResource("StyleBoxFlat_u12m2")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ttfn2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_omdtg")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button[/b][/rainbow][/center]"
 fit_content = true
