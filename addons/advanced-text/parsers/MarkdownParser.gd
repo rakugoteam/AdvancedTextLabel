@@ -4,6 +4,7 @@ extends ExtendedBBCodeParser
 
 ## This parser is every limited as its just translates Markdown to BBCode
 ## This parser also adds :emojis: and icons {icon:name} add Rakugo variables with <var_name>
+## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/MarkdownParser/
 class_name MarkdownParser
 
 ## choose to use * or _ to open/close italics tag

@@ -2,6 +2,7 @@
 extends Resource
 
 ## Base class used by AdvancedTexts addon Parsers
+## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/TextParser/
 class_name TextParser
 
 ## RegEx used by this class

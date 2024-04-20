@@ -4,6 +4,7 @@ extends ExtendedBBCodeParser
 
 ## This parser is every limited as its just translates RenPy Markup to BBCode
 ## This parser also adds Headers {h1}, :emojis: and icons {icon:name} add Rakugo variables with <var_name>
+## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/RenPyMarkupParser/
 class_name RenPyMarkupParser
 
 ## Returns given RenPyMarkup parsed into BBCode

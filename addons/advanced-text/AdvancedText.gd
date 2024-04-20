@@ -2,7 +2,7 @@
 ## This is singleton is used to keep references and common variables
 ## for AdvancedText in one place and not duplicate them.
 ## Mainly used to simplify the handling of supported addons/plugins.
-
+## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/AdvancedText/
 extends Node
 
 ## Reference to root

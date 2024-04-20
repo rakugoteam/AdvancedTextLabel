@@ -4,6 +4,7 @@ extends TextParser
 
 ## This parser adds Headers {h1}, :emojis: and icons [icon:name]
 ## add Rakugo variables with <var_name> to BBCode
+## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/ExtendedBBCodeParser/
 class_name ExtendedBBCodeParser
 
 ## Setting for headers

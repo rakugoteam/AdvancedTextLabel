@@ -2,6 +2,7 @@
 extends AdvancedTextLabel
 
 ## This is a AdvancedTextLabel that behaves like a button
+## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/AdvancedTextCheckButton/
 class_name AdvancedTextButton
 
 ## Emitted when button is pressed
