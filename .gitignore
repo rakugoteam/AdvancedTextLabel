@@ -1,10 +1,12 @@
-/.import/
+/.godot/
 /.vscode/
 /.mono/
 mono_crash.*.json
-/.plugged/
+
 /addons/*
-!/addons/gd-plug/
 !/addons/advanced-text/
-/addons/advanced-text/MarkupTextEditor/ram.data
-addons.cfg
+!/addons/gut/
+.gut_editor_config.json
+.gutconfig.json
+
+/.venv/

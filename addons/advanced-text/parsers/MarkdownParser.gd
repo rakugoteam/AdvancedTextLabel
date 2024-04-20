@@ -1,269 +1,403 @@
-tool
-extends "EBBCodeParser.gd"
-# now is added as autoload singleton : "MarkdownParser"
+@tool
+@icon("res://addons/advanced-text/icons/md.svg")
+extends ExtendedBBCodeParser
 
-# Markdown Parser
-# With support for <values> and :emojis:
-# For emojis you need to install emojis-for-godot
+## This parser is every limited as its just translates Markdown to BBCode
+## This parser also adds :emojis: and icons {icon:name} add Rakugo variables with <var_name>
+## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/MarkdownParser/
+class_name MarkdownParser
 
-func parse(text:String, headers_fonts:Array, variables:Dictionary) -> String:
-	var output = "" + text
+## choose to use * or _ to open/close italics tag
+@export_enum("*", "_") var italics = "*"
 
-	# prints("markdown_parser run with variables:", variables)
-	if !variables.empty():
-		output = replace_variables(output, variables)
+## choose to use * or _ to open/close bold tag
+@export_enum("**", "__") var bold = "**"
+
+## choose to use - or * to make points in bulleted list
+@export_enum("-", "*") var points = "-"
+
+## returns given Markdown parsed into BBCode
+func parse(text: String) -> String:
+	text = _addons(text)
+	text = parse_headers(text)
+	text = parse_imgs(text)
+	text = parse_imgs_size(text)
+	text = parse_code(text)
+	text = parse_hints(text)
+	text = parse_links(text)
+	text = parse_bold(text)
+	text = parse_italics(text)
+	text = parse_strike_through(text)
+	text = parse_table(text)
+	text = parse_color_key(text)
+	text = parse_color_hex(text)
+	text = parse_spaces(text)
 	
-	# prints("emojis_gd:", emojis_gd)
-	if emojis_gd:
-		output = emojis_gd.parse_emojis(output)
+	# @center { text }
+	text = parse_keyword(text, "center", "center")
 
-	if icons_gd:
-		output = parse_icons(output)
+	# alt
+	# @> text <@
+	text = parse_sing(text, "@>", "<@", "center")
 
-	# Parse headers
-	if !headers_fonts.empty():
-		output = parse_headers(output, headers_fonts)
+	# @u { text }
+	text = parse_keyword(text, "u", "u")
 
-	output = convert_markdown(output)
-	return output
+	# @right { text }
+	text = parse_keyword(text, "right", "right")
 
-func convert_markdown(text:String) -> String:
-	var re = RegEx.new()
-	var output = "" + text
-	var replacement = ""
+	# alt
+	# @> text >@
+	text = parse_sing(text, "@>", ">@", "right")
+
+	# @fill { text }
+	text = parse_keyword(text, "fill", "fill")
+
+	# @justified { text }
+	text = parse_keyword(text, "justified", "fill")
+
+	# alt
+	# @< text >@
+	text = parse_sing(text, "@<", ">@", "fill")
+
+	# @indent { text }
+	text = parse_keyword(text, "indent", "indent")
+
+	# @tab { text }
+	text = parse_keyword(text, "tab", "indent")
+
+	# alt
+	# @| text |@
+	text = parse_sing(text, "@\\|", "\\|@", "indent")
+
+	# @wave amp=50 freq=2{ text }
+	text = parse_effect(text, "wave", ["amp", "freq"])
+
+	# @tornado radius=5 freq=2{ text }
+	text = parse_effect(text, "tornado", ["radius", "freq"])
+
+	# @shake rate=5 level=10{ text }
+	text = parse_effect(text, "shake", ["rate", "level"])
+
+	# @fade start=4 length=14{ text }
+	text = parse_effect(text, "fade", ["start", "length"])
+
+	# @rainbow freq=0.2 sat=10 val=20{ text }
+	text = parse_effect(text, "rainbow", ["freq", "sat", "val"])
+
+	text = parse_points(text)
+	text = parse_number_points(text)
+
+	return text
+
+## Parse @space=x, that it add space in text in size of x
+func parse_spaces(text: String) -> String:
+	re.compile("@space=(?P<size>\\d+)\n")
+	result = re.search(text)
+	while result != null:
+		var size := result.get_string("size").to_int()
+		replacement = "[font_size=%d] [/font_size]\n" % size
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text)
+
+	return text
+
+## Parse md # Headers in given text into BBCode
+func parse_headers(text: String) -> String:
+	re.compile("(#+)\\s+(.+\n)")
+	result = re.search(text)
+	while result != null:
+		var header_level = result.get_string(1).length() - 1
+		var header_text = result.get_string(2)
+		replacement = add_header(header_level, header_text, true)
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text)
 	
-	# ![](path/to/img)
+	return text
+
+## Parse md images to in given text to BBCode
+## Example of md image: ![](path/to/img)
+func parse_imgs(text: String) -> String:
 	re.compile("!\\[\\]\\((.*?)\\)")
-	for result in re.search_all(text):
-		if result.get_string():
-			replacement = "[img]%s[/img]" % result.get_string(1)
-			output = regex_replace(result, output, replacement)
-	text = output
-
-	# ![height x width](path/to/img)
-	re.compile("!\\[(\\d+)x(\\d+)\\]\\((.*?)\\)")
-	for result in re.search_all(text):
-		if result.get_string():
-			var height = result.get_string(1)
-			var width = result.get_string(2)
-			var path = result.get_string(3)
-			replacement = "[img=%sx%s]%s[/img]" % [height, width, path]
-			output = regex_replace(result, output, replacement)
-	text = output
-
-	# https://www.example.com
-	re.compile("([=\\[\\]\\(]?)(\\w+:\\/\\/[A-Za-z0-9\\.\\-\\_\\@\\/]+)([\\]\\[\\)]?)")
-	for result in re.search_all(text):
-		if result.get_string():
-			if !result.get_string(1).empty():
-				continue
-			if !result.get_string(3).empty():
-				continue
-
-			replacement = "[url]%s[/url]" % result.get_string(2)
-			output = regex_replace(result, output, replacement)
-	text = output
-
-	# [link](path/to/file.md)
-	re.compile("(\\]?)\\[(.+)\\]\\(([A-Za-z0-9\\.-_@\\/]+)\\)")
-	for result in re.search_all(text):
-		if result.get_string():
-			if !result.get_string(1).empty():
-				continue
-			var _text = result.get_string(2)
-			var url = result.get_string(3)
-			replacement = "[url=%s]%s[/url]" % [url, _text]
-			output = regex_replace(result, output, replacement)
-	text = output
-
-	# **bold**
-	re.compile("\\*\\*(.*?)\\*\\*")
-	for result in re.search_all(text):
-		if result.get_string():
-			replacement = "[b]%s[/b]" % result.get_string(1)
-			output = regex_replace(result, output, replacement)
-	text = output
+	result = re.search(text)
+	while result != null:
+		replacement = "[img]%s[/img]" % result.get_string(1)
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text)
 	
+	return text
+
+## Parse md images with size to in given text to BBCode
+## Example of md image with size: ![height x width](path/to/img)
+func parse_imgs_size(text: String) -> String:
+	re.compile("!\\[(\\d+)x(\\d+)\\]\\((.*?)\\)")
+	result = re.search(text)
+	while result != null:
+		var height = result.get_string(1)
+		var width = result.get_string(2)
+		var path = result.get_string(3)
+		replacement = "[img=%sx%s]%s[/img]" % [height, width, path]
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text)
+	
+	return text
+
+## Parse md links to in given text to BBCode
+## Examples of md link:
+## [link](path/to/file.md)
+## <https://www.example.com>
+func parse_links(text: String) -> String:
+	# [link](path/to/file.md)
+	re.compile("\\[(.+)\\]\\((.+)\\)")
+	result = re.search(text)
+	while result != null:
+		var link = result.get_string(1)
+		var url = result.get_string(2)
+		replacement = "[url=%s]%s[/url]" % [url, link]
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text)
+
+	# <https://www.example.com>
+	re.compile("<(\\w+:\\/\\/[A-Za-z0-9\\.\\-\\_\\@\\/]+)>")
+	result = re.search(text)
+	while result != null:
+		replacement = "[url]%s[/url]" % result.get_string(1)
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text)
+
+	return text
+
+## Parse md hint to in given text to BBCode
+## @[text](hint)
+func parse_hints(text: String) -> String:
+	# @[text](hint)
+	re.compile("@\\[(.+)\\]\\((.+)\\)")
+	result = re.search(text)
+	while result != null:
+		var t = result.get_string(1)
+		var hint = result.get_string(2)
+		replacement = "[hint=%s]%s[/hint]" % [hint, t]
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text)
+	
+	return text
+
+func parse_sing(text: String, open: String, close: String, tag: String):
+	var search := "(.*)%s(.*?)%s(.*)" % [open, close]
+	re.compile(search)
+	result = re.search(text)
+
+	while result != null:
+		var r := result.get_string(2)
+		
+		var r_start := result.get_string(1)
+		if r_start.ends_with(open):
+			result = re.search(text)
+			continue
+
+		var r_end := result.get_string(3)
+		if r_end.begins_with(close):
+			result = re.search(text)
+			continue
+
+		var arr := [r_start, tag, r, tag, r_end]
+		replacement = "%s[%s]%s[/%s]%s" % arr
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text)
+	
+	return text
+
+## Parse md italics to in given text to BBCode
+## Example of md italics:
+## If italics = "*" : *italics*
+## If italics = "_" : _italics_
+func parse_italics(text: String) -> String:
+	var sing := ""
 	# *italic*
-	re.compile("\\*(.*?)\\*")
-	for result in re.search_all(text):
-		if result.get_string():
-			replacement = "[i]%s[/i]" % result.get_string(1)
-			output = regex_replace(result, output, replacement)
-	text = output
+	match italics:
+		"*":
+			sing = "\\*"
+		"_":
+			sing = "\\_"
 
+	return parse_sing(text, sing, sing, "i")
+
+## Parse md bold to in given text to BBCode
+## Example of md bold:
+## If bold = "**" : **bold**
+## If bold = "__" : __bold__
+func parse_bold(text: String) -> String:
+	var sing := ""
+	# **bold**
+	match bold:
+		"**":
+			sing = "\\*\\*"
+		"__":
+			sing = "\\_\\_"
+	
+	return parse_sing(text, sing, sing, "b")
+
+## Parse md strike through to in given text to BBCode
+## Example of md strike through: ~~strike through~~
+func parse_strike_through(text: String) -> String:
 	# ~~strike through~~
-	re.compile("~~(.*?)~~")
-	for result in re.search_all(text):
-		if result.get_string():
-			replacement = "[s]%s[/s]" % result.get_string(1)
-			output = regex_replace(result, output, replacement)
-	text = output
+	return parse_sing(text, "~~", "~~", "s")
 
-	# `code`
-	re.compile("`{1,3}(.*?)`{1,3}")
-	for result in re.search_all(text):
-		if result.get_string():
-			replacement = "[code]%s[/code]" % result.get_string(1)
-			output = regex_replace(result, output, replacement)
-	text = output
+## Parse md code to in given text to BBCode
+## Example of md code:
+## one line code: `code`
+## multiline code: ```code```
+func parse_code(text: String) -> String:
+	# `code` or ```code```
+	return parse_sing(text, "`{1,3}", "`{1,3}", "code")
 
+## Parse md table to in given text to BBCode
+## Example of md table:
+## @tabel=2 {
+## | cell1 | cell2 |
+## }
+func parse_table(text: String) -> String:
 	# @tabel=2 {
 	# | cell1 | cell2 |
 	# }
 	re.compile("@table=([0-9]+)\\s*\\{\\s*((\\|.+)\n)+\\}")
-	for result in re.search_all(text):
-		if result.get_string():
-			replacement = "[table=%s]" % result.get_string(1)
-			# cell 1 | cell 2
-			var r = result.get_string()
-			var lines = r.split("\n")
-			for line in lines:
-				if line.begins_with("|"):
-					var cells : Array = line.split("|", false)
-					for cell in cells:
-						replacement += "[cell]%s[/cell]" % cell
-					replacement += "\n"
-			replacement += "[/table]"
-			output = regex_replace(result, output, replacement)
-	text = output
+	result = re.search(text)
+	while result != null:
+		replacement = "[table=%s]" % result.get_string(1)
+		# cell 1 | cell 2
+		var r = result.get_string()
+		var lines = r.split("\n")
+		for line in lines:
+			if line.begins_with("|"):
+				var cells: Array = line.split("|", false)
 
-	# @color=red { text }
-	re.compile("@color=([a-z]+)\\s*\\{\\s*([^\\}]+)\\s*\\}")
-	for result in re.search_all(text):
-		if result.get_string():
-			var color = result.get_string(1)
-			var _text = result.get_string(2)
-			replacement = "[color=%s]%s[/color]" % [color, _text]
-			output = regex_replace(result, output, replacement)
-	text = output
+				for cell in cells:
+					replacement += "[cell]%s[/cell]" % cell
 
-	# @color=#ffe820 { text }
-	re.compile("@color=(#[0-9a-f]{6})\\s*\\{\\s*([^\\}]+)\\s*\\}")
-	for result in re.search_all(text):
-		if result.get_string():
-			var color = result.get_string(1)
-			var _text = result.get_string(2)
-			replacement = "[color=%s]%s[/color]" % [color, _text]
-			output = regex_replace(result, output, replacement)
-	text = output
-
-	# @center { text }
-	output = parse_keyword(text, "center", "center")
-	text = output
-
-	# @u { text }
-	output = parse_keyword(text, "u", "u")
-	text = output
-
-	# @right { text }
-	output = parse_keyword(text, "right", "right")
-	text = output
-
-	# @fill { text }
-	output = parse_keyword(text, "fill", "fill")
-	text = output
-
-	# @justified { text }
-	output = parse_keyword(text, "justified", "fill")
-	text = output
-
-	# @indent { text }
-	output = parse_keyword(text, "indent", "indent")
-	text = output
-
-	# @tab { text }
-	output = parse_keyword(text, "tab", "indent")
-	text = output
-
-	# @wave amp=50 freq=2{ text }
-	output = parse_effect(text, "wave", ["amp", "freq"])
-	text = output
-
-	# @tornado radius=5 freq=2{ text }
-	output = parse_effect(text, "tornado", ["radius", "freq"])
-	text = output
-
-	# @shake rate=5 level=10{ text }
-	output = parse_effect(text, "shake", ["rate", "level"])
-	text = output
-
-	# @fade start=4 length=14{ text }
-	output = parse_effect(text, "fade", ["start", "length"])
-	text = output
-
-	# @rainbow freq=0.2 sat=10 val=20{ text }
-	output = parse_effect(text, "rainbow", ["freq", "sat", "val"])
-	text = output
-
+				replacement += "\n"
+		replacement += "[/table]"
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text)
+	
 	return text
 
-func parse_effect(text:String, effect:String, args:Array) -> String:
-	var re = RegEx.new()
-	var output = "" + text
-	var replacement = ""
+## Parse md color name from Color class tag to in given text to BBCode
+func parse_color_key(text: String) -> String:
+	# @color=red { text }
+	re.compile("@color=([a-z]+)\\s*\\{\\s*([^\\}]+)\\s*\\}")
+	result = re.search(text)
+	while result != null:
+		var color = result.get_string(1)
+		var _text = result.get_string(2)
+		replacement = "[color=%s]%s[/color]" % [color, _text]
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text)
 	
+	return text
+
+## Parse md color hex to in given text to BBCode
+func parse_color_hex(text: String) -> String:
+	# @color=#ffe820 { text }
+	re.compile("@color=(#[0-9a-f]+)\\s*\\{\\s*([^\\}]+)\\s*\\}")
+	for i in range(0, 3):
+		result = re.search(text)
+		while result != null:
+			var color = result.get_string(1)
+			var _text = result.get_string(2)
+			replacement = "[color=%s]%s[/color]" % [color, _text]
+			text = replace_regex_match(text, result, replacement)
+			result = re.search(text)
+		i += 1
+	
+	return text
+
+## Parse md effects to in given text to BBCode
+func parse_effect(text: String, effect: String, args: Array) -> String:
 	# @effect args { text }
 	# where args: arg_name=arg_value, arg_name=arg_value
 	re.compile("@%s([\\s\\w=0-9\\.]+)\\s*{(.+)}" % effect)
-	for result in re.search_all(text):
-		if result.get_string():
-			var _args = result.get_string(1)
-			var _text = result.get_string(2)
-			replacement = "[%s %s]%s[/%s]" % [effect, _args, _text, effect]
-			output = regex_replace(result, output, replacement)
-	text = output
+	result = re.search(text)
+	while result != null:
+		var _args = result.get_string(1)
+		var _text = result.get_string(2)
+		replacement = "[%s %s]%s[/%s]" % [effect, _args, _text, effect]
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text)
 
 	# @effect val1,val2 { text }
 	re.compile("@%s\\s([0-9\\.\\,\\s]+)\\s*{(.+)}" % effect)
-	for result in re.search_all(text):
-		if result.get_string():
-			var _values = result.get_string(1)
-			_values = _values.replace(" ", "")
-			_values = _values.split(",", false)
-			var _text = result.get_string(2)
-			var _args = ""
-			for i in range(0, _values.size()):
-				_args += "%s=%s " % [args[i], _values[i]]
-			replacement = "[%s %s]%s[/%s]" % [effect, _args, _text, effect]
-			output = regex_replace(result, output, replacement)
-	text = output
+	result = re.search(text)
+	while result != null:
+		var _values = result.get_string(1)
+		_values = _values.replace(" ", "")
+		_values = _values.split(",", false)
+		var _text = result.get_string(2)
+		var _args = ""
+
+		for i in range(0, _values.size()):
+			_args += "%s=%s " % [args[i],_values[i]]
+
+		replacement = "[%s %s]%s[/%s]" % [effect, _args, _text, effect]
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text)
 	
 	return text
 
-
-func parse_keyword(text:String, keyword:String, tag:String) -> String:
-	var re = RegEx.new()
-	var output = "" + text
-	var replacement = ""
-
+## Parse md keyword to in given text to BBCode
+func parse_keyword(text: String, keyword: String, tag: String) -> String:
 	# @keyword {text}
 	re.compile("@%s\\s*{(.+)}" % keyword)
-	for result in re.search_all(text):
-		if result.get_string():
-			replacement = "[%s]%s[/%s]" % [tag, result.get_string(1), tag]
-			output = regex_replace(result, output, replacement)
-	text = output
+	result = re.search(text)
+	while result != null:
+		replacement = "[%s]%s[/%s]" % [tag, result.get_string(1), tag]
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text)
 
 	return text
 
-func parse_headers(text:String, headers_fonts:=[]) -> String:
-	var headers_count = headers_fonts.size()
+## Parse md points list to in given text to BBCode
+func parse_points(text: String) -> String:
+	return parse_list(text, "[ul]", "[/ul]", "^(\\t*)-\\s+(.+)$")
 
-	if headers_count == 0:
-		return text
+## Parse md number points list to in given text to BBCode
+func parse_number_points(text: String) -> String:
+	return parse_list(text, "[ol type=1]", "[/ol]", "^(\\t*)\\d+\\.\\s+(.+)$")
 
-	var re = RegEx.new()
-	var output = "" + text
+## Parse md list to in given text to BBCode
+func parse_list(text: String, open: String, close: String, regex: String):
+	re.compile(regex)
 
-	re.compile("(#+)\\s+(.+)\n")
-	for result in re.search_all(text):
-		if result.get_string():
-			var header_level = headers_count - result.get_string(1).length()
-			header_level = clamp(header_level, 0, headers_count)
-			var header_text = result.get_string(2)
-			var header_font = headers_fonts[header_level]
-			var replacement = "[font=%s]%s[/font]\n" % [header_font, header_text]
-			output = regex_replace(result, output, replacement)
-	
-	return output
+	var lines := text.split("\n")
+	var new_lines: Array[String] = []
+	var in_list := false
+	var indent := 0
+
+	for line in lines:
+		var result := re.search(line)
+		
+		if result == null:
+			if in_list:
+				in_list = false
+				new_lines.append(close)
+
+			new_lines.append(line)
+			continue
+
+		if not in_list:
+			in_list = true
+			new_lines.append(open)
+
+		var current_indent := result.get_string(1).count("\t")
+		if indent < current_indent:
+			indent = current_indent
+			new_lines.append(open)
+		
+		if indent > current_indent:
+			indent = current_indent
+			new_lines.append(close)
+		
+		new_lines.append(result.get_string(2))
+
+	text = "\n".join(new_lines)
+
+	return text

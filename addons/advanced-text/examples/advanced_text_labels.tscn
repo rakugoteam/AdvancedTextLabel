@@ -1,0 +1,735 @@
+[gd_scene load_steps=47 format=3 uid="uid://dw681hislg41h"]
+
+[ext_resource type="FontFile" uid="uid://dopnqhkanf1f7" path="res://addons/advanced-text/font/DejaVuSans.ttf" id="1_nhc5f"]
+[ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="1_uinld"]
+[ext_resource type="FontFile" uid="uid://be1m3xik5j81c" path="res://addons/advanced-text/font/DejaVuSans-Bold.ttf" id="2_aml2b"]
+[ext_resource type="FontFile" uid="uid://dv5f7ykw422ft" path="res://addons/advanced-text/font/DejaVuSans-Oblique.ttf" id="3_7l8y2"]
+[ext_resource type="FontFile" uid="uid://3spkwr34s2bq" path="res://addons/advanced-text/font/DejaVuSans-BoldOblique.ttf" id="4_rc1wt"]
+[ext_resource type="FontFile" uid="uid://buj02o26lgfif" path="res://addons/advanced-text/font/DejaVuSansMono.ttf" id="5_fmnql"]
+[ext_resource type="Script" path="res://addons/advanced-text/parsers/MarkdownParser.gd" id="7_r0mph"]
+[ext_resource type="Script" path="res://addons/advanced-text/parsers/RenPyMarkupParser.gd" id="8_8yudh"]
+[ext_resource type="Script" path="res://addons/advanced-text/parsers/ExtendedBBCodeParser.gd" id="9_xqqk6"]
+[ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextButton.gd" id="10_w4hpi"]
+[ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextCheckButton.gd" id="11_fk62q"]
+[ext_resource type="Script" path="res://addons/advanced-text/examples/InitTestRakugoVars.gd" id="12_wngyp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0sox2"]
+font_size = 22
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1rb2p"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cllr0"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_633q0"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_uxkq8"]
+script = ExtResource("7_r0mph")
+italics = "*"
+bold = "**"
+points = "-"
+headers = Array[LabelSettings]([SubResource("LabelSettings_0sox2"), SubResource("LabelSettings_1rb2p"), SubResource("LabelSettings_cllr0"), SubResource("LabelSettings_633q0")])
+
+[sub_resource type="LabelSettings" id="LabelSettings_lvv03"]
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_k7lbg"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_p2ep4"]
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_dbhjy"]
+
+[sub_resource type="Resource" id="Resource_1176o"]
+script = ExtResource("8_8yudh")
+headers = Array[LabelSettings]([SubResource("LabelSettings_lvv03"), SubResource("LabelSettings_k7lbg"), SubResource("LabelSettings_p2ep4"), SubResource("LabelSettings_dbhjy")])
+
+[sub_resource type="LabelSettings" id="LabelSettings_mq4wt"]
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_3fkcx"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_5l6r2"]
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_wlo5y"]
+
+[sub_resource type="Resource" id="Resource_xt6yb"]
+script = ExtResource("9_xqqk6")
+headers = Array[LabelSettings]([SubResource("LabelSettings_mq4wt"), SubResource("LabelSettings_3fkcx"), SubResource("LabelSettings_5l6r2"), SubResource("LabelSettings_wlo5y")])
+
+[sub_resource type="LabelSettings" id="LabelSettings_mqb2n"]
+font_size = 22
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_c8yh7"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_faw0r"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_n4lgb"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_va62r"]
+script = ExtResource("7_r0mph")
+italics = "*"
+bold = "**"
+points = "-"
+headers = Array[LabelSettings]([SubResource("LabelSettings_mqb2n"), SubResource("LabelSettings_c8yh7"), SubResource("LabelSettings_faw0r"), SubResource("LabelSettings_n4lgb")])
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttfn2"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_omdtg"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_2lewr"]
+font_size = 22
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_58a6f"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1573r"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hrlc5"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_oxcqf"]
+script = ExtResource("7_r0mph")
+italics = "*"
+bold = "**"
+points = "-"
+headers = Array[LabelSettings]([SubResource("LabelSettings_2lewr"), SubResource("LabelSettings_58a6f"), SubResource("LabelSettings_1573r"), SubResource("LabelSettings_hrlc5")])
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mhiy7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b2f2b"]
+content_margin_left = 6.0
+content_margin_top = 4.0
+content_margin_right = 6.0
+content_margin_bottom = 4.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4did"]
+font_size = 22
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fi24r"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f0kok"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_67rn5"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_n88j2"]
+script = ExtResource("7_r0mph")
+italics = "*"
+bold = "**"
+points = "-"
+headers = Array[LabelSettings]([SubResource("LabelSettings_g4did"), SubResource("LabelSettings_fi24r"), SubResource("LabelSettings_f0kok"), SubResource("LabelSettings_67rn5")])
+
+[node name="AdvancedTextLabels" type="TabContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 3
+
+[node name="MarkdownLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_nhc5f")
+theme_override_fonts/bold_font = ExtResource("2_aml2b")
+theme_override_fonts/italics_font = ExtResource("3_7l8y2")
+theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
+theme_override_fonts/mono_font = ExtResource("5_fmnql")
+bbcode_enabled = true
+text = "[bgcolor=#00000000][font_size=22]Header Level 1[/font_size][/bgcolor]
+[bgcolor=#00000000][font_size=20]Header Level 2[/font_size][/bgcolor]
+[bgcolor=#00000000][font_size=18]Header Level 3[/font_size][/bgcolor]
+
+[b]bold[/b]
+[i]italic[/i]
+[s]strike through[/s]
+[code]mono-spaced text[/code]
+
+text with space 6
+[font_size=6] [/font_size]
+text with space 6
+
+[ul]
+point 1
+point 2
+[ul]
+sub point A
+sub point B
+[/ul]
+point 3
+[/ul]
+
+[ol type=1]
+point 1
+[ol type=1]
+point 1
+point 2
+[/ol]
+point 2
+[/ol]
+
+[hint=hint]text whit hint[/hint]
+[url=https://some_domain.com]link[/url]
+[url]https://some_domain.com[/url]
+
+test_string = <test_string>
+test_int = <test_int>
+test_bool = <test_bool>
+test_color = <test_color>
+@color=<test_color> {text in custom color from variable}
+
+[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
+[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[font_size= 32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]
+[img]res://icon.png[/img]
+[img=24x24]res://icon.png[/img]
+
+[table=3][cell]1[/cell][cell]2[/cell][cell]3[/cell]
+[cell]4[/cell][cell]5[/cell][cell]6[/cell]
+[cell]7[/cell][cell]8[/cell][cell]9[/cell]
+[/table]
+
+[u]underlined text[/u]
+[center]centered text[/center]
+[center]centered text alt[/center]
+
+[right]right aligned text[/right]
+[right]right aligned text alt[/right]
+
+[indent]indent text[/indent]
+[indent]indent text alt[/indent]
+[indent]indent text alt 2s[/indent]
+
+[color=red]red text[/color]
+[color=#c39f00]custom colored text[/color]
+
+[wave  amp=50 freq=2 ]waving text[/wave]
+[wave amp=50 freq=2 ]waving text[/wave]
+
+[tornado  radius=5 freq=2 ]tornado text[/tornado]
+[tornado radius=5 freq=2 ]tornado text[/tornado]
+
+[shake  rate=5 level=10 ]shaking text [/shake]
+[shake rate=5 level=10 ]shaking text[/shake]
+
+[rainbow  freq=0.2 sat=10 val=20 ]rainbow text[/rainbow]
+[rainbow freq=0.2 sat=10 val=20 ]rainbow text[/rainbow]
+
+
+"
+script = ExtResource("1_uinld")
+_text = "# Header Level 1
+## Header Level 2
+### Header Level 3
+
+**bold**
+*italic*
+~~strike through~~
+`mono-spaced text`
+
+text with space 6
+@space=6
+text with space 6
+
+- point 1
+- point 2
+	- sub point A
+	- sub point B
+- point 3
+
+1. point 1
+	1. point 1
+	1. point 2
+1. point 2
+
+@[text whit hint](hint)
+[link](https://some_domain.com)
+<https://some_domain.com>
+
+test_string = <test_string>
+test_int = <test_int>
+test_bool = <test_bool>
+test_color = <test_color>
+@color=<test_color> {text in custom color from variable}
+
+:grinning:
+:grinning, 36:
+[icon:folder-open]
+[icon:folder-open, 32]
+![](res://icon.png)
+![24x24](res://icon.png)
+
+@table=3 {
+|1|2|3|
+|4|5|6|
+|7|8|9|
+}
+
+@u{underlined text}
+@center{centered text}
+@>centered text alt<@
+
+@right{right aligned text}
+@>right aligned text alt>@
+
+@indent{indent text}
+@|indent text alt|@
+@tab {indent text alt 2s}
+
+@color=red {red text}
+@color=#c39f00 {custom colored text}
+
+@wave amp=50 freq=2 {waving text}
+@wave 50, 2 {waving text}
+
+@tornado radius=5 freq=2 {tornado text}
+@tornado 5, 2 {tornado text}
+
+@shake rate=5 level=10 {shaking text }
+@shake 5, 10 {shaking text}
+
+@rainbow freq=0.2 sat=10 val=20 {rainbow text}
+@rainbow 0.2,10,20 {rainbow text}
+
+
+"
+parser = SubResource("Resource_uxkq8")
+
+[node name="RenPyStringLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 2
+auto_translate = false
+theme_override_fonts/normal_font = ExtResource("1_nhc5f")
+theme_override_fonts/bold_font = ExtResource("2_aml2b")
+theme_override_fonts/italics_font = ExtResource("3_7l8y2")
+theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
+theme_override_fonts/mono_font = ExtResource("5_fmnql")
+bbcode_enabled = true
+text = "[bgcolor=#00000000][color=#ffffffff][font_size=22]Header Level 1[/font_size][/color][/bgcolor]
+[bgcolor=#00000000][color=#ffffffff][font_size=20]Header Level 2[/font_size][/color][/bgcolor]
+[bgcolor=#00000000][color=#ffffffff][font_size=18]Header Level 3[/font_size][/color][/bgcolor]
+
+[b]bold[/b]
+[i]italic[/i]
+[s]strike through[/s]
+[code]mono-spaced text[/code]
+
+[url=https://some_domain.com]link[/url]
+[url]https://some_domain.com[/url]
+
+text with space 6
+[font_size=6] [/font_size]
+text with space 6
+
+[ul]
+point 1
+point 2
+[ul]
+sub point A
+sub point B
+[/ul]
+point 3
+[/ul]
+
+[ol type=1]
+point 1
+[ol type=1]
+point 1
+point 2
+[/ol]
+point 2
+[/ol]
+
+
+test_string = <test_string>
+test_bool = <test_bool>
+test_int = <test_int>
+test_color = <test_color>
+[color=<test_color>]text in custom color from variable[/color]
+
+[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
+[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
+[icon:folder-open]
+[icon:folder-open, 32]
+[img]res://icon.png[/img]
+[img=24x24]res://icon.png[/img]
+
+[table=3]
+[cell]1[/cell][cell]2[/cell][cell]3[/cell]
+[cell]4[/cell][cell]5[/cell][cell]6[/cell]
+[cell]7[/cell][cell]8[/cell][cell]9[/cell]
+[/table]
+
+[u]underline[/u]
+[center]center[/center]
+[right]right[/right]
+[fill]fill[/fill]
+[indent]text[/indent]
+
+[color=red]red[/color]
+[color=#c39f00]colored text[/color]
+[color=<test_color>]text in custom color from variable[/color]
+
+[wave amp=50 freq=2]wave[/wave]
+[tornado radius=5 freq=2]tornado[/tornado]
+[shake rate=5 level=10]shake[/shake]
+[rainbow freq=0.2 sat=10 val=20]rainbow[/rainbow]"
+script = ExtResource("1_uinld")
+_text = "{h1}Header Level 1{/h1}
+{h2}Header Level 2{/h2}
+{h3}Header Level 3{/h3}
+
+{b}bold{/b}
+{i}italic{/i}
+{s}strike through{/s}
+{code}mono-spaced text{/code}
+
+{a=https://some_domain.com}link{/a}
+{a}https://some_domain.com{/a}
+
+text with space 6
+{space=6}
+text with space 6
+
+{ul}
+point 1
+point 2
+{ul}
+sub point A
+sub point B
+{/ul}
+point 3
+{/ul}
+
+{ol type=1}
+point 1
+{ol type=1}
+point 1
+point 2
+{/ol}
+point 2
+{/ol}
+
+
+test_string = <test_string>
+test_bool = <test_bool>
+test_int = <test_int>
+test_color = <test_color>
+{color=<test_color>}text in custom color from variable{/color}
+
+:grinning:
+:grinning, 36:
+{icon:folder-open}
+{icon:folder-open, 32}
+{img=res://icon.png}
+{img=res://icon.png size=24x24}
+
+{table=3}
+{cell}1{/cell}{cell}2{/cell}{cell}3{/cell}
+{cell}4{/cell}{cell}5{/cell}{cell}6{/cell}
+{cell}7{/cell}{cell}8{/cell}{cell}9{/cell}
+{/table}
+
+{u}underline{/u}
+{center}center{/center}
+{right}right{/right}
+{fill}fill{/fill}
+{indent}text{/indent}
+
+{color=red}red{/color}
+{color=#c39f00}colored text{/color}
+{color=<test_color>}text in custom color from variable{/color}
+
+{wave amp=50 freq=2}wave{/wave}
+{tornado radius=5 freq=2}tornado{/tornado}
+{shake rate=5 level=10}shake{/shake}
+{rainbow freq=0.2 sat=10 val=20}rainbow{/rainbow}"
+parser = SubResource("Resource_1176o")
+
+[node name="ExBBCodeLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_nhc5f")
+theme_override_fonts/bold_font = ExtResource("2_aml2b")
+theme_override_fonts/italics_font = ExtResource("3_7l8y2")
+theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
+theme_override_fonts/mono_font = ExtResource("5_fmnql")
+bbcode_enabled = true
+text = "[bgcolor=#00000000][color=#ffffffff][font_size=22]Header Level 1[/font_size][/color][/bgcolor]
+[bgcolor=#00000000][color=#ffffffff][font_size=20]Header Level 2[/font_size][/color][/bgcolor]
+[bgcolor=#00000000][color=#ffffffff][font_size=18]Header Level 3[/font_size][/color][/bgcolor]
+
+[b]bold[/b]
+[i]italic[/i]
+[s]strike through[/s]
+[code]mono-spaced text[/code]
+
+text with spacex 6
+[font_size=6] [/font_size]
+text with spacex 6
+
+[ul]
+point 1
+point 2
+[ul]
+sub point A
+sub point B
+[/ul]
+point 3
+[/ul]
+
+[ol type=1]
+point 1
+[ol type=1]
+point 1
+point 2
+[/ol]
+point 2
+[/ol]s
+
+[url=https://some_domain.com]link[/url]
+[url]https://some_domain.com[/url]
+
+test_string = <test_string>
+test_int = <test_int>
+test_bool = <test_bool>
+test_color = <test_color>
+[color=<test_color>]text in custom color from variable[/color]
+
+[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
+[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
+[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
+[font_size= 32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]
+[img]res://icon.png[/img]
+[img=24x24]res://icon.png[/img]
+
+[table=3]
+[cell]1[/cell][cell]2[/cell][cell]3[/cell]
+[cell]4[/cell][cell]5[/cell][cell]6[/cell]
+[cell]7[/cell][cell]8[/cell][cell]9[/cell]
+[/table]
+
+[u]underline[/u]
+[center]center[/center]
+[right]right[/right]
+[fill]fill[/fill]
+[indent]text[/indent]
+s
+[color=red]red[/color]
+[color=#c39f00]colored text[/color]
+
+[wave amp=50 freq=2]wave[/wave]
+[tornado radius=5 freq=2]tornado[/tornado]
+[shake rate=5 level=10]shake[/shake]
+[rainbow freq=0.2 sat=10 val=20]rainbow[/rainbow]
+"
+script = ExtResource("1_uinld")
+_text = "[h1]Header Level 1[/h1]
+[h2]Header Level 2[/h2]
+[h3]Header Level 3[/h3]
+
+[b]bold[/b]
+[i]italic[/i]
+[s]strike through[/s]
+[code]mono-spaced text[/code]
+
+text with spacex 6
+[space=6]
+text with spacex 6
+
+[ul]
+point 1
+point 2
+[ul]
+sub point A
+sub point B
+[/ul]
+point 3
+[/ul]
+
+[ol type=1]
+point 1
+[ol type=1]
+point 1
+point 2
+[/ol]
+point 2
+[/ol]s
+
+[url=https://some_domain.com]link[/url]
+[url]https://some_domain.com[/url]
+
+test_string = <test_string>
+test_int = <test_int>
+test_bool = <test_bool>
+test_color = <test_color>
+[color=<test_color>]text in custom color from variable[/color]
+
+:grinning:
+:grinning, 36:
+[icon:folder-open]
+[icon:folder-open, 32]
+[img]res://icon.png[/img]
+[img=24x24]res://icon.png[/img]
+
+[table=3]
+[cell]1[/cell][cell]2[/cell][cell]3[/cell]
+[cell]4[/cell][cell]5[/cell][cell]6[/cell]
+[cell]7[/cell][cell]8[/cell][cell]9[/cell]
+[/table]
+
+[u]underline[/u]
+[center]center[/center]
+[right]right[/right]
+[fill]fill[/fill]
+[indent]text[/indent]
+s
+[color=red]red[/color]
+[color=#c39f00]colored text[/color]
+
+[wave amp=50 freq=2]wave[/wave]
+[tornado radius=5 freq=2]tornado[/tornado]
+[shake rate=5 level=10]shake[/shake]
+[rainbow freq=0.2 sat=10 val=20]rainbow[/rainbow]
+"
+parser = SubResource("Resource_xt6yb")
+
+[node name="PluginsTests" type="RichTextLabel" parent="."]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_nhc5f")
+theme_override_fonts/bold_font = ExtResource("2_aml2b")
+theme_override_fonts/italics_font = ExtResource("3_7l8y2")
+theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
+theme_override_fonts/mono_font = ExtResource("5_fmnql")
+bbcode_enabled = true
+text = "[font_size= 64][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰾼[/font][/font_size]
+[font_size=64][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]🍪[/font][/font_size]
+"
+script = ExtResource("1_uinld")
+_text = "[icon:format-text-rotation-angle-up, 64]
+:cookie, 64:
+"
+parser = SubResource("Resource_va62r")
+
+[node name="AdvancedTextButton" type="Panel" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AdvancedTextButton"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_ttfn2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_omdtg")
+bbcode_enabled = true
+text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button[/b][/rainbow][/center]"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("10_w4hpi")
+toggle_mode = true
+button_group = &"test_btn"
+_text = "@center{@rainbow freq=0.2 sat=10 val=20 {**Markdown Button**}}"
+parser = SubResource("Resource_oxcqf")
+
+[node name="AdvancedTextCheckButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_mhiy7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_b2f2b")
+bbcode_enabled = true
+text = "[center] [rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Toggle[/b] [font_size= 24][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰨙[/font][/font_size][/rainbow] [/center]"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("11_fk62q")
+main_text = "@> @rainbow freq=0.2 sat=10 val=20 {**Markdown Toggle** [switch]} <@"
+toggle_mode = true
+button_group = &"test_btn"
+_text = "@> @rainbow freq=0.2 sat=10 val=20 {**Markdown Toggle** [icon:toggle-switch-off-outline, 24]} <@"
+parser = SubResource("Resource_n88j2")
+
+[node name="InitTestRakugoVars" type="Timer" parent="."]
+one_shot = true
+script = ExtResource("12_wngyp")

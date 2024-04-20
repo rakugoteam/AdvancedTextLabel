@@ -1,127 +1,85 @@
-tool
+@tool
+@icon("res://addons/advanced-text/icons/AdvancedTextLabel.svg")
 extends RichTextLabel
-class_name AdvancedTextLabel, "res://addons/advanced-text/icons/AdvancedTextLabel.svg"
 
-var f : File
-signal update
+## This class parses given text to bbcode using given TextParser
+## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/AdvancedTextLabel/
+class_name AdvancedTextLabel
 
-export(String, FILE, "*.md, *.rpy, *.txt") var markup_text_file := "" setget _set_markup_text_file
-export(String, MULTILINE) var markup_text := "" setget _set_markup_text
-export(String, "default", "markdown", "renpy", "bbcode") var markup := "default" setget _set_markup
-export(Array, DynamicFont) var headers_fonts := [] 
+## By default links (staring from `http`) will be opened in web browser
+## For custom links you can connect to `custom_link` signal
+signal custom_link(url:String)
 
-# should be overrider by the user
-var variables := {
-	"test_string" : "test string",
-	"test_int" : 1,
-	"test_bool" : true,
-	"test_list" : [1],
-	"test_dict" : {"key1" : "value1"},
-	"test_color" : Color("#1acfa0"),
-}
-
-var _parser
-var hf_paths : Array
-
-func _ready() -> void:
-	bbcode_enabled = true
-	connect("update", self, "_on_update")
-	emit_signal("update")
-
-func _set_headers_fonts(value : Array) -> void:
-	headers_fonts = value
-	emit_signal("update")
-
-func get_hf_paths() -> Array:
-	if not Engine.editor_hint:
-		if not hf_paths.empty():
-			return hf_paths
-
-	for font in headers_fonts:
-		hf_paths.append(font.resource_path)
-
-	return hf_paths
-
-func get_text_parser(_markup:String):
-	if _parser == null:
-		return _get_text_parser(_markup)
-
-	if markup != _markup:
-		return _get_text_parser(_markup)
-
-func _get_text_parser(_markup_str:String):
-	match _markup_str:
-		"default":
-			var default = ProjectSettings.get_setting("addons/advanced_text/markup")
-			return _get_text_parser(default)
+## Text to be parsed in too BBCode
+## Use it instead of `text` from RichTextLabel
+## I had to make this way as I can't override `text` var behavior
+@export_multiline var _text := "":
+	set(value):
+		_text = value
+		_parse_text()
 		
-		"bbcode":
-			_parser = EBBCodeParser
-		"renpy":
-			_parser = RenpyParser
-		"markdown":
-			_parser = MarkdownParser
+	get:
+		if text and _text.is_empty():
+			_text = text
+		
+		return _text
 
-	return _parser
+## TextParser that will be used to parse `_text`
+@export var parser: TextParser:
+	set(value):
+		parser = value
+		update_configuration_warnings()
+		if parser:
+			parser.changed.connect(_parse_text)
 
-func _set_markup_text_file(value:String) -> void:
-	markup_text_file = value
-	emit_signal("update")
+			if parser is ExtendedBBCodeParser:
+				for h in parser.headers:
+					h.changed.connect(_parse_text)
 
-func _load_file(file_path:String) -> void:
-	f = File.new()
-	f.open(file_path, File.READ)
-	var file_ext = file_path.get_extension()
+			_parse_text()
+			print("parse text")
+	
+	get: return parser
 
+func _ready():
 	bbcode_enabled = true
-	match file_ext:
-		"md":
-			markup = "markdown"
-		"rpy":
-			markup = "renpy"
-		"txt":
-			markup = "bbcode"
+	meta_clicked.connect(_on_meta)
+	_parse_text()
 
-	markup_text = f.get_as_text()
-	f.close()
-
-func _set_markup_text(value:String) -> void:
-	markup_text = tr(value)
-	emit_signal("update")
-
-func _on_update() -> void:
-	bbcode_enabled = true
-	if markup_text_file:
-		_load_file(markup_text_file)
-
-	var p = _get_text_parser(markup)
-	if p == null:
-		push_error("can't load parser for markup: "+ markup)
+func _parse_text() -> void:
+	if !is_node_ready(): return
+	if parser:
+			
+		if AdvancedText.rakugo:
+			var r = AdvancedText.rakugo
+			var sg = r.sg_variable_changed
+			if !sg.is_connected(_on_rakuvars_changed):
+				sg.connect(_on_rakuvars_changed)
+	
+	if !parser:
+		push_warning("parser is null at " + str(name))
+		text = _text
 		return
 	
-	var vars_json = ProjectSettings.get_setting("addons/advanced_text/default_vars")
-	var default_vars = parse_json(vars_json)
+	text = parser.parse(_text)
+
+func _on_rakuvars_changed(var_name, value) -> void:
+	if "<%s>" % var_name in _text:
+		_parse_text()
+
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings: PackedStringArray = []
+	if !bbcode_enabled:
+		warnings.append("BBCode must be enabled.")
 	
-	if default_vars:
-		variables = join_dicts([default_vars, variables])
+	if !parser:
+		warnings.append("Need parser.")
 
-	bbcode_text = p.parse(markup_text, get_hf_paths(), variables)
+	return warnings
 
-func join_dicts(dicts:Array) -> Dictionary:
-	var result := {}
-	for dict in dicts:
-		for key in dict:
-			result[key] = dict[key]
-
-	return result
-
-func _set_markup(value:String) -> void:
-	markup = value
-	emit_signal("update")
-
-func resize_to_text(char_size:Vector2, axis:="xy"):
-	if "x" in axis:
-		rect_size.x += markup_text.length() * char_size.x
-	if "y" in axis:
-		var new_lines:int = markup_text.split("\n", false).size()
-		rect_size.y += new_lines * char_size.y;
+func _on_meta(url: String) -> void:
+	if url.begins_with("http"):
+		OS.shell_open(url)
+		return
+	
+	emit_signal("custom_link", url)
