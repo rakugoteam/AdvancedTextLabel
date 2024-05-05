@@ -87,7 +87,7 @@ bold = "**"
 points = "-"
 headers = Array[LabelSettings]([SubResource("LabelSettings_mqb2n"), SubResource("LabelSettings_c8yh7"), SubResource("LabelSettings_faw0r"), SubResource("LabelSettings_n4lgb")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttfn2"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mursv"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -108,7 +108,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_omdtg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5yccs"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -676,12 +676,10 @@ theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
 bbcode_enabled = true
 text = "[font_size= 64][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰾼[/font][/font_size]
-[font_size=64][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]🍪[/font][/font_size]
-"
+[font_size=64][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]🍪[/font][/font_size]"
 script = ExtResource("1_uinld")
 _text = "[icon:format-text-rotation-angle-up, 64]
-:cookie, 64:
-"
+:cookie, 64:"
 parser = SubResource("Resource_va62r")
 
 [node name="AdvancedTextButton" type="Panel" parent="."]
@@ -701,8 +699,8 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_ttfn2")
-theme_override_styles/normal = SubResource("StyleBoxFlat_omdtg")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mursv")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5yccs")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button[/b][/rainbow][/center]"
 fit_content = true
