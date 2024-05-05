@@ -16,13 +16,13 @@ signal custom_link(url:String)
 @export_multiline var _text := "":
 	set(value):
 		_text = value
+		if value == "":
+			text = ""
+			return
+		
 		_parse_text()
 		
-	get:
-		if text and _text.is_empty():
-			_text = text
-		
-		return _text
+	get: return _text
 
 ## TextParser that will be used to parse `_text`
 @export var parser: TextParser:
