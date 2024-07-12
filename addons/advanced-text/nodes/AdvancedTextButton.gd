@@ -10,7 +10,7 @@ signal pressed
 
 ## Emitted when button is toggled
 ## Works only if `toggle_mode` is on.
-signal toggled(value)
+signal toggled(value:bool)
 
 ## If true, button will be disabled
 @export var disabled := false:
