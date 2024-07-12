@@ -10,7 +10,7 @@ signal pressed
 
 ## Emitted when button is toggled
 ## Works only if `toggle_mode` is on.
-signal toggled(value)
+signal toggled(value:bool)
 
 ## If true, button will be disabled
 @export var disabled := false:
@@ -28,6 +28,10 @@ signal toggled(value)
 @export var toggle_mode := false
 var _toggled := false:
 	get: return _toggled
+
+## If true, on one button in group will be toggled
+## needs toggle_mode = true to works
+@export var radio_mode := false
 
 ## If true, button will be in pressed state
 @export var button_pressed := false:
@@ -52,6 +56,9 @@ func _ready() -> void:
 	_change_stylebox("focus", "focus")
 	mouse_entered.connect(_change_stylebox.bind("hover"))
 	mouse_exited.connect(_on_mouse_exited)
+	
+	if button_group:
+		add_to_group(button_group)
 
 func _on_mouse_exited():
 	if toggle_mode and _toggled:
@@ -71,10 +78,11 @@ func _gui_input(event: InputEvent) -> void:
 		var e := event as InputEventMouseButton
 		if e.button_index == MOUSE_BUTTON_LEFT and e.pressed:
 			if toggle_mode:
-				_togglef(null, !_toggled)
+				var t := !_toggled
+				_togglef(null, t)
 				
 				if button_group:
-					get_tree().call_group(button_group, "_togglef", self, !_toggled)
+					get_tree().call_group(button_group, "_togglef", self, !t)
 				
 			else:
 				pressed.emit()
@@ -83,6 +91,7 @@ func _gui_input(event: InputEvent) -> void:
 func _togglef(main_button: AdvancedTextButton, value: bool):
 	if disabled : return
 	if main_button == self: return
+	if radio_mode and _toggled: return
 
 	if value:
 		_change_stylebox("pressed")
