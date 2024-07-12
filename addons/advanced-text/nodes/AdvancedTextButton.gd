@@ -52,6 +52,9 @@ func _ready() -> void:
 	_change_stylebox("focus", "focus")
 	mouse_entered.connect(_change_stylebox.bind("hover"))
 	mouse_exited.connect(_on_mouse_exited)
+	
+	if button_group:
+		add_to_group(button_group)
 
 func _on_mouse_exited():
 	if toggle_mode and _toggled:
