@@ -71,10 +71,11 @@ func _gui_input(event: InputEvent) -> void:
 		var e := event as InputEventMouseButton
 		if e.button_index == MOUSE_BUTTON_LEFT and e.pressed:
 			if toggle_mode:
-				_togglef(null, !_toggled)
+				var t := !_toggled
+				_togglef(null, t)
 				
 				if button_group:
-					get_tree().call_group(button_group, "_togglef", self, !_toggled)
+					get_tree().call_group(button_group, "_togglef", self, !t)
 				
 			else:
 				pressed.emit()
