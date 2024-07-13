@@ -29,10 +29,6 @@ signal toggled(value:bool)
 var _toggled := false:
 	get: return _toggled
 
-## If true, on one button in group will be toggled
-## needs toggle_mode = true to works
-@export var radio_mode := false
-
 ## If true, button will be in pressed state
 @export var button_pressed := false:
 	set (value):
@@ -90,8 +86,6 @@ func _gui_input(event: InputEvent) -> void:
 
 func _togglef(main_button: AdvancedTextButton, value: bool):
 	if disabled : return
-	if main_button == self: return
-	if radio_mode and _toggled: return
 
 	if value:
 		_change_stylebox("pressed")
