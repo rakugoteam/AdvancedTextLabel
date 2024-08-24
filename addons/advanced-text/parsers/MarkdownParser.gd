@@ -25,6 +25,7 @@ func parse(text: String) -> String:
 	text = parse_code(text)
 	text = parse_hints(text)
 	text = parse_links(text)
+	text = parse_bold_italic(text)
 	text = parse_bold(text)
 	text = parse_italics(text)
 	text = parse_strike_through(text)
@@ -200,12 +201,49 @@ func parse_sing(text: String, open: String, close: String, tag: String):
 			result = re.search(text)
 			continue
 
-		var arr := [r_start, tag, r, tag, r_end]
-		replacement = "%s[%s]%s[/%s]%s" % arr
+		var op_tag = "["
+		if "," in tag:
+			var tags := tag.split(",", false)
+			op_tag += "][".join(tags)
+		else: op_tag += tag
+		op_tag += "]"
+
+		if " " in open:
+			op_tag = " " + op_tag
+
+		var cl_tag = "[/"
+		if "," in tag:
+			var tags := tag.split(",", false)
+			cl_tag += "][/".join(tags)
+		else: cl_tag += tag
+		cl_tag += "]"
+
+		if " " in close:
+			cl_tag += " "
+
+		var arr = [r_start, op_tag, r, cl_tag, r_end]
+		replacement = "%s%s%s%s%s" % arr
 		text = replace_regex_match(text, result, replacement)
 		result = re.search(text)
 	
 	return text
+
+## Parse md blod italics to in given text to BBCode
+## Example of md  blod italics:
+## _**text**_, ***text*** , ___text___
+func parse_bold_italic(text: String) -> String:
+	var sing := ""
+	# *italic*
+	match italics:
+		"*": sing = "\\*"
+		"_": sing = "\\_"
+	
+	match bold:
+		"**": sing += "\\*\\*"
+		"__": sing += "\\_\\_"
+
+	return parse_sing(text, " " + sing, sing + " ", "ib")
+
 
 ## Parse md italics to in given text to BBCode
 ## Example of md italics:
@@ -215,12 +253,10 @@ func parse_italics(text: String) -> String:
 	var sing := ""
 	# *italic*
 	match italics:
-		"*":
-			sing = "\\*"
-		"_":
-			sing = "\\_"
+		"*": sing = "\\*"
+		"_": sing = "\\_"
 
-	return parse_sing(text, sing, sing, "i")
+	return parse_sing(text, " " + sing, sing + " ", "i")
 
 ## Parse md bold to in given text to BBCode
 ## Example of md bold:
@@ -230,18 +266,16 @@ func parse_bold(text: String) -> String:
 	var sing := ""
 	# **bold**
 	match bold:
-		"**":
-			sing = "\\*\\*"
-		"__":
-			sing = "\\_\\_"
+		"**": sing = "\\*\\*"
+		"__": sing = "\\_\\_"
 	
-	return parse_sing(text, sing, sing, "b")
+	return parse_sing(text, " " + sing, sing + " ", "b")
 
 ## Parse md strike through to in given text to BBCode
 ## Example of md strike through: ~~strike through~~
 func parse_strike_through(text: String) -> String:
 	# ~~strike through~~
-	return parse_sing(text, "~~", "~~", "s")
+	return parse_sing(text, " ~~", "~~ ", "s")
 
 ## Parse md code to in given text to BBCode
 ## Example of md code:
@@ -335,7 +369,7 @@ func parse_effect(text: String, effect: String, args: Array) -> String:
 		var _args = ""
 
 		for i in range(0, _values.size()):
-			_args += "%s=%s " % [args[i],_values[i]]
+			_args += "%s=%s " % [args[i], _values[i]]
 
 		replacement = "[%s %s]%s[/%s]" % [effect, _args, _text, effect]
 		text = replace_regex_match(text, result, replacement)
