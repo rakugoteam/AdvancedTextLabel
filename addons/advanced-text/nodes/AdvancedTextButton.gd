@@ -1,3 +1,4 @@
+@icon("res://addons/advanced-text/icons/AdvancedTextButton.svg")
 @tool
 extends AdvancedTextLabel
 
