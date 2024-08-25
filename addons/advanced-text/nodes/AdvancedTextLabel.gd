@@ -46,16 +46,6 @@ signal custom_link(url:String)
 var font_size : int:
 	get: return theme.get_font_size(get_class(), &"normal")
 
-
-var parent_org_size : Vector2
-func _enter_tree():
-	if get_parent_control():
-		parent_org_size = get_parent_control().size
-
-func _exit_tree():
-	if get_parent_control():
-		get_parent_control().size = parent_org_size
-
 func _ready():
 	bbcode_enabled = true
 	meta_clicked.connect(_on_meta)
@@ -63,8 +53,6 @@ func _ready():
 		custom_minimum_size = Vector2.ONE * font_size
 
 	_parse_text()
-	_exit_tree()
-
 
 func _parse_text() -> void:
 	if !is_node_ready(): return
@@ -82,20 +70,6 @@ func _parse_text() -> void:
 		return
 	
 	text = parser.parse(_text)
-	if not scroll_active:
-		var lines_number := (1 + _text.count('\n'))
-		var new_minimum_size := Vector2()
-		new_minimum_size.y = lines_number * font_size
-		var max_line_lenght := visible_characters
-		if visible_characters == -1:
-			for l : String in _text.split('\n'):
-				if l.length() > max_line_lenght:
-					max_line_lenght = l.length()
-		
-		new_minimum_size.x = max_line_lenght * font_size
-		if new_minimum_size > custom_minimum_size:
-			custom_minimum_size = new_minimum_size
-
 
 func _on_rakuvars_changed(var_name, value) -> void:
 	if "<%s>" % var_name in _text:
