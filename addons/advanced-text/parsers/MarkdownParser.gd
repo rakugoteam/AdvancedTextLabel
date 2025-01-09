@@ -2,8 +2,9 @@
 @icon("res://addons/advanced-text/icons/md.svg")
 extends ExtendedBBCodeParser
 
-## This parser is every limited as its just translates Markdown to BBCode
-## This parser also adds :emojis: and icons {icon:name} add Rakugo variables with <var_name>
+## This parser is every limited as its just translates Markdown to BBCode,
+## adds support for add Rakugo variables with <var_name>
+## and Headers "#" and support for IconsFonts
 ## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/MarkdownParser/
 class_name MarkdownParser
 

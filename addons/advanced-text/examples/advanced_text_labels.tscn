@@ -87,7 +87,7 @@ bold = "**"
 points = "-"
 headers = Array[LabelSettings]([SubResource("LabelSettings_mqb2n"), SubResource("LabelSettings_c8yh7"), SubResource("LabelSettings_faw0r"), SubResource("LabelSettings_n4lgb")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gefr5"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnv5u"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -108,7 +108,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qn5p"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qae73"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -250,10 +250,10 @@ test_bool = <test_bool>
 test_color = <test_color>
 @color=<test_color> {text in custom color from variable}
 
-[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
-[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font_size= 32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]
+[font=res://addons/icons-fonts/icons_fonts/emojis/NotoColorEmoji.ttf]😀[/font]
+[font_size=36][font=res://addons/icons-fonts/icons_fonts/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
+[im:folder-open]
+[im:folder-open, 32]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -327,8 +327,8 @@ test_color = <test_color>
 
 :grinning:
 :grinning, 36:
-[icon:folder-open]
-[icon:folder-open, 32]
+[im:folder-open]
+[im:folder-open, 32]
 ![](res://icon.png)
 ![24x24](res://icon.png)
 
@@ -421,10 +421,10 @@ test_int = <test_int>
 test_color = <test_color>
 [color=<test_color>]text in custom color from variable[/color]
 
-[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
-[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
-[icon:folder-open]
-[icon:folder-open, 32]
+[font=res://addons/icons-fonts/icons_fonts/emojis/NotoColorEmoji.ttf]😀[/font]
+[font_size=36][font=res://addons/icons-fonts/icons_fonts/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
+[im:folder-open]
+[im:folder-open, 32]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -493,8 +493,8 @@ test_color = <test_color>
 
 :grinning:
 :grinning, 36:
-{icon:folder-open}
-{icon:folder-open, 32}
+{im:folder-open}
+{im:folder-open, 32}
 {img=res://icon.png}
 {img=res://icon.png size=24x24}
 
@@ -571,10 +571,10 @@ test_bool = <test_bool>
 test_color = <test_color>
 [color=<test_color>]text in custom color from variable[/color]
 
-[font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font]
-[font_size=36][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
-[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]
-[font_size= 32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]
+[font=res://addons/icons-fonts/icons_fonts/emojis/NotoColorEmoji.ttf]😀[/font]
+[font_size=36][font=res://addons/icons-fonts/icons_fonts/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
+[im:folder-open]
+[im:folder-open, 32]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -642,8 +642,8 @@ test_color = <test_color>
 
 :grinning:
 :grinning, 36:
-[icon:folder-open]
-[icon:folder-open, 32]
+[im:folder-open]
+[im:folder-open, 32]
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
@@ -678,10 +678,10 @@ theme_override_fonts/italics_font = ExtResource("3_7l8y2")
 theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
 bbcode_enabled = true
-text = "[font_size= 64][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰾼[/font][/font_size]
-[font_size=64][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]🍪[/font][/font_size]"
+text = "[font_size= 64][font=res://addons/icons-fonts/icons_fonts/MaterialIcons/material_design_icons.ttf]󰾼[/font][/font_size]
+[font_size=64][font=res://addons/icons-fonts/icons_fonts/emojis/NotoColorEmoji.ttf]🍪[/font][/font_size]"
 script = ExtResource("1_uinld")
-_text = "[icon:format-text-rotation-angle-up, 64]
+_text = "[mi:format-text-rotation-angle-up, 64]
 :cookie, 64:"
 parser = SubResource("Resource_va62r")
 metadata/_tab_index = 3
@@ -704,8 +704,8 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_gefr5")
-theme_override_styles/normal = SubResource("StyleBoxFlat_8qn5p")
+theme_override_styles/focus = SubResource("StyleBoxFlat_nnv5u")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qae73")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button[/b][/rainbow][/center]"
 fit_content = true
@@ -722,7 +722,7 @@ layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxFlat_mhiy7")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_b2f2b")
 bbcode_enabled = true
-text = "[center] [rainbow  freq=0.2 sat=10 val=20 ]**Markdown Toggle** [font_size= 24][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰨙[/font][/font_size][/rainbow] [/center]"
+text = "[center] [rainbow  freq=0.2 sat=10 val=20 ]**Markdown Toggle** [icon:toggle-switch-off-outline, 24][/rainbow] [/center]"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
