@@ -147,10 +147,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 4
+current_tab = 0
 
 [node name="MarkdownLabel" type="RichTextLabel" parent="."]
-visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
@@ -162,10 +161,10 @@ text = "[bgcolor=#00000000][font_size=22]Header Level 1[/font_size][/bgcolor]
 [bgcolor=#00000000][font_size=20]Header Level 2[/font_size][/bgcolor]
 [bgcolor=#00000000][font_size=18]Header Level 3[/font_size][/bgcolor]
 
-**bold**
-*italic*
-~~strike through~~
-[code]mono-spaced text[/code]
+ [b]bold[/b] 
+ [i]italic[/i] 
+ [s]strike through[/s] 
+ [code]mono-spaced text[/code] 
 
 text with space 6
 [font_size=6] [/font_size]
@@ -245,10 +244,10 @@ _text = "# Header Level 1
 ## Header Level 2
 ### Header Level 3
 
-**bold**
-*italic*
-~~strike through~~
-`mono-spaced text`
+ **bold** 
+ *italic* 
+ ~~strike through~~ 
+ `mono-spaced text` 
 
 text with space 6
 @space=6
@@ -638,6 +637,7 @@ parser = SubResource("Resource_va62r")
 metadata/_tab_index = 3
 
 [node name="AdvancedTextButton" type="Panel" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
@@ -657,14 +657,14 @@ layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxFlat_a0s63")
 theme_override_styles/normal = SubResource("StyleBoxFlat_qrhtc")
 bbcode_enabled = true
-text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button[/b][/rainbow][/center]"
+text = "[center][rainbow  freq=0.2 sat=10 val=20 ] [b]Markdown Button[/b] [font=res://addons/icons-fonts/icons_fonts/MaterialIcons/material_design_icons.ttf]󱜙[/font][/rainbow][/center]"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("10_w4hpi")
 toggle_mode = true
 button_group = &"test_btn"
-_text = "@center{@rainbow freq=0.2 sat=10 val=20 {**Markdown Button**}}"
+_text = "@center{@rainbow freq=0.2 sat=10 val=20 { **Markdown Button** [mi:robot-happy]}}"
 parser = SubResource("Resource_oxcqf")
 
 [node name="InitTestRakugoVars" type="Timer" parent="."]
