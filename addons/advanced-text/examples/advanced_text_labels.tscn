@@ -87,7 +87,7 @@ bold = "**"
 points = "-"
 headers = Array[LabelSettings]([SubResource("LabelSettings_mqb2n"), SubResource("LabelSettings_c8yh7"), SubResource("LabelSettings_faw0r"), SubResource("LabelSettings_n4lgb")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mursv"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gefr5"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -108,7 +108,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5yccs"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qn5p"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -203,18 +203,18 @@ current_tab = 3
 visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
-theme_override_fonts/bold_font = ExtResource("2_aml2b")
+theme_override_fonts/mono_font = ExtResource("5_fmnql")
 theme_override_fonts/italics_font = ExtResource("3_7l8y2")
 theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
-theme_override_fonts/mono_font = ExtResource("5_fmnql")
+theme_override_fonts/bold_font = ExtResource("2_aml2b")
 bbcode_enabled = true
 text = "[bgcolor=#00000000][font_size=22]Header Level 1[/font_size][/bgcolor]
 [bgcolor=#00000000][font_size=20]Header Level 2[/font_size][/bgcolor]
 [bgcolor=#00000000][font_size=18]Header Level 3[/font_size][/bgcolor]
 
-[b]bold[/b]
-[i]italic[/i]
-[s]strike through[/s]
+**bold**
+*italic*
+~~strike through~~
 [code]mono-spaced text[/code]
 
 text with space 6
@@ -367,16 +367,17 @@ test_color = <test_color>
 
 "
 parser = SubResource("Resource_uxkq8")
+metadata/_tab_index = 0
 
 [node name="RenPyStringLabel" type="RichTextLabel" parent="."]
+auto_translate_mode = 2
 visible = false
 layout_mode = 2
-auto_translate = false
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
-theme_override_fonts/bold_font = ExtResource("2_aml2b")
+theme_override_fonts/mono_font = ExtResource("5_fmnql")
 theme_override_fonts/italics_font = ExtResource("3_7l8y2")
 theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
-theme_override_fonts/mono_font = ExtResource("5_fmnql")
+theme_override_fonts/bold_font = ExtResource("2_aml2b")
 bbcode_enabled = true
 text = "[bgcolor=#00000000][color=#ffffffff][font_size=22]Header Level 1[/font_size][/color][/bgcolor]
 [bgcolor=#00000000][color=#ffffffff][font_size=20]Header Level 2[/font_size][/color][/bgcolor]
@@ -518,15 +519,16 @@ test_color = <test_color>
 {shake rate=5 level=10}shake{/shake}
 {rainbow freq=0.2 sat=10 val=20}rainbow{/rainbow}"
 parser = SubResource("Resource_1176o")
+metadata/_tab_index = 1
 
 [node name="ExBBCodeLabel" type="RichTextLabel" parent="."]
 visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
-theme_override_fonts/bold_font = ExtResource("2_aml2b")
+theme_override_fonts/mono_font = ExtResource("5_fmnql")
 theme_override_fonts/italics_font = ExtResource("3_7l8y2")
 theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
-theme_override_fonts/mono_font = ExtResource("5_fmnql")
+theme_override_fonts/bold_font = ExtResource("2_aml2b")
 bbcode_enabled = true
 text = "[bgcolor=#00000000][color=#ffffffff][font_size=22]Header Level 1[/font_size][/color][/bgcolor]
 [bgcolor=#00000000][color=#ffffffff][font_size=20]Header Level 2[/font_size][/color][/bgcolor]
@@ -666,14 +668,15 @@ s
 [rainbow freq=0.2 sat=10 val=20]rainbow[/rainbow]
 "
 parser = SubResource("Resource_xt6yb")
+metadata/_tab_index = 2
 
 [node name="PluginsTests" type="RichTextLabel" parent="."]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
-theme_override_fonts/bold_font = ExtResource("2_aml2b")
+theme_override_fonts/mono_font = ExtResource("5_fmnql")
 theme_override_fonts/italics_font = ExtResource("3_7l8y2")
 theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
-theme_override_fonts/mono_font = ExtResource("5_fmnql")
+theme_override_fonts/bold_font = ExtResource("2_aml2b")
 bbcode_enabled = true
 text = "[font_size= 64][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰾼[/font][/font_size]
 [font_size=64][font=res://addons/emojis-for-godot/emojis/NotoColorEmoji.ttf]🍪[/font][/font_size]"
@@ -681,10 +684,12 @@ script = ExtResource("1_uinld")
 _text = "[icon:format-text-rotation-angle-up, 64]
 :cookie, 64:"
 parser = SubResource("Resource_va62r")
+metadata/_tab_index = 3
 
 [node name="AdvancedTextButton" type="Panel" parent="."]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="AdvancedTextButton"]
 layout_mode = 1
@@ -699,8 +704,8 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_mursv")
-theme_override_styles/normal = SubResource("StyleBoxFlat_5yccs")
+theme_override_styles/focus = SubResource("StyleBoxFlat_gefr5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8qn5p")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Button[/b][/rainbow][/center]"
 fit_content = true
@@ -717,7 +722,7 @@ layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxFlat_mhiy7")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_b2f2b")
 bbcode_enabled = true
-text = "[center] [rainbow  freq=0.2 sat=10 val=20 ][b]Markdown Toggle[/b] [font_size= 24][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰨙[/font][/font_size][/rainbow] [/center]"
+text = "[center] [rainbow  freq=0.2 sat=10 val=20 ]**Markdown Toggle** [font_size= 24][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰨙[/font][/font_size][/rainbow] [/center]"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
