@@ -8,39 +8,27 @@ extends Node
 ## Reference to root
 ## Its a getter that returns [code]get_node("/root/")[/code]
 var root : Node:
-	get:
-		if !root:
-			root = get_node("/root")
-		return root
+	get: return get_tree().root
 
 ## Reference to Rakugo singleton
 ## Its a getter that returns Rakugo singelton if it exist
 var rakugo: Node:
 	get:
-		if Engine.is_editor_hint():
-			return null
+		if Engine.is_editor_hint(): return null
 		if !rakugo:
 			rakugo = get_singleton("Rakugo")
 		return rakugo
 
-## Reference to EmojisDB singleton
-## Its a getter that returns EmojisDB singelton if it exist
-var emojis: Node:
+## Reference to IconsFonts singleton
+## Its a getter that returns IconsFonts singelton if it exist
+var icons_fonts: Node:
 	get:
-		if !emojis:
-			emojis = get_singleton("EmojisDB")
-		return emojis
-
-## Reference to IconsDB singleton
-## Its a getter that returns MaterialIconsDB singelton if it exist
-var icons: Node:
-	get:
-		if !icons:
-			icons = get_singleton("MaterialIconsDB")
-		return icons
+		if !icons_fonts:
+			icons_fonts = get_singleton("IconsFonts")
+		return icons_fonts
 
 ## Func used get singletons from other addons.
-## Build-in Engine.get_singleton() works only for C++ custom modules,
+## Build-in Engine.get_singleton() works only for C++ modules,
 ## So we need to make this walkaround.
 func get_singleton(singleton: String) -> Node:
 	if root.has_node(singleton):

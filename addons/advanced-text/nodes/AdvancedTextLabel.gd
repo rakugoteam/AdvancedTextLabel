@@ -30,20 +30,28 @@ signal custom_link(url:String)
 		parser = value
 		update_configuration_warnings()
 		if parser:
-			parser.changed.connect(_parse_text)
+			if not parser.changed.is_connected(_parse_text):
+				parser.changed.connect(_parse_text)
 
 			if parser is ExtendedBBCodeParser:
 				for h in parser.headers:
-					h.changed.connect(_parse_text)
+					if not h.changed.is_connected(_parse_text):
+						h.changed.connect(_parse_text)
 
 			_parse_text()
-			print("parse text")
+			# print("parse text")
 	
 	get: return parser
+
+var font_size : int:
+	get: return theme.get_font_size(get_class(), &"normal")
 
 func _ready():
 	bbcode_enabled = true
 	meta_clicked.connect(_on_meta)
+	if not _text:
+		custom_minimum_size = Vector2.ONE * font_size
+
 	_parse_text()
 
 func _parse_text() -> void:

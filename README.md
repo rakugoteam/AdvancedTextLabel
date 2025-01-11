@@ -10,8 +10,7 @@ This new version is designed in way so any one can crate its own TextParser to u
 - Supports Markdown and RenPy
 - Adds headers supports RenPy and BBCode
 - Support for variables in [Rakugo Dialogue System](https://github.com/rakugoteam/Rakugo-Dialogue-System) use`<var_name>`
-- Support [Emojis For Godot](https://github.com/rakugoteam/Emojis-For-Godot) use `:emoji:`
-- Support [Godot Material Icons](https://github.com/rakugoteam/Godot-Material-Icons) use `[icon:icon_name]`
+- Support [Godot Icons Fonts](https://github.com/rakugoteam/Godot-Icons-Fonts)
 
 ### Nodes
 

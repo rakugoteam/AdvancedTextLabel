@@ -1,20 +1,21 @@
+@icon("res://addons/advanced-text/icons/AdvancedTextButton.svg")
 @tool
-extends AdvancedTextLabel
 
 ## This is a AdvancedTextLabel that behaves like a button
 ## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/AdvancedTextCheckButton/
 class_name AdvancedTextButton
+extends AdvancedTextLabel
 
 ## Emitted when button is pressed
 signal pressed
 
 ## Emitted when button is toggled
 ## Works only if `toggle_mode` is on.
-signal toggled(value:bool)
+signal toggled(value: bool)
 
 ## If true, button will be disabled
 @export var disabled := false:
-	set (value):
+	set(value):
 		disabled = value
 		if disabled:
 			_change_stylebox("disabled")
@@ -29,9 +30,13 @@ signal toggled(value:bool)
 var _toggled := false:
 	get: return _toggled
 
+## If true, on one button in group will be toggled
+## needs toggle_mode = true to works
+@export var radio_mode := false
+
 ## If true, button will be in pressed state
 @export var button_pressed := false:
-	set (value):
+	set(value):
 		if toggle_mode:
 			_togglef(null, value)
 			button_pressed = value
@@ -42,7 +47,11 @@ var _toggled := false:
 
 ## Name of node group to be used as button group
 ## It changes all toggleable buttons in group in to radio buttons
-@export var button_group : StringName = ""
+@export var button_group: StringName = ""
+
+func connect_if_possible(sig: Signal, method: Callable):
+	if !sig.is_connected(method):
+		sig.connect(method)
 
 func _ready() -> void:
 	scroll_active = false
@@ -50,8 +59,9 @@ func _ready() -> void:
 	fit_content = true
 	_change_stylebox("normal")
 	_change_stylebox("focus", "focus")
-	mouse_entered.connect(_change_stylebox.bind("hover"))
-	mouse_exited.connect(_on_mouse_exited)
+	
+	connect_if_possible(mouse_entered, _change_stylebox.bind("hover"))
+	connect_if_possible(mouse_exited, _on_mouse_exited)
 	
 	if button_group:
 		add_to_group(button_group)
@@ -63,7 +73,7 @@ func _on_mouse_exited():
 
 	_change_stylebox("normal")
 
-func _change_stylebox(button_style:StringName, label_style:StringName = "normal"):
+func _change_stylebox(button_style: StringName, label_style: StringName = "normal"):
 	var stylebox := get_theme_stylebox(button_style, "Button")
 	add_theme_stylebox_override(label_style, stylebox)
 
@@ -85,7 +95,9 @@ func _gui_input(event: InputEvent) -> void:
 				# print("pressed")
 
 func _togglef(main_button: AdvancedTextButton, value: bool):
-	if disabled : return
+	if disabled: return
+	if main_button == self: return
+	if radio_mode and _toggled: return
 
 	if value:
 		_change_stylebox("pressed")

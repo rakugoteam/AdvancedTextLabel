@@ -2,7 +2,7 @@
 @icon("res://addons/advanced-text/icons/bbcode.svg")
 extends TextParser
 
-## This parser adds Headers {h1}, :emojis: and icons [icon:name]
+## This parser adds Headers {h1} and support for IconsFonts
 ## add Rakugo variables with <var_name> to BBCode
 ## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/ExtendedBBCodeParser/
 class_name ExtendedBBCodeParser
@@ -31,11 +31,8 @@ func _addons(text: String) -> String:
 	if AdvancedText.rakugo:
 		text = AdvancedText.rakugo.replace_variables(text)
 	
-	if AdvancedText.emojis:
-		text = AdvancedText.emojis.parse_emojis(text)
-	
-	if AdvancedText.icons:
-		text = AdvancedText.icons.parse_icons(text)
+	if AdvancedText.icons_fonts:
+		text = AdvancedText.icons_fonts.parse_text(text)
 	
 	return text
 
