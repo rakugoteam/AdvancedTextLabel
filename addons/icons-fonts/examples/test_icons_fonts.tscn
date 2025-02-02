@@ -1,0 +1,267 @@
+[gd_scene load_steps=23 format=3 uid="uid://casymgu2sqx81"]
+
+[ext_resource type="FontFile" uid="uid://be10y8fgoiayy" path="res://addons/icons-fonts/icons_fonts/emojis/NotoColorEmoji.ttf" id="1_lglyu"]
+[ext_resource type="Script" path="res://addons/icons-fonts/nodes/FontIcon.gd" id="2_fd237"]
+[ext_resource type="Script" path="res://addons/icons-fonts/resources/FontIconSetting.gd" id="3_jajcj"]
+[ext_resource type="Script" path="res://addons/icons-fonts/nodes/FontIconButton.gd" id="4_5ca3b"]
+[ext_resource type="Script" path="res://addons/icons-fonts/nodes/FontIconCheckButton.gd" id="5_qfxwr"]
+[ext_resource type="Script" path="res://addons/icons-fonts/examples/rich_text_label_with_icons.gd" id="6_3361y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fw4y0"]
+font = ExtResource("1_lglyu")
+font_size = 64
+shadow_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_lqfro"]
+script = ExtResource("3_jajcj")
+icon_font = "MaterialIcons"
+icon_name = "image-outline"
+icon_size = 128
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_28mvn"]
+script = ExtResource("3_jajcj")
+icon_font = "MaterialIcons"
+icon_name = "image-outline"
+icon_size = 16
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6nmg6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scswg"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Resource" id="Resource_nwary"]
+script = ExtResource("3_jajcj")
+icon_font = "MaterialIcons"
+icon_name = "toggle-switch-variant"
+icon_size = 16
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_v03hs"]
+script = ExtResource("3_jajcj")
+icon_font = "MaterialIcons"
+icon_name = "toggle-switch-variant-off"
+icon_size = 16
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_7vk3f"]
+script = ExtResource("3_jajcj")
+icon_font = "MaterialIcons"
+icon_name = "image-outline"
+icon_size = 16
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mmhoi"]
+
+[sub_resource type="Resource" id="Resource_a0w4j"]
+script = ExtResource("3_jajcj")
+icon_font = "Emojis"
+icon_name = "framed_picture"
+icon_size = 64
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_pqb8k"]
+script = ExtResource("3_jajcj")
+icon_font = "Emojis"
+icon_name = "framed_picture"
+icon_size = 32
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dtieq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4h4a"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Resource" id="Resource_bo5k2"]
+script = ExtResource("3_jajcj")
+icon_font = "Emojis"
+icon_name = "thumbs_up"
+icon_size = 16
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_6kb3v"]
+script = ExtResource("3_jajcj")
+icon_font = "Emojis"
+icon_name = "thumbs_down"
+icon_size = 16
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_r0p3s"]
+script = ExtResource("3_jajcj")
+icon_font = "Emojis"
+icon_name = "framed_picture"
+icon_size = 32
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[node name="TestIconsFonts" type="BoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 105.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="MaterialIconsExamples" type="BoxContainer" parent="."]
+layout_mode = 2
+vertical = true
+
+[node name="Label" type="Label" parent="MaterialIconsExamples"]
+layout_mode = 2
+text = "Material Icons"
+horizontal_alignment = 1
+
+[node name="BoxContainer" type="BoxContainer" parent="MaterialIconsExamples"]
+layout_mode = 2
+
+[node name="FontIcon" type="Label" parent="MaterialIconsExamples/BoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "󰥶"
+label_settings = SubResource("LabelSettings_fw4y0")
+script = ExtResource("2_fd237")
+icon_settings = SubResource("Resource_lqfro")
+
+[node name="FontIconButton" type="PanelContainer" parent="MaterialIconsExamples/BoxContainer"]
+layout_mode = 2
+script = ExtResource("4_5ca3b")
+icon_settings = SubResource("Resource_28mvn")
+label_text = "Jakiś Tekst"
+label_settings = SubResource("LabelSettings_6nmg6")
+button_margin = 0
+
+[node name="FontIconCheckButton" type="PanelContainer" parent="MaterialIconsExamples/BoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_scswg")
+script = ExtResource("5_qfxwr")
+on_icon_settings = SubResource("Resource_nwary")
+off_icon_settings = SubResource("Resource_v03hs")
+layout_order = "Label-Icon-Toggle"
+icon_settings = SubResource("Resource_7vk3f")
+label_text = "Toogle"
+label_settings = SubResource("LabelSettings_mmhoi")
+button_margin = 0
+toggle_mode = true
+
+[node name="EmojisExamples" type="BoxContainer" parent="."]
+layout_mode = 2
+vertical = true
+
+[node name="Label2" type="Label" parent="EmojisExamples"]
+layout_mode = 2
+text = "Emoji"
+horizontal_alignment = 1
+
+[node name="BoxContainer" type="BoxContainer" parent="EmojisExamples"]
+layout_mode = 2
+
+[node name="FontIcon2" type="Label" parent="EmojisExamples/BoxContainer"]
+layout_mode = 2
+text = "🖼️"
+label_settings = SubResource("LabelSettings_fw4y0")
+script = ExtResource("2_fd237")
+icon_settings = SubResource("Resource_a0w4j")
+
+[node name="FontIconButton2" type="PanelContainer" parent="EmojisExamples/BoxContainer"]
+layout_mode = 2
+script = ExtResource("4_5ca3b")
+icon_settings = SubResource("Resource_pqb8k")
+label_text = "Jakiś Tekst"
+label_settings = SubResource("LabelSettings_dtieq")
+button_margin = 6
+
+[node name="FontIconCheckButton2" type="PanelContainer" parent="EmojisExamples/BoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r4h4a")
+script = ExtResource("5_qfxwr")
+on_icon_settings = SubResource("Resource_bo5k2")
+off_icon_settings = SubResource("Resource_6kb3v")
+layout_order = "Label-Icon-Toggle"
+layout_vertical = false
+icon_settings = SubResource("Resource_r0p3s")
+label_text = "Toogle"
+label_settings = SubResource("LabelSettings_mmhoi")
+button_margin = 0
+toggle_mode = true
+
+[node name="RichTextLabelWithIcons" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "This text can have icons [font=res://addons/icons-fonts/icons_fonts/MaterialIcons/material_design_icons.ttf]󰋩[/font],
+but also emojis [font=res://addons/icons-fonts/icons_fonts/emojis/NotoColorEmoji.ttf]🖼️[/font]"
+fit_content = true
+script = ExtResource("6_3361y")
+text_with_icons = "This text can have icons [mi:image],
+but also emojis :framed_picture:"
