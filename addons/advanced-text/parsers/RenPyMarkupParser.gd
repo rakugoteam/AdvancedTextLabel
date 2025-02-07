@@ -3,22 +3,23 @@
 extends ExtendedBBCodeParser
 
 ## This parser is every limited as its just translates RenPy Markup to BBCode
-## This parser also adds Headers {h1}, :emojis: and icons {icon:name} add Rakugo variables with <var_name>
+## adds Headers {h1}, FontsIcons and Rakugo variables with <var_name>
 ## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/RenPyMarkupParser/
 class_name RenPyMarkupParser
 
 ## Returns given RenPyMarkup parsed into BBCode
 func parse(text: String) -> String:
-	text = _addons(text)
-	text = parse_links(text)
-	text = parse_imgs(text)
-	text = parse_imgs_size(text)
-	
 	## BBCode and Ren'Py has a lot of the same tags,
 	## but RenPy uses '{}' instead of '[]',
 	## so we need to replace them
 	text = safe_replace("{", "[", text)
 	text = safe_replace("}", "]", text)
+
+	text = _addons(text)
+	text = parse_links(text)
+	text = parse_imgs(text)
+	text = parse_imgs_size(text)
+
 	text = parse_headers(text)
 	text = parse_spaces(text)
 	

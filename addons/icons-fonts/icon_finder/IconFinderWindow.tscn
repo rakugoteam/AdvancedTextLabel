@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://qsslm1ensgyo"]
+
+[ext_resource type="Script" path="res://addons/icons-fonts/icon_finder/icon_finder_window.gd" id="1_nvv0t"]
+[ext_resource type="PackedScene" uid="uid://bni8w3a3pcbwn" path="res://addons/icons-fonts/icon_finder/IconFinder.tscn" id="2_aqufi"]
+
+[node name="IconFinderWindow" type="Window"]
+title = "Icon Finder"
+initial_position = 2
+size = Vector2i(775, 400)
+wrap_controls = true
+script = ExtResource("1_nvv0t")
+
+[node name="IconFinder" parent="." instance=ExtResource("2_aqufi")]

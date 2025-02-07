@@ -42,8 +42,8 @@ func test_emojis():
 
 func test_icons():
 	setup_parser()
-	assert_parser("[icon:folder-open]", "[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]")
-	assert_parser("[icon:folder-open, 32]", "[font_size=32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]")
+	assert_parser("[im:folder-open]", "[font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font]")
+	assert_parser("[im:folder-open, 32]", "[font_size=32][font=res://addons/material-design-icons/fonts/material_design_icons.ttf]󰝰[/font][/font_size]")
 
 func test_rakugo_vars():
 	setup_parser()
