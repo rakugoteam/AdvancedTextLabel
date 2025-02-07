@@ -1,21 +1,21 @@
 @tool
 @icon("res://addons/advanced-text/icons/md.svg")
-extends ExtendedBBCodeParser
 
 ## This parser is every limited as its just translates Markdown to BBCode,
 ## adds support for add Rakugo variables with <var_name>
 ## and Headers "#" and support for IconsFonts
-## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/MarkdownParser/
+## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.3/MarkdownParser/
 class_name MarkdownParser
+extends ExtendedBBCodeParser
 
 ## choose to use * or _ to open/close italics tag
-@export_enum("*", "_") var italics = "*"
+@export_enum("both", "*", "_") var italics = "both"
 
 ## choose to use * or _ to open/close bold tag
-@export_enum("**", "__") var bold = "**"
+@export_enum("both", "**", "__") var bold = "both"
 
 ## choose to use - or * to make points in bulleted list
-@export_enum("-", "*") var points = "-"
+@export_enum("both", "-", "*") var points = "both"
 
 ## returns given Markdown parsed into BBCode
 func parse(text: String) -> String:
@@ -26,7 +26,6 @@ func parse(text: String) -> String:
 	text = parse_code(text)
 	text = parse_hints(text)
 	text = parse_links(text)
-	text = parse_bold_italic(text)
 	text = parse_bold(text)
 	text = parse_italics(text)
 	text = parse_strike_through(text)
@@ -229,54 +228,63 @@ func parse_sing(text: String, open: String, close: String, tag: String):
 	
 	return text
 
-## Parse md blod italics to in given text to BBCode
-## Example of md  blod italics:
-## _**text**_, ***text*** , ___text___
-func parse_bold_italic(text: String) -> String:
-	var sing := ""
-	# *italic*
-	match italics:
-		"*": sing = "\\*"
-		"_": sing = "\\_"
-	
-	match bold:
-		"**": sing += "\\*\\*"
-		"__": sing += "\\_\\_"
+func parse_sing_def(text, sing, tag) -> String:
+	return parse_sing(text, sing, "%s( |\n|\\*+)" % sing, tag)
 
-	return parse_sing(text, " " + sing, sing + " ", "ib")
+func get_italics_sing(_italics: String = italics) -> String:
+	match _italics:
+		"*": return "\\*"
+		"_": return "\\_"
+	return ""
 
+func get_bold_sing(_bold: String = bold) -> String:
+	match _bold:
+		"**": return "\\*\\*"
+		"__": return "\\_\\_"
+	return ""
 
 ## Parse md italics to in given text to BBCode
 ## Example of md italics:
 ## If italics = "*" : *italics*
 ## If italics = "_" : _italics_
-func parse_italics(text: String) -> String:
+func parse_italics(text: String, _italics: String = italics) -> String:
 	var sing := ""
 	# *italic*
-	match italics:
-		"*": sing = "\\*"
-		"_": sing = "\\_"
+	match _italics:
+		"*", "_": sing = get_italics_sing(_italics)
+		"both":
+			text = parse_italics(text, "*")
+			return parse_italics(text, "_")
 
-	return parse_sing(text, " " + sing, sing + " ", "i")
+	return parse_sing_def(text, sing, "i")
 
 ## Parse md bold to in given text to BBCode
 ## Example of md bold:
 ## If bold = "**" : **bold**
 ## If bold = "__" : __bold__
-func parse_bold(text: String) -> String:
+func parse_bold(text: String, _bold: String = bold) -> String:
 	var sing := ""
+	match _bold:
 	# **bold**
-	match bold:
-		"**": sing = "\\*\\*"
-		"__": sing = "\\_\\_"
-	
-	return parse_sing(text, " " + sing, sing + " ", "b")
+		"**", "__": sing = get_bold_sing(_bold)
+		"both":
+			text = parse_bold(text, "**")
+			return parse_bold(text, "__")
+
+	return parse_sing_def(text, sing, "b")
+
+func parse_bold_italic(text: String) -> String:
+	var _bold := get_bold_sing(bold)
+	var _italics := get_italics_sing(italics)
+	var sing := _bold + _italics
+
+	return parse_sing_def(text, sing, "ib")
 
 ## Parse md strike through to in given text to BBCode
 ## Example of md strike through: ~~strike through~~
 func parse_strike_through(text: String) -> String:
 	# ~~strike through~~
-	return parse_sing(text, " ~~", "~~ ", "s")
+	return parse_sing_def(text, "~~", "s")
 
 ## Parse md code to in given text to BBCode
 ## Example of md code:
@@ -284,7 +292,7 @@ func parse_strike_through(text: String) -> String:
 ## multiline code: ```code```
 func parse_code(text: String) -> String:
 	# `code` or ```code```
-	return parse_sing(text, "`{1,3}", "`{1,3}", "code")
+	return parse_sing_def(text, "`{1,3}", "code")
 
 ## Parse md table to in given text to BBCode
 ## Example of md table:
@@ -391,8 +399,16 @@ func parse_keyword(text: String, keyword: String, tag: String) -> String:
 	return text
 
 ## Parse md points list to in given text to BBCode
-func parse_points(text: String) -> String:
-	return parse_list(text, "[ul]", "[/ul]", "^(\\t*)-\\s+(.+)$")
+func parse_points(text: String, _points: String = points) -> String:
+	var regex := "^(\\t*)%s\\s+(.+)$"
+	match _points:
+		"-": regex %= "-"
+		"*": regex %= "\\*"
+		"both":
+			text = parse_points(text, "-")
+			return parse_points(text, "*")
+
+	return parse_list(text, "[ul]", "[/ul]", regex)
 
 ## Parse md number points list to in given text to BBCode
 func parse_number_points(text: String) -> String:
