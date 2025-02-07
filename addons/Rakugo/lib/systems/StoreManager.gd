@@ -13,7 +13,6 @@ var parsed_scripts: Dictionary
 func _init():
 	save_folder_path = ProjectSettings.get_setting("addons/rakugo/save_folder")
 
-
 ## Rk
 func load_rk(path: String) -> PackedStringArray:
 	var file = FileAccess.open(path, FileAccess.READ)
