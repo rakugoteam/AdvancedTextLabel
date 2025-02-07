@@ -3,9 +3,7 @@
 /.mono/
 mono_crash.*.json
 
-/addons/*
-!/addons/advanced-text/
-!/addons/gut/
+/addons/open_external_editor
 .gut_editor_config.json
 .gutconfig.json
 
