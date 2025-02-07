@@ -9,16 +9,17 @@ class_name RenPyMarkupParser
 
 ## Returns given RenPyMarkup parsed into BBCode
 func parse(text: String) -> String:
-	text = _addons(text)
-	text = parse_links(text)
-	text = parse_imgs(text)
-	text = parse_imgs_size(text)
-	
 	## BBCode and Ren'Py has a lot of the same tags,
 	## but RenPy uses '{}' instead of '[]',
 	## so we need to replace them
 	text = safe_replace("{", "[", text)
 	text = safe_replace("}", "]", text)
+
+	text = _addons(text)
+	text = parse_links(text)
+	text = parse_imgs(text)
+	text = parse_imgs_size(text)
+
 	text = parse_headers(text)
 	text = parse_spaces(text)
 	
