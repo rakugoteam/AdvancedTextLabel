@@ -64,8 +64,6 @@ var parser_regex :={
 	# "like regex" (> label_name)?
 	CHOICE = "^(?<text>{STRING})( > (?<label>{NAME}))?$",
 	# jump label
-	JUMP_IF_SIGNSAL = "^jump (?<label>{NAME}) if (?<node>{NAME}) (?<sg>{NAME})$",
-	# jump label
 	JUMP = "^jump (?<label>{NAME})( if (?<expression>.+))?$",
 	# for setting Rakugo variables
 	SET_VARIABLE = "^(?<lvar_name>{VARIABLE})\\s*{ASSIGNMENT}\\s*((?<text>{STRING})|(?<number>{NUMERIC})|(?<rvar_name>{VARIABLE}))$",
@@ -277,13 +275,12 @@ func parse_script(lines:PackedStringArray) -> Dictionary:
 						}
 
 						parse_array.push_back([key, dic_result])
-
 					_:
 						parse_array.push_back([key, result])
 				break
 
 		if (not have_find_key):
-			push_error("Parser: Error on line: " + str(i+1)+ ", can not parse it !")
+			push_error("Parser: Error on line: " + str(i+1) + ", can not parse it !")
 			return {}
 			
 	return {"parse_array":parse_array, "labels":labels}

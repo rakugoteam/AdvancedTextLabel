@@ -4,11 +4,11 @@ const jump_error = "Executer::do_execute_jump, can not jump to unknow label : "
 
 var stop_thread := false
 
-var current_thread: Thread
+var current_thread:Thread
 
-var current_semaphore: Semaphore
+var current_semaphore:Semaphore
 
-var threads: Dictionary
+var threads:Dictionary
 
 var regex := {
 	NAME = "[a-zA-Z][a-zA-Z_0-9]*",
@@ -18,7 +18,7 @@ var regex := {
 
 var regex_cache := {}
 
-var menu_jump_index: int
+var menu_jump_index:int
 
 func _init():
 	for key in regex:
@@ -34,7 +34,7 @@ func get_current_thread_datas() -> Dictionary:
 	if current_thread:
 		var dico = threads[current_thread.get_id()]
 
-		return {"file_base_name": dico["file_base_name"], "last_index": dico["last_index"]}
+		return {"file_base_name":dico["file_base_name"], "last_index":dico["last_index"]}
 
 	return {}
 
@@ -46,16 +46,7 @@ func stop_current_thread() -> int:
 		dico["semaphore"].post()
 	return OK
 
-func try_jump(can_jump, label, labels, index, parameters) -> int:
-	if can_jump:
-		index = do_execute_jump(label, labels) - 1
-	
-	if index == -2:
-		parameters["error"] = jump_error + label
-		parameters["stop"] = true
-	return index
-
-func execute_script(parsed_script: Dictionary, label_name: String = "", index: int = 0) -> int:
+func execute_script(parsed_script:Dictionary, label_name:String = "", index:int = 0) -> int:
 	stop_current_thread()
 
 	current_thread = Thread.new()
@@ -63,11 +54,11 @@ func execute_script(parsed_script: Dictionary, label_name: String = "", index: i
 	current_semaphore = Semaphore.new()
 	
 	var thread_parameters = {
-		"thread": current_thread,
-		"semaphore": current_semaphore,
-		"parsed_script": parsed_script,
-		"file_base_name": parsed_script["path"].get_file().get_basename(),
-		"stop": false
+		"thread":current_thread,
+		"semaphore":current_semaphore,
+		"parsed_script":parsed_script,
+		"file_base_name":parsed_script["path"].get_file().get_basename(),
+		"stop":false
 		}
 
 	if index > 0:
@@ -75,7 +66,7 @@ func execute_script(parsed_script: Dictionary, label_name: String = "", index: i
 	elif !label_name.is_empty():
 		thread_parameters["label_name"] = label_name
 
-	if current_thread.start(Callable(self, "do_execute_script").bind(thread_parameters)) != OK:
+	if current_thread.start(Callable(self,"do_execute_script").bind(thread_parameters)) != OK:
 		threads.erase(current_thread.get_id())
 
 		current_thread = null
@@ -85,7 +76,7 @@ func execute_script(parsed_script: Dictionary, label_name: String = "", index: i
 		return FAILED
 	return OK
 
-func do_execute_script_end(parameters: Dictionary):
+func do_execute_script_end(parameters:Dictionary):
 	parameters["thread"].wait_to_finish()
 	
 	if parameters.has("error"):
@@ -100,13 +91,13 @@ func do_execute_script_end(parameters: Dictionary):
 		
 	current_semaphore = null
 
-func do_execute_jump(jump_label: String, labels: Dictionary) -> int:
+func do_execute_jump(jump_label:String, labels:Dictionary) -> int:
 	if labels.has(jump_label):
 		return labels[jump_label]
 
 	return -1
 
-func do_execute_script(parameters: Dictionary):
+func do_execute_script(parameters:Dictionary):
 	var thread = parameters["thread"]
 	
 	threads[thread.get_id()] = parameters
@@ -117,7 +108,7 @@ func do_execute_script(parameters: Dictionary):
 	
 	Rakugo.call_thread_safe("send_execute_script_start", parameters["file_base_name"])
 	
-	var parse_array: Array = parsed_script["parse_array"]
+	var parse_array:Array = parsed_script["parse_array"]
 	
 	var labels = parsed_script["labels"]
 
@@ -142,49 +133,14 @@ func do_execute_script(parameters: Dictionary):
 	while !parameters["stop"] and index < parse_array.size():
 		parameters["last_index"] = index
 
-		var line: Array = parse_array[index]
+		var line:Array = parse_array[index]
 		
 		var result = line[1]
 		
-		match (line[0]):
+		match(line[0]):
 			"EXIT":
 				parameters["stop"] = true
 				break
-			
-			"JUMP_IF_SIGNSAL":
-				var can_jump = false
-				var node_ref = result.get_string("node")
-
-				var node_path = Rakugo.get_variable(node_ref)
-				if node_path == null:
-					parameters["error"] = "Executer::do_execute_script::JUMP, can not get variable :" + node_ref
-					parameters["stop"] = true
-					break
-				
-				if !(node_path is String):
-					parameters["error"] = "Executer::do_execute_script::JUMP, %s variable isn't String" % node_ref
-					parameters["stop"] = true
-					break
-
-				var main := Engine.get_main_loop()
-				var root := main.current_scene() as Node
-				var node := root.get_node_or_null(node_path)
-				if node == null:
-					parameters["error"] = "Executer::do_execute_script::JUMP, %s node doesn't exits" % node_ref
-					parameters["stop"] = true
-					break
-
-				can_jump = true
-				var label = result.get_string("label")
-				var sg_name = result.get_string("sg")
-				node.connect(sg_name,
-					func(): index = try_jump(
-						can_jump, label, labels, index,
-						parameters
-					)
-				)
-
-				if index == -2: break
 
 			"JUMP":
 				var can_jump = false
@@ -195,7 +151,7 @@ func do_execute_script(parameters: Dictionary):
 					for var_name in line[3]:
 						var var_ = Rakugo.get_variable(var_name)
 
-						if var_ == null:
+						if !var_:
 							parameters["error"] = "Executer::do_execute_script::JUMP, can not get variable :" + var_name
 							parameters["stop"] = true
 							break
@@ -208,15 +164,18 @@ func do_execute_script(parameters: Dictionary):
 						parameters["error"] = "Executer::do_execute_script::JUMP, failed to execute expression : " + result.get_string("expression")
 						parameters["stop"] = true
 						break
-				
-				can_jump = true
+				else:
+					can_jump = true
 
 				var label = result.get_string("label")
 
-				index = try_jump(
-					can_jump, label, labels, index, parameters)
+				if can_jump:
+					index = do_execute_jump(label, labels) - 1
 				
-				if index == -2: break
+				if index == -2:
+					parameters["error"] = jump_error + label
+					parameters["stop"] = true
+					break
 			
 			"SAY":
 				var text = Rakugo.replace_variables(result["text"])
@@ -241,9 +200,9 @@ func do_execute_script(parameters: Dictionary):
 				semephore.wait()
 				
 			"MENU":
-				var menu_choices: PackedStringArray
+				var menu_choices:PackedStringArray
 				
-				var menu_jumps: Dictionary
+				var menu_jumps:Dictionary
 				
 				for i in line[2].size():
 					var menu_choice_result = line[2][i]
@@ -324,7 +283,7 @@ func do_execute_script(parameters: Dictionary):
 						parameters["stop"] = true
 						break
 					
-					match (assignment):
+					match(assignment):
 						"+=":
 							value = lvalue + value
 							
