@@ -28,11 +28,11 @@ func _gen_headers(sizes: Array[int], color:=Color.BLACK) -> Array[LabelSettings]
 ## Must be run at start of parsing
 ## Needed for plugins with other addons to work
 func _addons(text: String) -> String:
-	# if AdvancedText.rakugo:
-	# 	text = AdvancedText.rakugo.replace_variables(text)
+	if AdvancedText.rakugo:
+		text = AdvancedText.rakugo.replace_variables(text)
 	
 	if AdvancedText.icons_fonts:
-		text = AdvancedText.icons_fonts.parse_text(text)
+			text = AdvancedText.icons_fonts.parse_text(text)
 	
 	return text
 

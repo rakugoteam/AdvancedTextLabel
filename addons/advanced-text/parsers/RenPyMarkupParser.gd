@@ -12,18 +12,29 @@ func parse(text: String) -> String:
 	## BBCode and Ren'Py has a lot of the same tags,
 	## but RenPy uses '{}' instead of '[]',
 	## so we need to replace them
-	text = safe_replace("{", "[", text)
-	text = safe_replace("}", "]", text)
 
 	text = _addons(text)
 	text = parse_links(text)
 	text = parse_imgs(text)
 	text = parse_imgs_size(text)
 
+	text = safe_replace("{", "[", text)
+	text = safe_replace("}", "]", text)
+	
 	text = parse_headers(text)
 	text = parse_spaces(text)
-	
+
 	return text
+
+func _addons(text := "") -> String:
+	re.compile("\\{(mi:.*?)\\}")
+	result = re.search(text)
+	while result != null:
+		replacement = "[%s]" % result.get_string(1)
+		text = replace_regex_match(text, result, replacement)
+		result = re.search(text)
+		
+	return super._addons(text)
 
 ## parse Ren'Py links into BBCode
 ## Ren'Py links examples:
@@ -33,7 +44,6 @@ func parse_links(text: String) -> String:
 	re.compile("(?<!\\{)\\{(\\/{0,1})a(?:(=[^\\}]+)\\}|\\})")
 	result = re.search(text)
 	while result != null:
-		
 		replacement = "[%surl%s]" % [
 			result.get_string(1), result.get_string(2)]
 		text = replace_regex_match(text, result, replacement)
@@ -48,7 +58,6 @@ func parse_imgs(text: String) -> String:
 	re.compile("(?<!\\{)\\{img=([^\\}\\s]+)\\}")
 	result = re.search(text)
 	while result != null:
-		
 		replacement = to_bbcode_img(result.get_string(1))
 		text = replace_regex_match(text, result, replacement)
 		result = re.search(text)
@@ -62,7 +71,6 @@ func parse_imgs_size(text: String) -> String:
 	re.compile("(?<!\\{)\\{img=([^\\}\\s]+) size=([^\\}]+)\\}")
 	result = re.search(text)
 	while result != null:
-		
 		replacement = to_bbcode_img(result.get_string(1), result.get_string(2))
 		text = replace_regex_match(text, result, replacement)
 		result = re.search(text)

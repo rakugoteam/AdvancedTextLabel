@@ -86,7 +86,7 @@ bold = "**"
 points = "-"
 headers = Array[LabelSettings]([SubResource("LabelSettings_mqb2n"), SubResource("LabelSettings_c8yh7"), SubResource("LabelSettings_faw0r"), SubResource("LabelSettings_n4lgb")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_so4ba"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tr80r"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -107,7 +107,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qa83e"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hvxaw"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -147,9 +147,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
+current_tab = 1
 
 [node name="MarkdownLabel" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
@@ -323,7 +324,6 @@ metadata/_tab_index = 0
 
 [node name="RenPyStringLabel" type="RichTextLabel" parent="."]
 auto_translate_mode = 2
-visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
@@ -331,20 +331,21 @@ theme_override_fonts/italics_font = ExtResource("3_7l8y2")
 theme_override_fonts/bold_italics_font = ExtResource("4_rc1wt")
 theme_override_fonts/bold_font = ExtResource("2_aml2b")
 bbcode_enabled = true
-text = "[bgcolor=#00000000][color=#ffffffff][font_size=22]Header Level 1[/font_size][/color][/bgcolor]
-[bgcolor=#00000000][color=#ffffffff][font_size=20]Header Level 2[/font_size][/color][/bgcolor]
-[bgcolor=#00000000][color=#ffffffff][font_size=18]Header Level 3[/font_size][/color][/bgcolor]
+text = "[h1]Header Level 1[/h1]
+[h2]Header Level 2[/h2]
+[h3]Header Level 3[/h3]
 
 [b]bold[/b]
 [i]italic[/i]
+[i][b]bold-italic[/b][/i]
 [s]strike through[/s]
 [code]mono-spaced text[/code]
 
-[a=https://some_domain.com]link[/a]
-[a]https://some_domain.com[/a]
+[url=https://some_domain.com]link[/url]
+[url]https://some_domain.com[/url]
 
 text with space 6
-[font_size=6] [/font_size]
+[space=6]
 text with space 6
 
 [ul]
@@ -375,10 +376,10 @@ test_color = <test_color>
 
 [font=res://addons/icons-fonts/icons_fonts/emojis/NotoColorEmoji.ttf]😀[/font]
 [font_size=36][font=res://addons/icons-fonts/icons_fonts/emojis/NotoColorEmoji.ttf]😀[/font][/font_size]
-[font=res://addons/icons-fonts/icons_fonts/MaterialIcons/material_design_icons.ttf]󰝰[/font]
-[font_size= 32][font=res://addons/icons-fonts/icons_fonts/MaterialIcons/material_design_icons.ttf]󰝰[/font][/font_size]
-[img=res://icon.png]
-[img=res://icon.png size=24x24]
+[mi:folder-open]
+[mi:folder-open, 32]
+[img]res://icon.png[/img]
+[img=24x24]res://icon.png[/img]
 
 [table=3]
 [cell]1[/cell][cell]2[/cell][cell]3[/cell]
@@ -407,6 +408,7 @@ _text = "{h1}Header Level 1{/h1}
 
 {b}bold{/b}
 {i}italic{/i}
+{i}{b}bold-italic{/b}{/i}
 {s}strike through{/s}
 {code}mono-spaced text{/code}
 
@@ -657,8 +659,8 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_so4ba")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qa83e")
+theme_override_styles/focus = SubResource("StyleBoxFlat_tr80r")
+theme_override_styles/normal = SubResource("StyleBoxFlat_hvxaw")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ] [b]Markdown Button[/b] [font=res://addons/icons-fonts/icons_fonts/MaterialIcons/material_design_icons.ttf]󱜙[/font][/rainbow][/center]"
 fit_content = true
