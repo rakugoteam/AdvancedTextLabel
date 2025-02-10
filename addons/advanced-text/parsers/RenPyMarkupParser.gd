@@ -1,11 +1,11 @@
 @tool
 @icon("res://addons/advanced-text/icons/ren16.png")
-extends ExtendedBBCodeParser
 
 ## This parser is every limited as its just translates RenPy Markup to BBCode
 ## adds Headers {h1}, FontsIcons and Rakugo variables with <var_name>
 ## @tutorial: https://rakugoteam.github.io/advanced-text-docs/2.0/RenPyMarkupParser/
 class_name RenPyMarkupParser
+extends ExtendedBBCodeParser
 
 ## Returns given RenPyMarkup parsed into BBCode
 func parse(text: String) -> String:
