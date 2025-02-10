@@ -26,6 +26,7 @@ func parse(text: String) -> String:
 	text = parse_code(text)
 	text = parse_hints(text)
 	text = parse_links(text)
+	text = parse_bold_italic(text)
 	text = parse_bold(text)
 	text = parse_italics(text)
 	text = parse_strike_through(text)
@@ -125,7 +126,6 @@ func parse_imgs(text: String) -> String:
 		replacement = "[img]%s[/img]" % result.get_string(1)
 		text = replace_regex_match(text, result, replacement)
 		result = re.search(text)
-	
 	return text
 
 ## Parse md images with size to in given text to BBCode
@@ -214,6 +214,7 @@ func parse_sing(text: String, open: String, close: String, tag: String):
 		var cl_tag = "[/"
 		if "," in tag:
 			var tags := tag.split(",", false)
+			tags.reverse()
 			cl_tag += "][/".join(tags)
 		else: cl_tag += tag
 		cl_tag += "]"
@@ -228,57 +229,49 @@ func parse_sing(text: String, open: String, close: String, tag: String):
 	
 	return text
 
+
 func parse_sing_def(text, sing, tag) -> String:
-	return parse_sing(text, sing, "%s( |\n|\\*+)" % sing, tag)
+	return parse_sing(text, sing, "%s[ |\n|\\*]" % sing, tag)
 
 func get_italics_sing(_italics: String = italics) -> String:
 	match _italics:
 		"*": return "\\*"
 		"_": return "\\_"
-	return ""
+	return "[_|\\*]"
 
 func get_bold_sing(_bold: String = bold) -> String:
 	match _bold:
 		"**": return "\\*\\*"
 		"__": return "\\_\\_"
-	return ""
+	return "[_\\*]{2}"
 
 ## Parse md italics to in given text to BBCode
 ## Example of md italics:
 ## If italics = "*" : *italics*
 ## If italics = "_" : _italics_
-func parse_italics(text: String, _italics: String = italics) -> String:
-	var sing := ""
-	# *italic*
-	match _italics:
-		"*", "_": sing = get_italics_sing(_italics)
-		"both":
-			text = parse_italics(text, "*")
-			return parse_italics(text, "_")
-
+func parse_italics(text: String,) -> String:
+	var sing :=  get_italics_sing(italics)
 	return parse_sing_def(text, sing, "i")
 
 ## Parse md bold to in given text to BBCode
 ## Example of md bold:
 ## If bold = "**" : **bold**
 ## If bold = "__" : __bold__
-func parse_bold(text: String, _bold: String = bold) -> String:
-	var sing := ""
-	match _bold:
-	# **bold**
-		"**", "__": sing = get_bold_sing(_bold)
-		"both":
-			text = parse_bold(text, "**")
-			return parse_bold(text, "__")
-
+func parse_bold(text: String) -> String:
+	var sing := get_bold_sing(bold)
 	return parse_sing_def(text, sing, "b")
 
 func parse_bold_italic(text: String) -> String:
+	var sing := "[\\*_]{3}"
 	var _bold := get_bold_sing(bold)
 	var _italics := get_italics_sing(italics)
-	var sing := _bold + _italics
 
-	return parse_sing_def(text, sing, "ib")
+	if "both" in [bold, italics]:
+		sing = "%s%s" % [_bold, _italics]
+	else:
+		sing = "[%s%s]{3}" % [_bold, _italics]
+	
+	return parse_sing_def(text, sing, "i,b")
 
 ## Parse md strike through to in given text to BBCode
 ## Example of md strike through: ~~strike through~~
