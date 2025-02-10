@@ -56,13 +56,12 @@ func _ready():
 
 func _parse_text() -> void:
 	if !is_node_ready(): return
-	if parser:
-			
-		if AdvancedText.rakugo:
-			var r = AdvancedText.rakugo
-			var sg = r.sg_variable_changed
-			if !sg.is_connected(_on_rakuvars_changed):
-				sg.connect(_on_rakuvars_changed)
+	# if parser:
+	# 	if AdvancedText.rakugo:
+	# 		var r = AdvancedText.rakugo
+	# 		var sg = r.sg_variable_changed
+	# 		if !sg.is_connected(_on_rakuvars_changed):
+	# 			sg.connect(_on_rakuvars_changed)
 	
 	if !parser:
 		push_warning("parser is null at " + str(name))

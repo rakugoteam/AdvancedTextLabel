@@ -29,8 +29,8 @@ font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_uxkq8"]
 script = ExtResource("7_r0mph")
-italics = "*"
-bold = "**"
+italics = "both"
+bold = "both"
 points = "-"
 headers = Array[LabelSettings]([SubResource("LabelSettings_0sox2"), SubResource("LabelSettings_1rb2p"), SubResource("LabelSettings_cllr0"), SubResource("LabelSettings_633q0")])
 
@@ -86,7 +86,7 @@ bold = "**"
 points = "-"
 headers = Array[LabelSettings]([SubResource("LabelSettings_mqb2n"), SubResource("LabelSettings_c8yh7"), SubResource("LabelSettings_faw0r"), SubResource("LabelSettings_n4lgb")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c5u2j"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yydct"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -107,7 +107,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi7qd"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_etw76"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -161,10 +161,11 @@ text = "[bgcolor=#00000000][font_size=22]Header Level 1[/font_size][/bgcolor]
 [bgcolor=#00000000][font_size=20]Header Level 2[/font_size][/bgcolor]
 [bgcolor=#00000000][font_size=18]Header Level 3[/font_size][/bgcolor]
 
- [b]bold[/b] 
- [i]italic[/i] 
- [s]strike through[/s] 
- [code]mono-spaced text[/code] 
+[b]bold[/b] 
+[i]italic[/i] 
+[i][b]bold-italic[/] 
+[s]strike through[/s] 
+[code]mono-spaced text[/code] 
 
 text with space 6
 [font_size=6] [/font_size]
@@ -206,10 +207,8 @@ test_color = <test_color>
 [img]res://icon.png[/img]
 [img=24x24]res://icon.png[/img]
 
-[table=3][cell]1[/cell][cell]2[/cell][cell]3[/cell]
-[cell]4[/cell][cell]5[/cell][cell]6[/cell]
-[cell]7[/cell][cell]8[/cell][cell]9[/cell]
-[/table]
+@table=3 {
+|1|2[i]3[/i] |4|5[i]6[/i] |7|8[i]9[/i] }
 
 [u]underlined text[/u]
 [center]centered text[/center]
@@ -244,10 +243,11 @@ _text = "# Header Level 1
 ## Header Level 2
 ### Header Level 3
 
- **bold** 
- *italic* 
- ~~strike through~~ 
- `mono-spaced text` 
+**bold** 
+*italic* 
+***bold-italic*** 
+~~strike through~~ 
+`mono-spaced text` 
 
 text with space 6
 @space=6
@@ -654,8 +654,8 @@ grow_vertical = 2
 
 [node name="AdvancedTextButton" type="RichTextLabel" parent="AdvancedTextButton/VBoxContainer" groups=["test_btn"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_c5u2j")
-theme_override_styles/normal = SubResource("StyleBoxFlat_fi7qd")
+theme_override_styles/focus = SubResource("StyleBoxFlat_yydct")
+theme_override_styles/normal = SubResource("StyleBoxFlat_etw76")
 bbcode_enabled = true
 text = "[center][rainbow  freq=0.2 sat=10 val=20 ] [b]Markdown Button[/b] [font=res://addons/icons-fonts/icons_fonts/MaterialIcons/material_design_icons.ttf]󱜙[/font][/rainbow][/center]"
 fit_content = true
