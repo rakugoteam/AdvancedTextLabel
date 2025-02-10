@@ -184,7 +184,7 @@ func parse_hints(text: String) -> String:
 	return text
 
 func parse_sing(text: String, open: String, close: String, tag: String):
-	var search := "(.*)%s(.*?)%s(.*)" % [open, close]
+	var search := "(\\W+)%s(.*?)%s(\\W+)" % [open, close]
 	re.compile(search)
 	result = re.search(text)
 
@@ -229,10 +229,6 @@ func parse_sing(text: String, open: String, close: String, tag: String):
 	
 	return text
 
-
-func parse_sing_def(text, sing, tag) -> String:
-	return parse_sing(text, sing, "%s[ |\n|\\*]" % sing, tag)
-
 func get_italics_sing(_italics: String = italics) -> String:
 	match _italics:
 		"*": return "\\*"
@@ -250,8 +246,8 @@ func get_bold_sing(_bold: String = bold) -> String:
 ## If italics = "*" : *italics*
 ## If italics = "_" : _italics_
 func parse_italics(text: String,) -> String:
-	var sing :=  get_italics_sing(italics)
-	return parse_sing_def(text, sing, "i")
+	var sing := get_italics_sing(italics)
+	return parse_sing(text, sing, sing, "i")
 
 ## Parse md bold to in given text to BBCode
 ## Example of md bold:
@@ -259,7 +255,7 @@ func parse_italics(text: String,) -> String:
 ## If bold = "__" : __bold__
 func parse_bold(text: String) -> String:
 	var sing := get_bold_sing(bold)
-	return parse_sing_def(text, sing, "b")
+	return parse_sing(text, sing, sing, "b")
 
 func parse_bold_italic(text: String) -> String:
 	var sing := "[\\*_]{3}"
@@ -271,13 +267,13 @@ func parse_bold_italic(text: String) -> String:
 	else:
 		sing = "[%s%s]{3}" % [_bold, _italics]
 	
-	return parse_sing_def(text, sing, "i,b")
+	return parse_sing(text, sing, sing, "i,b")
 
 ## Parse md strike through to in given text to BBCode
 ## Example of md strike through: ~~strike through~~
 func parse_strike_through(text: String) -> String:
 	# ~~strike through~~
-	return parse_sing_def(text, "~~", "s")
+	return parse_sing(text, "~~", "~~", "s")
 
 ## Parse md code to in given text to BBCode
 ## Example of md code:
@@ -285,7 +281,7 @@ func parse_strike_through(text: String) -> String:
 ## multiline code: ```code```
 func parse_code(text: String) -> String:
 	# `code` or ```code```
-	return parse_sing_def(text, "`{1,3}", "code")
+	return parse_sing(text, "`{1,3}", "`{1,3}", "code")
 
 ## Parse md table to in given text to BBCode
 ## Example of md table:
